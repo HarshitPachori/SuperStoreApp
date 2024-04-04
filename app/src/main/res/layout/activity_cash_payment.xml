@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/orange_bg"
+    tools:context=".payments.CashPaymentActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cash Payment"
+        android:fontFamily="@font/allerta"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:id="@+id/cashhead"
+        android:padding="15dp"
+        android:textColor="@android:color/black"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/cashlottie"
+        android:layout_below="@id/cashhead"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/cashpayment" />
+
+    <TextView
+        android:id="@+id/cashhead2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cashlottie"
+        android:fontFamily="@font/allerta"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Select User to Handover Cash Payment"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <RadioGroup
+        android:id="@+id/cashpatmentradioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cashhead2"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:checkedButton="@+id/resetadmincheck"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/cashsrcheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:text="SR"
+            android:fontFamily="@font/allerta"
+            android:checked="true"
+            android:textColor="@android:color/background_dark"
+            android:layout_marginRight="50dp" />
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/cashdrivercheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:text="Driver"
+            android:fontFamily="@font/allerta"
+            android:textColor="@android:color/background_dark"
+            android:layout_marginRight="50dp" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/cashownercheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Owner"
+            android:fontFamily="@font/allerta"
+            android:textColor="@android:color/background_dark" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/cashothercheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:fontFamily="@font/allerta"
+            android:textColor="@android:color/background_dark" />
+
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cashpaymentusernameTIL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="visible"
+        android:layout_below="@+id/cashpatmentradioGroup"
+        android:hint="Name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:fontFamily="@font/allerta"
+            android:id="@+id/cashUserNameET"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cashpaymentamountTIL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="visible"
+        android:fontFamily="@font/allerta"
+        android:layout_below="@+id/cashpaymentusernameTIL"
+        android:hint="Amount"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/cashAmountET"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cashSubmitBtn"
+        android:padding="20dp"
+        android:backgroundTint="@color/black"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/allerta"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Submit"
+        android:layout_below="@id/cashpaymentamountTIL"/>
+</RelativeLayout>

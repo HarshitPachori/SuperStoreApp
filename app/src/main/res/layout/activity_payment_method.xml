@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E3F2FD"
+    tools:context=".payments.PaymentMethodActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Payment Methods"
+        android:id="@+id/paymentmethodhead"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/paymentlottie"
+        android:layout_below="@id/paymentmethodhead"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/paymentmethod2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/paymentLL1"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_below="@+id/paymentlottie"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cashBtn"
+            android:layout_width="145dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/paymentlottie"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="#303F9F"
+            app:icon="@drawable/baseline_attach_money_24"
+            android:text="Cash" />
+
+        <Button
+            android:id="@+id/qrBtn"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/paymentmethodhead"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="#303F9F"
+            app:icon="@drawable/baseline_qr_code_24"
+            android:text="QR" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/chequeBtn"
+        android:layout_marginLeft="90dp"
+        android:layout_width="match_parent"
+        android:backgroundTint="#303F9F"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/paymentLL1"
+        android:layout_centerHorizontal="true"
+        app:icon="@drawable/baseline_note_24"
+        android:text="Cheque" />
+
+    <Button
+        android:id="@+id/bankTransferBtn"
+        android:layout_marginLeft="90dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chequeBtn"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#303F9F"
+        app:icon="@drawable/baseline_add_to_home_screen_24"
+        android:text="Bank Transfer" />
+
+    <Button
+        android:id="@+id/materialBtn"
+        android:layout_marginLeft="90dp"
+        android:layout_width="match_parent"
+        android:backgroundTint="#303F9F"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bankTransferBtn"
+        android:layout_centerHorizontal="true"
+        app:icon="@drawable/baseline_keyboard_return_24"
+        android:text="Material Return" />
+
+</RelativeLayout>

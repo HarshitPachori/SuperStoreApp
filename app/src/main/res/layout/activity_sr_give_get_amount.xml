@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".SrCreditDebitActivity">
+
+  <TextView
+      android:id="@+id/addPaymentHeader"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:padding="20dp"
+      android:textStyle="bold"
+      android:text="Add Credit/Debit"
+      android:textAlignment="center"
+      android:textColor="@android:color/background_dark"
+      android:textSize="25dp"
+      android:gravity="center_horizontal" />
+
+
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/paymentAmountTIL"
+      android:layout_width="match_parent"
+      android:layout_below="@+id/addPaymentHeader"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:hint="Amount"
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:id="@+id/paymentAmountET"
+        />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <Spinner
+      android:id="@+id/paymentType"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:layout_below="@+id/paymentAmountTIL"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginBottom="10dp"
+      android:backgroundTint="#303F9F"
+      android:background="@android:drawable/btn_dropdown"
+      android:spinnerMode="dropdown"/>
+
+  <Button
+      android:id="@+id/submitPaymentBtn"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/paymentType"
+      android:layout_centerHorizontal="true"
+      android:layout_marginLeft="20dp"
+      android:layout_marginTop="20dp"
+      android:layout_marginRight="20dp"
+      android:padding="20dp"
+      android:backgroundTint="#303F9F"
+      app:icon="@drawable/baseline_add_to_photos_24"
+      android:text="Add Entry"
+      android:textColor="@color/white"
+      />
+
+</RelativeLayout>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B3E5FC"
+    tools:context=".RequestServiceActivity">
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/servicestxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Services"
+        android:padding="15dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:layout_alignParentTop="true"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="150dp"
+        android:layout_below="@+id/servicestxt"
+        android:layout_height="150dp"
+        android:id="@+id/servicelottie"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/service2" />
+
+    <LinearLayout
+        android:layout_below="@+id/servicelottie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:id="@+id/servicebtngroup1"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:backgroundTint="#283593"
+            android:id="@+id/replacedbydealerbtn"
+            android:text="Replace By Dealer"/>
+
+        <Button
+            android:layout_width="190dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:backgroundTint="#283593"
+            android:id="@+id/registercomplaints"
+            android:text="Register Complaints"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/servicebtngroup1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:id="@+id/servicebtngroup2"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="190dp"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            android:id="@+id/handoverbtn"
+            android:backgroundTint="#283593"
+            android:text="Handover to Distributor Representor"/>
+
+        <Button
+            android:layout_width="190dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:id="@+id/servicecontactbtn"
+            android:backgroundTint="#283593"
+            android:text="Service Contact Information and Contact Details"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/materialpendencybtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/servicebtngroup2"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:backgroundTint="#283593"
+        android:layout_marginRight="10dp"
+        android:padding="20dp"
+        android:text="Service Report" />
+
+    <Button
+        android:id="@+id/raiseconcernbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/materialpendencybtn"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#283593"
+        android:layout_marginEnd="10dp"
+        android:padding="20dp"
+        android:text="Raise a Service Concern" />
+
+
+</RelativeLayout>

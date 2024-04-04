@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/orange_bg"
+    tools:context=".admin.AddSchemeActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addSchemeHead"
+        android:text="Add Scheme"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/allerta"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:padding="20dp"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/schemeNameTIL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/addSchemeHead"
+        android:hint="Scheme Name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:fontFamily="@font/allerta"
+            android:id="@+id/schemeNameET"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/schemeImage"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:layout_below="@+id/schemeNameTIL"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:srcCompat="@drawable/baseline_add_image" />
+
+    <TextView
+        android:id="@+id/addImageTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/schemeImage"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/allerta"
+        android:gravity="center"
+        android:text="Add Image" />
+
+    <Spinner
+        android:id="@+id/selectDealer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addImageTV"
+        android:layout_centerInParent="true"
+        android:backgroundTint="#ED792E"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:padding="10dp"
+        android:spinnerMode="dropdown" />
+
+
+
+    <Button
+        android:id="@+id/submitSchemeDetailsBtn"
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selectDealer"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/allerta"
+        android:padding="20dp"
+        android:text="Add Scheme"
+        app:icon="@drawable/baseline_add_24" />
+
+</RelativeLayout>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "881764966368",
+    "firebase_url": "https://superdistributor-db-default-rtdb.firebaseio.com",
+    "project_id": "superdistributor-db",
+    "storage_bucket": "superdistributor-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881764966368:android:28a58a03ab4fbab4325585",
+        "android_client_info": {
+          "package_name": "com.app.superdistributor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881764966368-qhev5n62g3q71ssjqgjr3366opti3vr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNmL0Mc8Jxz8_sboyjmLvi6NQ79mo857M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881764966368-qhev5n62g3q71ssjqgjr3366opti3vr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B3E5FC"
+    tools:context=".ui.dealer_home.DealerHomeFragment">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/statuscard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="#7AFFFFFF"
+        app:cardCornerRadius="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="135dp"
+            android:background="#5C6BC0"
+            android:padding="16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="Status Report"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/currentOutstandingBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_below="@id/title"
+                android:src="@drawable/ic_launcher_background"
+                android:text="Current Outstanding Balance : Rs. 68,000"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/currentServicePendency"
+                android:layout_below="@id/currentOutstandingBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_baseline_verified_24"
+                android:text="Service Pendency Details : 0"
+                android:textColor="@color/white"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/pending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:lottie_autoPlay="true"
+                android:layout_marginLeft="150dp"
+                android:layout_toRightOf="@id/title"
+                app:lottie_rawRes="@raw/pending" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statuscard"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Place Order"
+        android:backgroundTint="#283593"
+        android:id="@+id/placeorderbtn"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/placeorderbtn"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Request Service"
+        android:id="@+id/requestservicebtn"
+        android:backgroundTint="#283593"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/requestservicebtn"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#283593"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Add Payment"
+        android:id="@+id/addpaymentbtn"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addpaymentbtn"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#283593"
+        android:text="Reports"
+        android:id="@+id/reportbtn"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reportbtn"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Pending Approvals"
+        android:id="@+id/pendingapprovalsbtn"
+        android:backgroundTint="#283593"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pendingapprovalsbtn"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Schemes | Points"
+        android:backgroundTint="#283593"
+        android:id="@+id/schemessbtn"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"/>
+
+</RelativeLayout>

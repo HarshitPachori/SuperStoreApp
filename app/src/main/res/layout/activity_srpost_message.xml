@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".SRPostMessageActivity">
+
+    <TextView
+        android:id="@+id/postMessageHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="20dp"
+        android:textStyle="bold"
+        android:text="Post a Message"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="25dp"
+        android:gravity="center_horizontal" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/descriptionTIL"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/postMessageHeader"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Description"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:id="@+id/descriptionET"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/addAudio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add an audio message : "
+        android:textColor="#282828"
+        android:textSize="16sp"
+        android:layout_below="@+id/descriptionTIL"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <Button
+        android:id="@+id/selectAudioBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addAudio"
+        android:textSize="12sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:padding="8dp"
+        android:text="Select Audio File"
+        android:backgroundTint="#303F9F"
+        android:textColor="@color/white" />
+
+
+    <Button
+        android:id="@+id/selectDealersBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectAudioBtn"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        app:icon="@drawable/baseline_add_24"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:text="Select Dealers" />
+
+    <Button
+        android:id="@+id/submitMessageBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectDealersBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="20dp"
+        app:icon="@drawable/baseline_notifications_active_24"
+        android:text="Post Message"
+        android:backgroundTint="#303F9F"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

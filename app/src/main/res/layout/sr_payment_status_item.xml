@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@android:color/white"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="10dp">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="H"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="5dp"
+        android:background="@drawable/rounded_textview"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:id="@+id/roundedNameTv" />
+
+    <TextView
+        android:id="@+id/paymentNameTv"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toEndOf="@+id/roundedNameTv"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/typeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cheque"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@+id/paymentNameTv"
+        app:layout_constraintTop_toBottomOf="@id/paymentNameTv" />
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/typeTv"
+        app:layout_constraintTop_toBottomOf="@id/paymentNameTv" />
+
+    <TextView
+        android:id="@+id/amountTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="125000"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/temp"
+        app:layout_constraintTop_toBottomOf="@id/paymentNameTv" />
+
+    <Button
+        android:id="@+id/statusBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:text="Pending"
+        android:clickable="false"
+        android:backgroundTint="#FFB300"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/paymentNameTv"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".SRHomeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/srTopHead"
+        android:background="#283593">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dashboard"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/srMessages"
+            android:src="@drawable/msgicon"
+            android:layout_toLeftOf="@id/srNotification"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/srNotification"
+            android:src="@drawable/baseline_notifications_24"
+            android:layout_toLeftOf="@id/srLogout"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/srLogout"
+            android:src="@drawable/baseline_logout_24"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="25dp"/>
+
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/SRStatusCard"
+        android:layout_below="@+id/srTopHead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        app:cardBackgroundColor="#7AFFFFFF"
+        app:cardCornerRadius="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="135dp"
+            android:background="#5C6BC0"
+            android:padding="16dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="Status Report"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/salesDoneTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_below="@id/title"
+                android:src="@drawable/ic_launcher_background"
+                android:text=""
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/remainingTargetTv"
+                android:layout_below="@id/salesDoneTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_baseline_verified_24"
+                android:text=""
+                android:textColor="@color/white"/>
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/totaloutstandingondealersbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/SRStatusCard"
+        android:layout_marginStart="20dp"
+        android:backgroundTint="#283593"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:padding="10dp"
+        android:text="Total Outstanding" />
+
+
+    <LinearLayout
+        android:id="@+id/btngroup2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/totaloutstandingondealersbtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dealerintentbtn"
+            android:layout_width="170dp"
+            android:backgroundTint="#283593"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Dealer Intent" />
+
+        <Button
+            android:id="@+id/paymentapprovebtn"
+            android:layout_width="170dp"
+            android:layout_marginLeft="20dp"
+            android:backgroundTint="#283593"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            android:text="Payment Approve" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btngroup3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btngroup2"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/complaintraisebtn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:backgroundTint="#283593"
+            android:text="Complaint Raise" />
+
+        <Button
+            android:id="@+id/addpaymentbtn"
+            android:layout_width="170dp"
+            android:backgroundTint="#283593"
+            android:layout_marginLeft="20dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:text="Add Payment" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btngroup4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btngroup3"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/requestservicebtn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:padding="9.5dp"
+            android:backgroundTint="#283593"
+            android:text="Request Service" />
+
+        <Button
+            android:id="@+id/postMessageBtn"
+            android:layout_width="170dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#283593"
+            android:padding="10dp"
+            android:text="Post a message" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btngroup5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btngroup4"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/expensebtn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:backgroundTint="#283593"
+            android:text="Expense" />
+
+        <Button
+            android:id="@+id/addvisitbtn"
+            android:layout_width="170dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:backgroundTint="#283593"
+            android:text="Add Visit" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/btngroup6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btngroup5"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/creditdebitbtn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:backgroundTint="#283593"
+            android:text="Credit/Debit" />
+
+        <Button
+            android:id="@+id/reportbtn"
+            android:layout_width="170dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:backgroundTint="#283593"
+            android:text="Reports" />
+
+    </LinearLayout>
+
+</RelativeLayout>

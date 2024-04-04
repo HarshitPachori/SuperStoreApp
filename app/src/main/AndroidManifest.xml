@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:targetApi="31">
+        <activity
+            android:name=".PlacedOrderHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".placedOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".dealerreports.paymentreports.MaterialReturnReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".dealerreports.paymentreports.BankTransferReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".dealerreports.paymentreports.ChequeReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".dealerreports.paymentreports.QRReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".dealerreports.paymentreports.CashReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyMessagesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SrGiveGetAmountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SrCreditDebitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TechnicianHandleComplaintsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TechnicianSparesRequestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TechnicianTotalPendencyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminViewSRPaymentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminViewSRComplaintsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewSRPaymentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SRAddVisitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SRPostMessageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SRExpenseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SRAddPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SRComplaintActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SRDealersLedgerAccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AddSchemeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AddOfferActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.notification.AdminNotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".sr.DealerIntentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.GiveGetAmountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AddDebitCreditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyProducts.ViewProductList"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AddAccountantActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AddManagerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".payments.MaterialReturnPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".payments.BankTransferPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".payments.ChequePaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".payments.QRPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".payments.CashPaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.ViewCreditDebitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AddCreditDebitActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.ViewTechnicianActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.ViewSRActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.ViewDealerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AddTechnicianActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AddSRActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AddDealerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SchemesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PendingApprovalsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReportsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".payments.PaymentMethodActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RequestService.RaiseServiceConcerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RequestService.ServiceReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RequestService.ServiceContactDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RequestService.HandoverDRActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RequestService.RegisterComplaintAcitivty"
+            android:exported="false" />
+        <activity
+            android:name=".RequestService.ReplaceByDealerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AccountDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminPanelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RequestServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CheckoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TechnicianHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SRHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyProducts.PlaceOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DealerHomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_dealer_home" />
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

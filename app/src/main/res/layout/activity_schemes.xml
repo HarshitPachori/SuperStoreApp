@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#E3F2FD"
+    android:layout_height="match_parent"
+    tools:context=".SchemesActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Schemes"
+        android:id="@+id/schemeshead"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/schemeslottie"
+        android:layout_below="@id/schemeshead"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/offers" />
+
+    <Button
+        android:id="@+id/yourSchemesBtn"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/schemeslottie"
+        android:backgroundTint="#303F9F"
+        android:layout_centerHorizontal="true"
+        app:icon="@drawable/baseline_newspaper_24"
+        android:text="Your Scheme" />
+
+    <Button
+        android:id="@+id/runningOffersBtn"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/yourSchemesBtn"
+        android:layout_centerHorizontal="true"
+        app:icon="@drawable/baseline_local_offer_24"
+        android:backgroundTint="#303F9F"
+        android:text="Running Offers" />
+
+    <Button
+        android:id="@+id/claimPointsBtn"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/runningOffersBtn"
+        android:backgroundTint="#303F9F"
+        android:layout_centerHorizontal="true"
+        app:icon="@drawable/baseline_call_missed_24"
+        android:text="Missed Claim Points" />
+
+</RelativeLayout>

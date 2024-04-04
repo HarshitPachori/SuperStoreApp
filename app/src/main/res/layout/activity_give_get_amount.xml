@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ECECEC"
+    tools:context=".admin.GiveGetAmountActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/headRR"
+        android:background="@color/purple_700"
+        >
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="25sp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/rounded_textview_two"
+            android:textColor="@color/purple_700"
+            android:gravity="center"
+            android:id="@+id/roundedNameTv" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="15sp"
+            android:layout_toRightOf="@id/roundedNameTv"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:id="@+id/roundedUserNameTv" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/entriesLayout"
+        android:layout_width="match_parent"
+        android:layout_below="@id/headRR"
+        android:layout_height="wrap_content"
+        android:background="#ECECEC"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entries"
+            android:gravity="left"
+            android:layout_weight="1"
+            android:padding="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You Gave"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"/>
+
+        <TextView
+            android:gravity="right"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You Got"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/accountBalanceRL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_below="@+id/entriesLayout"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@id/amountLL1"/>
+
+    <LinearLayout
+        android:id="@+id/amountLL1"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="You Gave ₹"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:padding="10dp"
+            android:backgroundTint="#FF0000"
+            android:id="@+id/yougaveBtn"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="You Got ₹ "
+            android:layout_margin="20dp"
+            android:padding="10dp"
+            android:backgroundTint="#46923c"
+            android:id="@+id/yougotBtn"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

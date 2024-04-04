@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="@android:color/white"
+    android:layout_margin="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Customer Name"
+                    android:id="@+id/servicecustomernamehead"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Customer Name"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/servicecustomername"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="50dp"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll2"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/ll1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date Of Purchase"
+                    android:id="@+id/servicedateofpurchasehead"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date of Purchase"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/servicedateofpurchase"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="50dp"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll3"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/ll2"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Model No."
+                    android:id="@+id/modelnumberhead"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/modelno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Model No."
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll4"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/ll3"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Product SN"
+                    android:id="@+id/newproductserialnumberhead"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Product Serial Number"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/newproductserialnumber"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="50dp"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll5"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/ll4"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phone Number"
+                    android:id="@+id/phonenohead"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/servicephonenumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Phone Number"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll6"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/ll5"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Report URL"
+                    android:id="@+id/reporturlhead"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Report URL"
+                    android:layout_alignParentEnd="true"
+                    android:autoLink="web"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/reporturl"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:layout_marginLeft="50dp"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll7"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/ll6"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Serial Number"
+                    android:id="@+id/serialnohead"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Serial Number"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/serviceserialnumber"
+                    android:textColor="@android:color/black"
+                    android:layout_marginLeft="50dp"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

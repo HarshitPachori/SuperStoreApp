@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/orange_bg"
+    android:layout_height="match_parent"
+    tools:context=".payments.ChequePaymentActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cheque Payment"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:fontFamily="@font/allerta"
+        android:gravity="center"
+        android:id="@+id/chequehead"
+        android:padding="20dp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/chequehead2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chequehead"
+        android:fontFamily="@font/allerta"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Select User to Handover Cheque"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <RadioGroup
+        android:id="@+id/chequepaymentradioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chequehead2"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:checkedButton="@+id/paymentchequecheck"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/chequesrcheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:text="SR"
+            android:fontFamily="@font/allerta"
+            android:checked="true"
+            android:textColor="@android:color/background_dark"
+            android:layout_marginRight="50dp" />
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/chequedrivercheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:text="Driver"
+            android:fontFamily="@font/allerta"
+            android:textColor="@android:color/background_dark"
+            android:layout_marginRight="50dp" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/chequeownercheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Owner"
+            android:fontFamily="@font/allerta"
+            android:textColor="@android:color/background_dark" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/chequeothercheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:fontFamily="@font/allerta"
+            android:textColor="@android:color/background_dark" />
+
+    </RadioGroup>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/chequepaymentusernameTIL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="visible"
+        android:layout_below="@+id/chequepaymentradioGroup"
+        android:hint="Name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:fontFamily="@font/allerta"
+            android:id="@+id/chequeUserNameET"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/cheque_selected_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chequepaymentusernameTIL"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/allerta"
+        android:layout_marginTop="22dp"
+        android:text="Selected Date is : "
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/chequedateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/cheque_selected_date"
+        android:text="Select Date"
+        android:fontFamily="@font/allerta"
+        android:textSize="18sp"
+        android:backgroundTint="@color/black"
+        app:icon="@drawable/baseline_add_to_photos_24" />
+
+    <Button
+        android:id="@+id/attachChequeScreenshotBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chequedateBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/black"
+        app:icon="@drawable/baseline_add_24"
+        android:fontFamily="@font/allerta"
+        android:text="Attach Screenshot" />
+
+    <Button
+        android:id="@+id/submitChequePaymentBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/attachChequeScreenshotBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/black"
+        android:fontFamily="@font/allerta"
+        android:layout_marginRight="20dp"
+        android:padding="20dp"
+        android:text="Submit"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>
