@@ -21,6 +21,7 @@ public class PendingApprovalsActivity extends AppCompatActivity {
     NotificationAdapter myAdapter;
     ArrayList<NotificationItemModel> list;
     NotificationItemModel notificationItemModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,7 @@ public class PendingApprovalsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        myAdapter = new NotificationAdapter(this,list);
+        myAdapter = new NotificationAdapter(this, list);
         recyclerView.setAdapter(myAdapter);
 
         database.child("Admin").child("Notifications").child("ProductConfirmation").child("SRs")
@@ -41,7 +42,7 @@ public class PendingApprovalsActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         list.clear();
 
-                        for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             if (dataSnapshot.child("Status").getValue().toString().equals("Pending")) {
                                 NotificationItemModel notificationItemModel = new NotificationItemModel();
                                 notificationItemModel.setNotificationType("SR Product Confirmation");
@@ -53,7 +54,8 @@ public class PendingApprovalsActivity extends AppCompatActivity {
                                                 "\nQuantity : " + dataSnapshot.child("Qty").getValue().toString() +
                                                 "\nPlaced by : " + dataSnapshot.child("PlacedBy").getValue().toString()
                                         );
-                                if(dataSnapshot.child("Reminder").exists())notificationItemModel
+
+                                if (dataSnapshot.child("Reminder").exists()) notificationItemModel
                                         .setNotificationPriority(dataSnapshot.child("Reminder").getValue().toString());
                                 list.add(notificationItemModel);
 //                                myAdapter.notifyDataSetChanged();
@@ -62,13 +64,14 @@ public class PendingApprovalsActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
         database.child("Dealers").child("RequestServices").child("RegisterComplaints")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             if (dataSnapshot.child("Status").getValue().toString().equals("Pending")) {
                                 notificationItemModel = new NotificationItemModel();
                                 notificationItemModel.setNotificationType("Dealer Complaint");
@@ -78,22 +81,24 @@ public class PendingApprovalsActivity extends AppCompatActivity {
                                                 "\nModel : " + dataSnapshot.child("ModelNumber").getValue().toString() +
                                                 "\nPurchased on : " + dataSnapshot.child("DateOfPurchase").getValue().toString() +
                                                 "\nSerial No. : " + dataSnapshot.child("SerialNumber").getValue().toString());
-                                if(dataSnapshot.child("Reminder").exists())notificationItemModel
+                                notificationItemModel.setReportUrl(dataSnapshot.child("ReportUrl").getValue().toString());
+                                if (dataSnapshot.child("Reminder").exists()) notificationItemModel
                                         .setNotificationPriority(dataSnapshot.child("Reminder").getValue().toString());
                                 list.add(notificationItemModel);
 //                                myAdapter.notifyDataSetChanged();
                             }
                         }
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
         database.child("Dealers").child("RequestServices").child("ReplacementByDealer")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot dataSnapshot: snapshot.getChildren())
-                        {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             if (dataSnapshot.child("Status").getValue().toString().equals("Pending")) {
                                 NotificationItemModel notificationItemModel = new NotificationItemModel();
                                 notificationItemModel.setNotificationType("Replacement by Dealer");
@@ -104,7 +109,8 @@ public class PendingApprovalsActivity extends AppCompatActivity {
                                                 "\nPurchased on : " + dataSnapshot.child("DateOfPurchase").getValue().toString() +
                                                 "\nSerial No. : " + dataSnapshot.child("SerialNumber").getValue().toString() +
                                                 "\nNew Serial No. : " + dataSnapshot.child("NewProductSerialNumber").getValue().toString());
-                                if(dataSnapshot.child("Reminder").exists())notificationItemModel
+                                notificationItemModel.setReportUrl(dataSnapshot.child("ReportUrl").getValue().toString());
+                                if (dataSnapshot.child("Reminder").exists()) notificationItemModel
                                         .setNotificationPriority(dataSnapshot.child("Reminder").getValue().toString());
                                 list.add(notificationItemModel);
                                 myAdapter.notifyDataSetChanged();
@@ -113,15 +119,16 @@ public class PendingApprovalsActivity extends AppCompatActivity {
                         }
 
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
         database.child("Grievances")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot dataSnapshot: snapshot.getChildren())
-                        {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             NotificationItemModel notificationItemModel = new NotificationItemModel();
                             notificationItemModel.setNotificationType("Grievance");
                             notificationItemModel.setNotificationTag(dataSnapshot.getKey());
@@ -131,8 +138,10 @@ public class PendingApprovalsActivity extends AppCompatActivity {
                         }
 
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
         myAdapter.notifyDataSetChanged();
     }

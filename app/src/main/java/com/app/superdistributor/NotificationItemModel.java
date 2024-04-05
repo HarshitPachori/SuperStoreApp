@@ -7,6 +7,23 @@ public class NotificationItemModel {
     String notificationTag;
     String notificationPriority = "No";
 
+    String reportUrl;
+
+    public String getReportUrl() {
+        return reportUrl;
+    }
+
+    public NotificationItemModel(String notificationType, String notificationTag, String notificationPriority, String reportUrl, String notificationDesc) {
+        this.notificationType = notificationType;
+        this.notificationTag = notificationTag;
+        this.notificationPriority = notificationPriority;
+        this.reportUrl = reportUrl;
+        this.notificationDesc = notificationDesc;
+    }
+
+    public void setReportUrl(String reportUrl) {
+        this.reportUrl = reportUrl;
+    }
 
     public String getNotificationPriority() {
         return notificationPriority;

@@ -6,10 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +60,21 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         holder.type.setText(notificationItemModel.getNotificationType());
         holder.tag.setText(notificationItemModel.getNotificationTag());
         holder.description.setText(notificationItemModel.getNotificationDesc());
+        if (notificationItemModel.getReportUrl() != null) {
+
+            holder.reportUrlTv.setVisibility(View.VISIBLE);
+            holder.reportUrlTv.setMovementMethod(LinkMovementMethod.getInstance());
+            holder.reportUrlTv.setPaintFlags(holder.reportUrlTv.getPaintFlags());
+            holder.reportUrlTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(notificationItemModel.getReportUrl()));
+                    context.startActivity(intent);
+                }
+            });
+        }
+
         if (notificationItemModel.getNotificationPriority().equals("Yes")) {
             holder.type.setTextColor(Color.RED);
             holder.tag.setTextColor(Color.RED);
@@ -68,10 +86,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             public void onClick(View v) {
                 Log.d("Context",context.toString());
                 if (context.toString().substring(0,49).equals("com.app.superdistributor.PendingApprovalsActivity")) {
+                    holder.item.setText("Send a Reminder");
                     sendReminderDialogBox(holder.getAdapterPosition(),
                             notificationItemModel.getNotificationType(),
                             notificationItemModel.getNotificationTag(),
                             notificationItemModel.getNotificationDesc());
+
                 } else {
                     showExpandedDialog(holder.getAdapterPosition(),
                             notificationItemModel.getNotificationType(),
@@ -88,8 +108,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        CardView item;
-        TextView type, tag, description;
+        Button item;
+        TextView type, tag, description,reportUrlTv;
         ImageView reminderIcon;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -98,6 +118,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             tag = itemView.findViewById(R.id.tag);
             reminderIcon = itemView.findViewById(R.id.reminder_icon);
             description = itemView.findViewById(R.id.complaint_desc);
+            reportUrlTv = itemView.findViewById(R.id.reportUrlTV);
         }
     }
 
