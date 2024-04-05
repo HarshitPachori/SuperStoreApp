@@ -55,9 +55,9 @@ public class SRComplaintActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snap : snapshot.getChildren()) {
 
-                    Log.d("Check",snap.getValue().toString());
+                    Log.d("Check",snap.child("Name").getValue().toString());
                     if (snap.getValue() != null)
-                        dealerUserNamesList.add(snap.getValue().toString());
+                        dealerUserNamesList.add(snap.child("Name").getValue().toString());
                 }
             }
             @Override

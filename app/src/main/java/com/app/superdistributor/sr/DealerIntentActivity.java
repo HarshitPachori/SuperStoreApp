@@ -94,7 +94,9 @@ public class DealerIntentActivity extends AppCompatActivity {
                                 for(DataSnapshot dataSnapshot1: dataSnapshot.child("Orders").getChildren())
                                 {
                                     DealerOrder dealerOrder = dataSnapshot1.getValue(DealerOrder.class);
-                                    list.add(dealerOrder);
+                                   if(dealerOrder.getStatus().equals("Pending")){
+                                       list.add(dealerOrder);
+                                   }
                                 }
                             }
                         }

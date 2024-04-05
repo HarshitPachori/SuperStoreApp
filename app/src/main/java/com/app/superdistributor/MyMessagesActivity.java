@@ -61,7 +61,7 @@ public class MyMessagesActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    if(dataSnapshot.child("Recipient").getValue().toString().equals(username)) {
+                    if(dataSnapshot.child("Recipient").getValue().toString().equals(username) || dataSnapshot.child("Sender").getValue().toString().equals(username)) {
 
                         list.add(dataSnapshot.getValue(MessageModel.class));
                     }
@@ -71,8 +71,6 @@ public class MyMessagesActivity extends AppCompatActivity {
                 if (list.isEmpty()) {
                     Toast.makeText(MyMessagesActivity.this, "No messages", Toast.LENGTH_LONG).show();
                     noMessagesIcon.setVisibility(View.VISIBLE);
-                }else{
-                    recyclerView.scrollToPosition(list.size()-1);
                 }
 
             }
@@ -180,6 +178,8 @@ public class MyMessagesActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(MyMessagesActivity.this, "Message Sent!", Toast.LENGTH_SHORT).show();
+                        recyclerView.scrollToPosition(messagesAdapter.getItemCount()-1);
+                        messagesAdapter.notifyDataSetChanged();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

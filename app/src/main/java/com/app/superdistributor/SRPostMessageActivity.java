@@ -112,9 +112,9 @@ public class SRPostMessageActivity extends AppCompatActivity {
 
                         String[] allDealers = dealerUserNamesList.toArray(new String[0]);
                         choosenDealers = new boolean[dealerUserNamesList.size()];
-                        for (int i = 0; i < dealerUserNamesList.size(); i++) {
-                            allDealers[i] = dealerNamesList.get(i)+" : "+ dealerUserNamesList.get(i);
-                        }
+//                        for (int i = 0; i < dealerUserNamesList.size(); i++) {
+//                            allDealers[i] = dealerNamesList.get(i)+" : "+ dealerUserNamesList.get(i);
+//                        }
                         Log.d("Dealer Names" , Arrays.toString(allDealers));
 
 

@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
+    <color name="reciever_msg">#ADD8E6</color>
+    <color name="sender_msg">#FFDAB9</color>
 </resources>

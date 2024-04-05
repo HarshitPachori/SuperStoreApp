@@ -26,7 +26,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"
-        tools:listitem="@layout/message_item"
+        tools:listitem="@layout/sender_message_item"
         app:layout_constraintTop_toBottomOf="@+id/yourmsgs"/>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
