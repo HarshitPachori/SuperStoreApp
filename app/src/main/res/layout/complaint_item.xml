@@ -78,7 +78,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:gravity="center"
-            android:outlineProvider="none"
             android:text="View Report"
             android:textSize="14sp"
             android:visibility="gone"

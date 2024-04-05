@@ -34,7 +34,7 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/orderDealerName"
+                    android:id="@+id/complaint_customer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -48,6 +48,7 @@
             </RelativeLayout>
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll3"
             android:layout_width="match_parent"
@@ -83,6 +84,7 @@
             </RelativeLayout>
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll2"
             android:layout_width="match_parent"
@@ -96,26 +98,16 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/orderProductNameHead"
+                    android:id="@+id/complaint_dateofpurchase_head"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="ProductName"
+                    android:text="Date Of Purchase"
                     android:textColor="@android:color/black"
                     android:textSize="15sp" />
 
-                <!--                <TextView-->
-                <!--                    android:id="@+id/orderProductName"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_below="@+id/orderProductNameHead"-->
-                <!--                    android:layout_marginLeft="20dp"-->
-                <!--                    android:layout_marginRight="20dp"-->
-                <!--                    android:text="Product Name"-->
-                <!--                    android:textColor="@android:color/black"-->
-                <!--                    android:textSize="12sp" />   -->
                 <TextView
-                    android:id="@+id/orderProductName"
+                    android:id="@+id/complaint_dateofpurchase"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -123,13 +115,14 @@
                     android:layout_marginRight="10dp"
                     android:ellipsize="end"
                     android:maxWidth="150dp"
-                    android:text="Product Name"
+                    android:text="Date of purchase"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
 
             </RelativeLayout>
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll4"
             android:layout_width="match_parent"
@@ -143,22 +136,168 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/orderProductQtyHead"
+                    android:id="@+id/complaint_modelno_head"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="Product Qty"
+                    android:text="Model Number"
                     android:textColor="@android:color/black"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/orderProductQty"
+                    android:id="@+id/complaint_modelno"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="10dp"
-                    android:text="Product Qty"
+                    android:text="model number"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll4"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/complaint_phone_head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Phone Number"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/complaint_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="10dp"
+                    android:text="phone number"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll5"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/complaint_report_head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Report Url"
+
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/complaint_report"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="10dp"
+                    android:text="document url"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:autoLink="web"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll6"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/complaint_serialno_head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Serial No"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/complaint_serialno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="10dp"
+                    android:text="serial no"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll7"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/complaint_status_head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Status"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/complaint_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="10dp"
+                    android:text="status"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
 
