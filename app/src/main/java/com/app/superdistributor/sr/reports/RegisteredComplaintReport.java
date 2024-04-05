@@ -1,6 +1,8 @@
 package com.app.superdistributor.sr.reports;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -28,32 +30,37 @@ public class RegisteredComplaintReport extends AppCompatActivity {
     DatabaseReference database;
     RegisterComplaintAdapter adapter;
     ArrayList<RegisteredComplaintModel> list;
+    ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registered_complaint_report);
         recyclerView = findViewById(R.id.registeredComplaintReportRV);
+        progressBar = findViewById(R.id.registerComplaintProgressBar);
         database = FirebaseDatabase.getInstance().getReference();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
         adapter = new RegisterComplaintAdapter(this, list);
         recyclerView.setAdapter(adapter);
-
+        progressBar.setVisibility(View.VISIBLE);
         database.child("Dealers").child("RequestServices").child("RegisterComplaints").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     RegisteredComplaintModel model = dataSnapshot.getValue(RegisteredComplaintModel.class);
-                   if(model.getStatus().equals("Accepted") || model.getStatus().equals("Rejected")){
-                       list.add(model);
-                   }
+                    if (model.getStatus().equals("Accepted") || model.getStatus().equals("Rejected")) {
+                        list.add(model);
+                    }
                 }
                 adapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                progressBar.setVisibility(View.GONE);
 
             }
         });
