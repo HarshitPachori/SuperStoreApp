@@ -30,7 +30,7 @@ public class SRHomeActivity extends AppCompatActivity {
 
     TextView SalesDoneTV, RemainingTargetTV;
     Button TotalSROutstandingBtn, DealerIntentBtn, PaymentApproveBtn, ComplaintRaiseBtn, AddPaymentBtn,
-    RequestServiceBtn, PostMessageBtn, ExpenseBtn, AddVisitBtn, CreditDebitBtn;
+    RequestServiceBtn, PostMessageBtn, ExpenseBtn, AddVisitBtn, CreditDebitBtn, ReportsBtn;
 
     ImageView myMessagesBtn, NotificationBtn,LogoutBtn;
 
@@ -112,6 +112,7 @@ public class SRHomeActivity extends AppCompatActivity {
         ExpenseBtn = findViewById(R.id.expensebtn);
         AddVisitBtn = findViewById(R.id.addvisitbtn);
         CreditDebitBtn = findViewById(R.id.creditdebitbtn);
+        ReportsBtn = findViewById(R.id.reportbtn);
 
 
         database = FirebaseDatabase.getInstance().getReference();
@@ -202,6 +203,14 @@ public class SRHomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        ReportsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SRHomeActivity.this, SrReportsActivity.class);
+                i.putExtra("SRUsername",SRUsername);
+                startActivity(i);
+            }
+        });
 
         ActionBar actionBar = getSupportActionBar();
 
@@ -238,5 +247,6 @@ public class SRHomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
     }
 }

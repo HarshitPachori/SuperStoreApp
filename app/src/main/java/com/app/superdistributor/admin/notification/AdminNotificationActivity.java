@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -66,6 +67,7 @@ public class AdminNotificationActivity extends AppCompatActivity {
                                                 "\nQuantity : " + dataSnapshot.child("Qty").getValue().toString() +
                                                 "\nPlaced by : " + dataSnapshot.child("PlacedBy").getValue().toString()
                                         );
+
                                 if(dataSnapshot.child("Reminder").exists())notificationItemModel
                                         .setNotificationPriority(dataSnapshot.child("Reminder").getValue().toString());
                                 list.add(notificationItemModel);
@@ -91,6 +93,10 @@ public class AdminNotificationActivity extends AppCompatActivity {
                                                 "\nModel : " + dataSnapshot.child("ModelNumber").getValue().toString() +
                                                 "\nPurchased on : " + dataSnapshot.child("DateOfPurchase").getValue().toString() +
                                                 "\nSerial No. : " + dataSnapshot.child("SerialNumber").getValue().toString());
+                                Log.d("snapReport",dataSnapshot.child("ReportUrl").getValue(String.class));
+                                if(dataSnapshot.child("ReportUrl").exists()){
+                                    notificationItemModel.setReportUrl(dataSnapshot.child("ReportUrl").getValue(String.class));
+                                }
                                 if(dataSnapshot.child("Reminder").exists())notificationItemModel
                                         .setNotificationPriority(dataSnapshot.child("Reminder").getValue().toString());
                                 list.add(notificationItemModel);
@@ -117,6 +123,10 @@ public class AdminNotificationActivity extends AppCompatActivity {
                                                 "\nPurchased on : " + dataSnapshot.child("DateOfPurchase").getValue().toString() +
                                                 "\nSerial No. : " + dataSnapshot.child("SerialNumber").getValue().toString() +
                                                 "\nNew Serial No. : " + dataSnapshot.child("NewProductSerialNumber").getValue().toString());
+                                Log.d("snapReport",dataSnapshot.child("ReportUrl").getValue(String.class));
+                                if(dataSnapshot.child("ReportUrl").exists()){
+                                    notificationItemModel.setReportUrl(dataSnapshot.child("ReportUrl").getValue(String.class));
+                                }
                                 if(dataSnapshot.child("Reminder").exists())notificationItemModel
                                         .setNotificationPriority(dataSnapshot.child("Reminder").getValue().toString());
                                 list.add(notificationItemModel);

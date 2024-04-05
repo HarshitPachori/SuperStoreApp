@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E3F2FD"
+    tools:context=".SrReportsActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reports"
+        android:id="@+id/reportshead"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textSize="25sp"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/reportslottie"
+        android:layout_below="@id/reportshead"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/reports" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/reportLL1"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_below="@+id/reportslottie"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/registerComplaintReportBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="#303F9F"
+            android:text="Registered Complaints" />
+
+        <Button
+            android:id="@+id/replaceByDealerReportBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="#303F9F"
+            android:text="Replaced By Dealers" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/reportLL2"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_below="@+id/reportLL1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/confirmedOrderReportBtn"
+            android:layout_width="150dp"
+            android:backgroundTint="#303F9F"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Confirmed Orders" />
+
+        <Button
+            android:id="@+id/paymentReportBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="#303F9F"
+            android:text="Approved Payments" />
+
+    </LinearLayout>
+  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/reportLL3"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_below="@+id/reportLL2"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/postMessageReportBtn"
+            android:layout_width="150dp"
+            android:backgroundTint="#303F9F"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Post Message" />
+
+        <Button
+            android:id="@+id/raiseComplaintReportBtn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="#303F9F"
+            android:text="Raise Complaint" />
+
+    </LinearLayout>
+  <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/reportLL4"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_below="@+id/reportLL3"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/expenseReportBtn"
+            android:layout_width="150dp"
+            android:backgroundTint="#303F9F"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Expense" />
+
+        <Button
+            android:id="@+id/paymentReportBt"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="#303F9F"
+            android:text="Payment" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

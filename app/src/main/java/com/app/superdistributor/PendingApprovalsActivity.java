@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -81,7 +82,10 @@ public class PendingApprovalsActivity extends AppCompatActivity {
                                                 "\nModel : " + dataSnapshot.child("ModelNumber").getValue().toString() +
                                                 "\nPurchased on : " + dataSnapshot.child("DateOfPurchase").getValue().toString() +
                                                 "\nSerial No. : " + dataSnapshot.child("SerialNumber").getValue().toString());
-                                notificationItemModel.setReportUrl(dataSnapshot.child("ReportUrl").getValue().toString());
+
+                                if(dataSnapshot.child("ReportUrl").exists()){
+                                    notificationItemModel.setReportUrl(dataSnapshot.child("ReportUrl").getValue(String.class));
+                                }
                                 if (dataSnapshot.child("Reminder").exists()) notificationItemModel
                                         .setNotificationPriority(dataSnapshot.child("Reminder").getValue().toString());
                                 list.add(notificationItemModel);
@@ -109,7 +113,10 @@ public class PendingApprovalsActivity extends AppCompatActivity {
                                                 "\nPurchased on : " + dataSnapshot.child("DateOfPurchase").getValue().toString() +
                                                 "\nSerial No. : " + dataSnapshot.child("SerialNumber").getValue().toString() +
                                                 "\nNew Serial No. : " + dataSnapshot.child("NewProductSerialNumber").getValue().toString());
-                                notificationItemModel.setReportUrl(dataSnapshot.child("ReportUrl").getValue().toString());
+
+                                if(dataSnapshot.child("ReportUrl").exists()){
+                                    notificationItemModel.setReportUrl(dataSnapshot.child("ReportUrl").getValue(String.class));
+                                }
                                 if (dataSnapshot.child("Reminder").exists()) notificationItemModel
                                         .setNotificationPriority(dataSnapshot.child("Reminder").getValue().toString());
                                 list.add(notificationItemModel);

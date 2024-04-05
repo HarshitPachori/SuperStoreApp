@@ -31,6 +31,7 @@ public class DealerHomeFragment extends Fragment {
 
     private FragmentDealerHomeBinding binding;
     private DatabaseReference mref;
+
     String dealerName;
     int currentBalance = 0;
 

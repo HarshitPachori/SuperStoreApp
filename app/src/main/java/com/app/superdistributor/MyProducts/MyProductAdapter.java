@@ -16,8 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.superdistributor.R;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.MyViewHolder> {
@@ -62,7 +65,9 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.MyVi
                     productMap.put("ProductQty",holder.Qty.getText().toString());
                     productMap.put("DealerName",DealerName);
                     productMap.put("Status","Open");
-
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    String formattedTimestamp = sdf.format(new Date());
+                    productMap.put("Timestamp",formattedTimestamp);
                     orderMap.put(products.getProductID(),productMap);
                     holder.Qty.setText("0");
                     //Toast.makeText(context, ""+products.getName(), Toast.LENGTH_SHORT).show();

@@ -57,7 +57,6 @@ public class DealerHomeActivity extends AppCompatActivity {
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
-
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
@@ -77,8 +76,8 @@ public class DealerHomeActivity extends AppCompatActivity {
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //dealerName.setText(snapshot.child("Dealers").child(DealerName).child("Name").getValue().toString());
-                //dealerEmail.setText(snapshot.child("Dealers").child(DealerName).child("Email").getValue().toString());
+                dealerName.setText(snapshot.child("Dealers").child(DealerName).child("Name").getValue().toString());
+                dealerEmail.setText(snapshot.child("Dealers").child(DealerName).child("Email").getValue().toString());
             }
 
             @Override
@@ -121,6 +120,6 @@ public class DealerHomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        super.onBackPressed();
     }
 }

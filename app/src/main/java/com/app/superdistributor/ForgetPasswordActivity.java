@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -226,6 +227,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                         } else {
                             // if the code is not correct then we are
                             // displaying an error message to the user.
+                            Log.d("incorrectcode",task.getException().getMessage());
                             Toast.makeText(ForgetPasswordActivity.this, "After : -"+task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
@@ -268,6 +270,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
+            Log.d("verificationfail" ,e.getMessage());
             Toast.makeText(ForgetPasswordActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 

@@ -23,6 +23,30 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".sr.reports.ExpenseReport"
+            android:exported="false" />
+        <activity
+            android:name=".sr.reports.PostMessageReport"
+            android:exported="false" />
+        <activity
+            android:name=".sr.reports.ApprovedPaymentReport"
+            android:exported="false" />
+        <activity
+            android:name=".sr.reports.ConfirmedOrderReport"
+            android:exported="false" />
+        <activity
+            android:name=".sr.reports.ReplaceByDealerReport"
+            android:exported="false" />
+        <activity
+            android:name=".sr.reports.RegisteredComplaintReport"
+            android:exported="false" />
+        <activity
+            android:name=".sr_reports_history"
+            android:exported="false" />
+        <activity
+            android:name=".SrReportsActivity"
+            android:exported="false" />
+        <activity
             android:name=".PlacedOrderHistoryActivity"
             android:exported="false" />
         <activity
