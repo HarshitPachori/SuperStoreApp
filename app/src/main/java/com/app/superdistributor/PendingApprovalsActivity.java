@@ -32,7 +32,6 @@ public class PendingApprovalsActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         list = new ArrayList<>();
         myAdapter = new NotificationAdapter(this, list);
         recyclerView.setAdapter(myAdapter);
@@ -83,7 +82,7 @@ public class PendingApprovalsActivity extends AppCompatActivity {
                                                 "\nPurchased on : " + dataSnapshot.child("DateOfPurchase").getValue().toString() +
                                                 "\nSerial No. : " + dataSnapshot.child("SerialNumber").getValue().toString());
 
-                                if(dataSnapshot.child("ReportUrl").exists()){
+                                if (dataSnapshot.child("ReportUrl").exists()) {
                                     notificationItemModel.setReportUrl(dataSnapshot.child("ReportUrl").getValue(String.class));
                                 }
                                 if (dataSnapshot.child("Reminder").exists()) notificationItemModel
@@ -114,7 +113,7 @@ public class PendingApprovalsActivity extends AppCompatActivity {
                                                 "\nSerial No. : " + dataSnapshot.child("SerialNumber").getValue().toString() +
                                                 "\nNew Serial No. : " + dataSnapshot.child("NewProductSerialNumber").getValue().toString());
 
-                                if(dataSnapshot.child("ReportUrl").exists()){
+                                if (dataSnapshot.child("ReportUrl").exists()) {
                                     notificationItemModel.setReportUrl(dataSnapshot.child("ReportUrl").getValue(String.class));
                                 }
                                 if (dataSnapshot.child("Reminder").exists()) notificationItemModel

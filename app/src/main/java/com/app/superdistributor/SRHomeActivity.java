@@ -60,6 +60,7 @@ public class SRHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(SRHomeActivity.this, AdminNotificationActivity.class);
+                i.putExtra("Username",SRUsername);
                 startActivity(i);
             }
         });

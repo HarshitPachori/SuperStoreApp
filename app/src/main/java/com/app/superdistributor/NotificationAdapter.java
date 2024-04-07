@@ -41,6 +41,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     Context context;
     ArrayList<NotificationItemModel> list;
     DatabaseReference databaseReference;
+
     public NotificationAdapter(Context context, ArrayList<NotificationItemModel> list){
         this.context = context;
         this.list = list;
@@ -164,6 +165,30 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
               }
               else if (type.equals("Grievance")) {
                   databaseReference.child("Grievances").child(tag).removeValue();
+              }else if(type.equals("Expense")){
+                 DatabaseReference exReference = databaseReference.child("SRs");
+                 exReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                     @Override
+                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                         for (DataSnapshot srSnapshot : snapshot.getChildren()) {
+                             for (DataSnapshot expenseSnapshot : srSnapshot.child("Expenses").getChildren()) {
+                                 if (expenseSnapshot.getKey().equals(tag)) {
+                                     // Found the expense, now update its status
+                                     DatabaseReference expenseRef = expenseSnapshot.getRef();
+                                     expenseRef.updateChildren(updateStatus);
+                                     return; // Stop iterating once the expense is found and updated
+                                 }
+                             }
+                         }
+                         // If the expense is not found
+                         Toast.makeText(context, "Expense not found", Toast.LENGTH_SHORT).show();
+                     }
+
+                     @Override
+                     public void onCancelled(@NonNull DatabaseError error) {
+
+                     }
+                 });
               }
               if(position<list.size()) list.remove(position);
               ((Activity)context).finish();
@@ -201,6 +226,30 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
               }
               else if (type.equals("Grievance")) {
                   databaseReference.child("Grievances").child(tag).removeValue();
+              }else if(type.equals("Expense")){
+                  DatabaseReference exReference = databaseReference.child("SRs");
+                  exReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                      @Override
+                      public void onDataChange(@NonNull DataSnapshot snapshot) {
+                          for (DataSnapshot srSnapshot : snapshot.getChildren()) {
+                              for (DataSnapshot expenseSnapshot : srSnapshot.child("Expenses").getChildren()) {
+                                  if (expenseSnapshot.getKey().equals(tag)) {
+                                      // Found the expense, now update its status
+                                      DatabaseReference expenseRef = expenseSnapshot.getRef();
+                                      expenseRef.updateChildren(updateStatus);
+                                      return; // Stop iterating once the expense is found and updated
+                                  }
+                              }
+                          }
+                          // If the expense is not found
+                          Toast.makeText(context, "Expense not found", Toast.LENGTH_SHORT).show();
+                      }
+
+                      @Override
+                      public void onCancelled(@NonNull DatabaseError error) {
+
+                      }
+                  });
               }
               if(position<list.size()) list.remove(position);
               ((Activity)context).finish();

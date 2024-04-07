@@ -34,6 +34,7 @@ public class AdminNotificationActivity extends AppCompatActivity {
     ArrayList<NotificationItemModel> list;
     NotificationItemModel notificationItemModel;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,6 +158,48 @@ public class AdminNotificationActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {}
                 });
+        database.child("SRs").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot srSnapshot : dataSnapshot.getChildren()) {
+                    DataSnapshot expensesSnapshot = srSnapshot.child("Expenses");
+
+                    for (DataSnapshot expenseSnapshot : expensesSnapshot.getChildren()) {
+                        String status = expenseSnapshot.child("Status").getValue(String.class);
+
+                        if ("Pending".equals(status)) {
+                            String expenseType = expenseSnapshot.child("Type").getValue(String.class);
+                            String amount = expenseSnapshot.child("Amount").getValue(String.class);
+                            String date = expenseSnapshot.child("Date").getValue(String.class);
+                            String reminder = expenseSnapshot.child("Reminder").getValue(String.class);
+String expenseId = expenseSnapshot.child("Id").getValue(String.class);
+                            NotificationItemModel notificationItemModel = new NotificationItemModel();
+                            notificationItemModel.setNotificationType("Expense");
+                            notificationItemModel.setNotificationTag(expenseId);
+                            notificationItemModel.setNotificationDesc("Expense Type : " + expenseType +
+                                    "\nAmount : " + amount +
+                                    "\nDate : " + date +
+                                    "\nStatus : " + status);
+
+                            if (reminder != null) {
+                                notificationItemModel.setNotificationPriority(reminder);
+                            }
+
+                            list.add(notificationItemModel);
+                            myAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+
+                myAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle onCancelled event
+            }
+        });
+
         myAdapter.notifyDataSetChanged();
     }
 

@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 public class SRExpenseActivity extends AppCompatActivity {
     String username;
@@ -85,12 +86,15 @@ public class SRExpenseActivity extends AppCompatActivity {
                     HashMap<String, Object> expense = new HashMap<>();
                     String expenseType = expenseTypeEt.getText().toString();
                     String expenseAmt = expenseAmtEt.getText().toString();
-
+String expenseId = UUID.randomUUID().toString();
+                    expense.put("Id", expenseId);
                     expense.put("Type", expenseType);
                     expense.put("Amount", expenseAmt);
                     expense.put("Date", selectedDate);
+                    expense.put("Status","Pending");
+                    expense.put("Reminder","No");
                     database.child("SRs").child(username)
-                            .child("Expenses").child(selectedDate)
+                            .child("Expenses").child(expenseId)
                             .updateChildren(expense).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
