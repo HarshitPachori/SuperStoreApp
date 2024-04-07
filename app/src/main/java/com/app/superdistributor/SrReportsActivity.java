@@ -2,6 +2,7 @@ package com.app.superdistributor;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -35,7 +36,7 @@ public class SrReportsActivity extends AppCompatActivity {
         PostMessage = findViewById(R.id.postMessageReportBtn);
         RaiseComplaint = findViewById(R.id.raiseComplaintReportBtn);
         Expense = findViewById(R.id.expenseReportBtn);
-
+        Log.d("sruser",SRUsername);
         RegisterComplaint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +55,7 @@ public class SrReportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SrReportsActivity.this, ConfirmedOrderReport.class);
+                intent.putExtra("SRUsername",SRUsername);
                 startActivity(intent);
             }
         });
@@ -82,6 +84,7 @@ public class SrReportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SrReportsActivity.this, ExpenseReport.class);
+                intent.putExtra("SRUsername",SRUsername);
                 startActivity(intent);
             }
         });

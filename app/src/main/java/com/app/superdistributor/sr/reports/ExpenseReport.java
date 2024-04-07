@@ -40,6 +40,7 @@ public class ExpenseReport extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_report);
+        SRUsername = getIntent().getStringExtra("SRUsername");
         recyclerView = findViewById(R.id.expenseReportRV);
         progressBar = findViewById(R.id.expenseProgressBar);
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -48,8 +49,9 @@ public class ExpenseReport extends AppCompatActivity {
         list = new ArrayList<>();
         adapter = new ExpenseAdapter(this, list);
         recyclerView.setAdapter(adapter);
-        SRUsername = getIntent().getStringExtra("SRUsername");
+        Log.d("sruser",SRUsername);
         progressBar.setVisibility(View.VISIBLE);
+
        databaseReference.child("SRs").child(SRUsername).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
