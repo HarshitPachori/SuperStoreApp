@@ -28,7 +28,7 @@ static final int RECEIVER_TYPE= 1;
     public MessagesAdapter(String username, Context context, ArrayList<MessageModel> list) {
         this.username = username;
         this.context = context;
-        this.list = list;
+        this.list = list != null ? list : new ArrayList<>();
     }
 
     @NonNull
@@ -77,7 +77,7 @@ static final int RECEIVER_TYPE= 1;
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list != null ? list.size() : 0;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

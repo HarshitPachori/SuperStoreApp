@@ -1,20 +1,27 @@
 package com.app.superdistributor;
 
-public class MessageModel {
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class MessageModel{
     String Sender;
     String Recipient;
     String Message;
 
-    public Object getTimestamp() {
+    public String getTimestamp() {
         return Timestamp;
     }
 
-    public void setTimestamp(Object timestamp) {
+    public void setTimestamp(String timestamp) {
         Timestamp = timestamp;
     }
 
-    Object Timestamp;
-    public MessageModel(String sender, String recipient, String message,Object timestamp) {
+    String Timestamp;
+
+    public MessageModel(String sender, String recipient, String message, String timestamp) {
         Sender = sender;
         Recipient = recipient;
         Message = message;
@@ -58,4 +65,6 @@ public class MessageModel {
                 ", Timestamp=" + Timestamp +
                 '}';
     }
+
+
 }
