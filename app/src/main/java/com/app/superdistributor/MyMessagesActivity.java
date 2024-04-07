@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,7 +48,7 @@ public class MyMessagesActivity extends AppCompatActivity {
     List<String> dealers, srs, technicians;
     ArrayList<MessageModel> list;
     MessagesAdapter messagesAdapter;
-    String username;
+    String username, recieverUsername;
     ImageView noMessagesIcon;
     Spinner spinner;
 
@@ -62,9 +63,9 @@ public class MyMessagesActivity extends AppCompatActivity {
         noMessagesIcon = findViewById(R.id.nomsgssign);
         recyclerView = findViewById(R.id.messages_rcv);
         spinner = findViewById(R.id.roleSpinner);
-
-        String roles[] = {"Admin","Dealer","SR","Technician"};
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,roles);
+        recieverUsername = "admin";
+        String roles[] = {"Admin", "Dealer", "SR", "Technician"};
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, roles);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(spinnerAdapter);
@@ -79,14 +80,41 @@ public class MyMessagesActivity extends AppCompatActivity {
 
         messagesAdapter = new MessagesAdapter(username, this, list);
         recyclerView.setAdapter(messagesAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedRole = parent.getItemAtPosition(position).toString();
+                switch (selectedRole){
+                    case "Admin": {
+                        list.clear();
+                        recieverUsername = "admin";
+                       getMsgForReciever(recieverUsername);
+                    };
+                    break;
+                    case "Dealer": generateDialogForSpinner(dealers.toArray(new String[0]));
+                    break;
+                    case "SR": generateDialogForSpinner(srs.toArray(new String[0]));
+                    break;
+                    case "Technician": generateDialogForSpinner(technicians.toArray(new String[0]));
+                    break;
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         databaseReference.child("Messages").orderByChild("Timestamp").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    if (dataSnapshot.child("Recipient").getValue().toString().equals(username) || dataSnapshot.child("Sender").getValue().toString().equals(username)) {
-                        list.add(dataSnapshot.getValue(MessageModel.class));
+                    MessageModel model = dataSnapshot.getValue(MessageModel.class);
+                    if ((model.getSender().equals(username) && model.getRecipient().equals(recieverUsername))
+                            || (model.getRecipient().equals(username) && model.getSender().equals(recieverUsername))
+                    || (model.getSender().equals(username) && model.getRecipient().equals(username))) {
+                        list.add(model);
                     }
                 }
                 messagesAdapter.notifyDataSetChanged();
@@ -297,6 +325,49 @@ public class MyMessagesActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+
+    protected  void generateDialogForSpinner(String[] users){
+      if(users.length>0){
+          AlertDialog.Builder builder = new AlertDialog.Builder(MyMessagesActivity.this);
+          builder.setTitle("Select recipient");
+          builder.setItems(users, new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialogInterface, int i) {
+                  Toast.makeText(MyMessagesActivity.this,"user selected is " + users[i],Toast.LENGTH_LONG).show();
+                  list.clear();
+                  recieverUsername = users[i];
+                  getMsgForReciever(recieverUsername);
+
+              }
+          });
+          builder.show();
+      }
+    }
+    protected void getMsgForReciever(String reciever){
+        databaseReference.child("Messages").orderByChild("Timestamp").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    MessageModel model = dataSnapshot.getValue(MessageModel.class);
+                    if ((model.getSender().equals(username) && model.getRecipient().equals(recieverUsername))
+                            || (model.getRecipient().equals(username) && model.getSender().equals(recieverUsername))
+                            || (model.getSender().equals(username) && model.getRecipient().equals(username))) {
+                        list.add(model);
+                    }
+                }
+                messagesAdapter.notifyDataSetChanged();
+                Log.d("Chekar", list.toString());
+                if (list.isEmpty()) {
+                    Toast.makeText(MyMessagesActivity.this, "No messages", Toast.LENGTH_LONG).show();
+                    noMessagesIcon.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
