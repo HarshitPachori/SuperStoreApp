@@ -139,6 +139,7 @@ public class SRPostMessageActivity extends AppCompatActivity {
                                     // Add position  in lang list
                                     Log.d("delaernameslist", dealerUserNamesList.get(i) + " : " + dealerNamesList.get(i));
                                     selectedDealers.put(dealerUserNamesList.get(i),dealerNamesList.get(i));
+                                    Log.d("selectdealer",selectedDealers.keySet().toString());
                                     // Sort array list
                                 } else {
                                     // when checkbox unselected
@@ -216,7 +217,8 @@ public class SRPostMessageActivity extends AppCompatActivity {
         HashMap<String,Object> message = new HashMap<>();
         message.put("Message",descriptionEt.getText().toString());
         message.put("AudioUrl",audioUrl);
-        message.put("To Dealers",selectedDealers.get("Name"));
+        Log.d("todealer",selectedDealers.toString());
+        message.put("Dealers",selectedDealers.keySet().toString());
         DatabaseReference db = database.child("SRs").child(username).child("MessageToDealers");
         db.child(db.push().getKey())
                 .updateChildren(message)

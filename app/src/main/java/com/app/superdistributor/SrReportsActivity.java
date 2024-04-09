@@ -70,6 +70,7 @@ public class SrReportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SrReportsActivity.this, PostMessageReport.class);
+                intent.putExtra("SRUsername",SRUsername);
                 startActivity(intent);
             }
         });
