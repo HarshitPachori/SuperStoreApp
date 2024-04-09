@@ -84,6 +84,7 @@ public class AdminPanelActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(AdminPanelActivity.this, AdminNotificationActivity.class);
+                i.putExtra("username",Username);
                 startActivity(i);
             }
         });
@@ -431,5 +432,6 @@ public class AdminPanelActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
     }
 }
