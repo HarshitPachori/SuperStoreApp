@@ -93,6 +93,7 @@ String expenseId = UUID.randomUUID().toString();
                     expense.put("Date", selectedDate);
                     expense.put("Status","Pending");
                     expense.put("Reminder","No");
+                    expense.put("Name",username);
                     database.child("SRs").child(username)
                             .child("Expenses").child(expenseId)
                             .updateChildren(expense).addOnSuccessListener(new OnSuccessListener<Void>() {

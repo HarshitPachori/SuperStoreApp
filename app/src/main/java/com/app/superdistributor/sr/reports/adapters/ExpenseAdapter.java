@@ -38,6 +38,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         holder.amount.setText(model.getAmount());
         holder.date.setText(model.getDate());
         holder.type.setText(model.getType());
+        holder.name.setText(model.getName());
     }
 
     @Override
@@ -46,7 +47,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView type, amount, date, status;
+        TextView type, amount, date, status,name;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -54,6 +55,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
             amount = itemView.findViewById(R.id.expense_amount);
             date = itemView.findViewById(R.id.expense_date);
             status = itemView.findViewById(R.id.expense_status);
+            name = itemView.findViewById(R.id.expense_doneby);
         }
     }
 }

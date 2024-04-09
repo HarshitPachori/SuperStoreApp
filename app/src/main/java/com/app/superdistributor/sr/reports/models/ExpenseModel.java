@@ -1,13 +1,14 @@
 package com.app.superdistributor.sr.reports.models;
 
 public class ExpenseModel {
-   String Amount,Date,Status,Type;
+   String Amount,Date,Status,Type,Name;
 
-    public ExpenseModel(String amount, String date, String status, String type) {
+    public ExpenseModel(String amount, String date, String status, String type,String name) {
         Amount = amount;
         Date = date;
         Status = status;
         Type = type;
+        Name = name;
     }
 
     @Override
@@ -16,11 +17,19 @@ public class ExpenseModel {
                 "Amount='" + Amount + '\'' +
                 ", Date='" + Date + '\'' +
                 ", Status='" + Status + '\'' +
-                ", Type='" + Type + '\'' +
+                ", Type='" + Type + '\'' +  ", Name='" + Name + '\'' +
                 '}';
     }
 
     public ExpenseModel() {
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
     }
 
     public String getAmount() {
