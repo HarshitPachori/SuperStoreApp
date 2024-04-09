@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -74,8 +75,10 @@ public class SRPostMessageActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot snap : snapshot.getChildren()) {
                     if (snap.getValue() != null) {
+
+                        Log.d("snapval",snap.getKey() + " : "+ snap.child("Name").getValue());
                         dealerUserNamesList.add((snap.getKey().toString()));
-                        dealerNamesList.add(snap.getValue().toString());
+                        dealerNamesList.add(snap.child("Name").getValue().toString());
                     }
                 }
                 Log.d("Dealers" , dealerUserNamesList.toString());
@@ -88,6 +91,8 @@ public class SRPostMessageActivity extends AppCompatActivity {
         mediaLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        Log.d("resultcode",result.getResultCode()+"");
+                        Log.d("resultdata",result.getData().toString());
                         Intent data = result.getData();
                         // Get the selected audio URI
                         uploadedAudioUri = data.getData();
@@ -97,7 +102,7 @@ public class SRPostMessageActivity extends AppCompatActivity {
         selectAudioBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mediaIntent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+                Intent mediaIntent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 mediaLauncher.launch(mediaIntent);
             }
         });
@@ -132,6 +137,7 @@ public class SRPostMessageActivity extends AppCompatActivity {
                                 if (b) {
                                     // when checkbox selected
                                     // Add position  in lang list
+                                    Log.d("delaernameslist", dealerUserNamesList.get(i) + " : " + dealerNamesList.get(i));
                                     selectedDealers.put(dealerUserNamesList.get(i),dealerNamesList.get(i));
                                     // Sort array list
                                 } else {
@@ -187,8 +193,9 @@ public class SRPostMessageActivity extends AppCompatActivity {
                 }
                 else if (selectedDealers.size() == 0){
                     Toast.makeText(SRPostMessageActivity.this, "Please select dealers",Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else if (uploadedAudioUri==null || uploadedAudioUri.toString().isEmpty()  ){
+                    Toast.makeText(SRPostMessageActivity.this, "Please select Audio file",Toast.LENGTH_SHORT).show();
+                } else {
                         createNewMessageEntry();
                 }
             }
@@ -209,7 +216,7 @@ public class SRPostMessageActivity extends AppCompatActivity {
         HashMap<String,Object> message = new HashMap<>();
         message.put("Message",descriptionEt.getText().toString());
         message.put("AudioUrl",audioUrl);
-        message.put("To Dealers",selectedDealers);
+        message.put("To Dealers",selectedDealers.get("Name"));
         DatabaseReference db = database.child("SRs").child(username).child("MessageToDealers");
         db.child(db.push().getKey())
                 .updateChildren(message)

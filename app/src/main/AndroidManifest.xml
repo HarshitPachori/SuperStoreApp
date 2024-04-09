@@ -9,8 +9,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
 
     <application
         android:allowBackup="true"
@@ -40,9 +42,7 @@
         <activity
             android:name=".sr.reports.RegisteredComplaintReport"
             android:exported="false" />
-        <activity
-            android:name=".sr_reports_history"
-            android:exported="false" />
+
         <activity
             android:name=".SrReportsActivity"
             android:exported="false" />
@@ -50,7 +50,7 @@
             android:name=".PlacedOrderHistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".placedOrdersActivity"
+            android:name=".MyProducts.PlaceOrderActivity"
             android:exported="false" />
         <activity
             android:name=".dealerreports.paymentreports.MaterialReturnReportActivity"
@@ -229,9 +229,7 @@
         <activity
             android:name=".SRHomeActivity"
             android:exported="false" />
-        <activity
-            android:name=".MyProducts.PlaceOrderActivity"
-            android:exported="false" />
+
         <activity
             android:name=".AboutActivity"
             android:exported="false" />
