@@ -68,6 +68,7 @@ public class MaterialReturnPaymentActivity extends AppCompatActivity {
                     Map<String, Object> materialDetails = new HashMap<String, Object>();
                     materialDetails.put("Description", MaterialDescription.getText().toString());
                     materialDetails.put("Value", MaterialValue.getText().toString());
+                    materialDetails.put("Status","Pending");
 
                     mref.child("Dealers").child(DealerName).child("Payments").child("MaterialReturn")
                             .push().updateChildren(materialDetails).addOnCompleteListener(new OnCompleteListener<Void>() {

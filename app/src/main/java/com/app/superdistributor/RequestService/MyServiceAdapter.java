@@ -50,6 +50,7 @@ public class MyServiceAdapter extends RecyclerView.Adapter<MyServiceAdapter.MyVi
         holder.ModelNoTV.setText(serviceModel.getModelNumber());
         holder.NewProductSerialNumberTV.setText(serviceModel.getNewProductSerialNumber());
         holder.PhoneNoTV.setText(serviceModel.getPhoneNumber());
+        holder.status.setText(serviceModel.getStatus());
         holder.ReportURLTV.setText("Document URL");
         holder.SerialNoTv.setText(serviceModel.getSerialNumber());
 
@@ -71,7 +72,7 @@ public class MyServiceAdapter extends RecyclerView.Adapter<MyServiceAdapter.MyVi
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView CustomerNameTV, DateOfPurchaseTV, ModelNoTV, NewProductSerialNumberTV, PhoneNoTV, ReportURLTV, SerialNoTv;
+        TextView CustomerNameTV, DateOfPurchaseTV, ModelNoTV, NewProductSerialNumberTV, PhoneNoTV, ReportURLTV, SerialNoTv,status;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,6 +84,7 @@ public class MyServiceAdapter extends RecyclerView.Adapter<MyServiceAdapter.MyVi
             PhoneNoTV = itemView.findViewById(R.id.servicephonenumber);
             ReportURLTV = itemView.findViewById(R.id.reporturl);
             SerialNoTv = itemView.findViewById(R.id.serviceserialnumber);
+            status = itemView.findViewById(R.id.status);
         }
     }
 }

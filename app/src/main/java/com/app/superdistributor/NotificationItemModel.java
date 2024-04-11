@@ -8,9 +8,19 @@ public class NotificationItemModel {
     String notificationPriority = "No";
 
     String reportUrl;
+    String NotificationId;
 
     public String getReportUrl() {
         return reportUrl;
+    }
+
+
+    public String getNotificationId() {
+        return NotificationId;
+    }
+
+    public void setNotificationId(String notificationId) {
+        NotificationId = notificationId;
     }
 
     public NotificationItemModel(String notificationType, String notificationTag, String notificationPriority, String reportUrl, String notificationDesc) {

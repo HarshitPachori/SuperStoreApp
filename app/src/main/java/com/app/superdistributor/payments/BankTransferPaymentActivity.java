@@ -180,6 +180,7 @@ public class BankTransferPaymentActivity extends AppCompatActivity {
                                             bankTransferPaymentDetails.put("Amount", amount);
                                             bankTransferPaymentDetails.put("Date", selectedDate);
                                             bankTransferPaymentDetails.put("TransactionScreenshotUrl", url);
+                                            bankTransferPaymentDetails.put("Status","Pending");
 
                                             mref.child("Dealers").child(DealerName).child("Payments").child("BankTransfer").
                                                     push().updateChildren(bankTransferPaymentDetails)

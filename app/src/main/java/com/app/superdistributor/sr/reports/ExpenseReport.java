@@ -65,9 +65,6 @@ public class ExpenseReport extends AppCompatActivity {
                 }
                 adapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
-                if(list.isEmpty()){
-                    Toast.makeText(ExpenseReport.this,"No Expenses are Approved or rejected yet",Toast.LENGTH_LONG).show();
-                }
             }
 
             @Override

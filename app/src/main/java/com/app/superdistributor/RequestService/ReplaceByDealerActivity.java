@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -69,8 +70,8 @@ public class ReplaceByDealerActivity extends AppCompatActivity {
 
         userType = getIntent().getType();
 
-        username = (userType.equals("viaDealer"))?getIntent().getStringExtra("DealerName"):getIntent().getStringExtra("SRUserame");
-
+        username = (userType.equals("Dealers"))?getIntent().getStringExtra("Username"):getIntent().getStringExtra("SRUserame");
+        Log.d("user : ", userType + "   "+ username);
         CustomerNameTI = findViewById(R.id.customerNameTI);
         PhoneNumberTI = findViewById(R.id.phoneNoTI);
         mPickDateButton = findViewById(R.id.dealerdateOfPurchase);
@@ -352,7 +353,7 @@ public class ReplaceByDealerActivity extends AppCompatActivity {
                                             replacementDetails.put("ReportUrl", url);
                                             replacementDetails.put("Status", "Pending");
 
-                                            mref.child(userType).child("RequestServices").child("ReplacementByDealer").child(customerName).updateChildren(replacementDetails)
+                                            mref.child(userType).child("RequestServices").child("ReplacementByDealer").child(customerName).push().setValue(replacementDetails)
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
@@ -361,7 +362,7 @@ public class ReplaceByDealerActivity extends AppCompatActivity {
 
                                                             Intent i = new Intent(ReplaceByDealerActivity.this, RequestServiceActivity.class);
                                                             i.setType("viaSr");
-                                                            i.putExtra("SRUsername",username);
+                                                            i.putExtra("Username",username);
                                                             startActivity(i);
                                                         }
                                                     });

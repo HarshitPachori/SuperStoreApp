@@ -1,7 +1,21 @@
 package com.app.superdistributor.RequestService;
 
 public class ServiceModel {
-    String CustomerName, DateOfPurchase, ModelNumber, NewProductSerialNumber, PhoneNumber, ReportUrl, SerialNumber;
+    String CustomerName, DateOfPurchase, ModelNumber, NewProductSerialNumber, PhoneNumber, ReportUrl, SerialNumber,Status;
+
+    public ServiceModel() {
+    }
+
+    public ServiceModel(String customerName, String dateOfPurchase, String modelNumber, String newProductSerialNumber, String phoneNumber, String reportUrl, String serialNumber, String status) {
+        CustomerName = customerName;
+        DateOfPurchase = dateOfPurchase;
+        ModelNumber = modelNumber;
+        NewProductSerialNumber = newProductSerialNumber;
+        PhoneNumber = phoneNumber;
+        ReportUrl = reportUrl;
+        SerialNumber = serialNumber;
+        Status = status;
+    }
 
     public String getCustomerName() {
         return CustomerName;
@@ -59,6 +73,14 @@ public class ServiceModel {
         SerialNumber = serialNumber;
     }
 
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
     @Override
     public String toString() {
         return "ServiceModel{" +
@@ -69,6 +91,7 @@ public class ServiceModel {
                 ", PhoneNumber='" + PhoneNumber + '\'' +
                 ", ReportUrl='" + ReportUrl + '\'' +
                 ", SerialNumber='" + SerialNumber + '\'' +
+                ", Status='" + Status + '\'' +
                 '}';
     }
 }

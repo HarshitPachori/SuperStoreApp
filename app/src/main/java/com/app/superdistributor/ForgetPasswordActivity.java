@@ -49,6 +49,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     String userType = "";
     private FirebaseAuth mAuth;
     TextInputLayout ForgetPasswordUserNameTIL, OTPTIL, NewPasswordTIL, ConfirmPasswordTIL;
+
+    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,19 +106,20 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                     userType = "Technicians";
                 }
 
+                Log.d("userdata",userType);
                 mref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+Log.d("userdata",snapshot.child(userType).child(ForgetPasswordUsername.getText().toString()).toString());
                         if((snapshot.child(userType).child(ForgetPasswordUsername.getText().toString()).exists()))
                         {
 
                             String mobileNumber = snapshot.child(userType)
                                     .child(ForgetPasswordUsername.getText().toString()).child("Phone")
                                     .getValue().toString();
-
+                            Log.d("userdata",mobileNumber);
                             String phoneNumber = CountryCode + mobileNumber;
-
+                            Log.d("userdata",phoneNumber);
                             ForgetPasswordUserNameTIL.setVisibility(View.INVISIBLE);
                             SendOTPBtn.setVisibility(View.INVISIBLE);
                             ResetradioGroup.setVisibility(View.INVISIBLE);
@@ -194,6 +197,28 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            @Override
+            public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                super.onCodeSent(s, forceResendingToken);
+                VerificationId = s;
+            }
+
+            @Override
+            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                // OTP automatically verified
+                        signInWithCredential(phoneAuthCredential);
+            }
+
+            @Override
+            public void onVerificationFailed(@NonNull FirebaseException e) {
+                // Verification failed
+                        Log.e("verification_failed", e.getMessage());
+                        LoadingBar.dismiss();
+                        Toast.makeText(ForgetPasswordActivity.this, "Verification Failed!", Toast.LENGTH_SHORT).show();
+            }
+        };
     }
     private void verifyCode(String code)
     {
@@ -236,43 +261,13 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
     private void sendVerificationCode(String phone) {
 
-        PhoneAuthOptions options =
-                PhoneAuthOptions.newBuilder(mAuth)
-                        .setPhoneNumber(phone)            // Phone number to verify
-                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                        .setActivity(this)                 // Activity (for callback binding)
-                        .setCallbacks(mCallbacks)           // OnVerificationStateChangedCallbacks
-                        .build();
+        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
+                .setPhoneNumber(phone)
+                .setTimeout(60L,TimeUnit.SECONDS)
+                .setActivity(this)
+                .setCallbacks(mCallbacks)
+                .build();
         PhoneAuthProvider.verifyPhoneNumber(options);
     }
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks
-            mCallbacks=new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
-        @Override
-        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            super.onCodeSent(s, forceResendingToken);
-
-            VerificationId=s;
-        }
-
-        @Override
-        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-
-            String code=phoneAuthCredential.getSmsCode();
-            if(code != null)
-            {
-                LoadingBar.setTitle("Please Wait..");
-                LoadingBar.setMessage("Please Wait while we are checking our credentials...");
-                LoadingBar.show();
-                verifyCode(code);
-            }
-        }
-
-        @Override
-        public void onVerificationFailed(@NonNull FirebaseException e) {
-            Log.d("verificationfail" ,e.getMessage());
-            Toast.makeText(ForgetPasswordActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-    };
 }

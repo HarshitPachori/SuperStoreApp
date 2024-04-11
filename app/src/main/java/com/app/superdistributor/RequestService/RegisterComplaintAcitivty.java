@@ -54,14 +54,15 @@ public class RegisterComplaintAcitivty extends AppCompatActivity {
     TextInputEditText RegisterCustomerNameTI, RegisterPhoneNumberTI, RegisterDateOfPurchaseTI,
             RegisterModelNumberTI, RegisterSerialNumberTI;
     Button RegisterAttachReportBtn, RegisterSendForApprovalBtn;
-    String userType;
+    String userType,username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_complaint_acitivty);
         userType = getIntent().getType();
-        Toast.makeText(this, userType, Toast.LENGTH_SHORT).show();
+        username = (userType.equals("Dealers"))?getIntent().getStringExtra("Username"):getIntent().getStringExtra("SRUserame");
+        Toast.makeText(this, userType + " " + username, Toast.LENGTH_SHORT).show();
 
         RegisterCustomerNameTI = findViewById(R.id.registercustomerNameTI);
         RegisterPhoneNumberTI = findViewById(R.id.registerphoneNoTI);
@@ -186,7 +187,7 @@ public class RegisterComplaintAcitivty extends AppCompatActivity {
                                             replacementDetails.put("ReportUrl", url);
                                             replacementDetails.put("Status", "Pending");
 
-                                            mref.child(userType).child("RequestServices").child("RegisterComplaints").child(replacementID).updateChildren(replacementDetails)
+                                            mref.child(userType).child("RequestServices").child("RegisterComplaints").child(replacementID).push().setValue(replacementDetails)
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
@@ -194,6 +195,8 @@ public class RegisterComplaintAcitivty extends AppCompatActivity {
                                                             Toast.makeText(RegisterComplaintAcitivty.this, "Complaints Details Uploaded Successfully..", Toast.LENGTH_SHORT).show();
 
                                                             Intent i = new Intent(RegisterComplaintAcitivty.this, RequestServiceActivity.class);
+                                                            i.setType(userType);
+                                                            i.putExtra("Username",username);
                                                             startActivity(i);
                                                         }
                                                     });
@@ -221,6 +224,7 @@ public class RegisterComplaintAcitivty extends AppCompatActivity {
                             String replacementID = registerCustomerName;
 
                             Map<String, Object> replacementDetails = new HashMap<String, Object>();
+                            replacementDetails.put("ComplaintId",UUID.randomUUID().toString());
                             replacementDetails.put("CustomerName", registerCustomerName);
                             replacementDetails.put("PhoneNumber", registerPhoneNumber);
                             replacementDetails.put("DateOfPurchase", registerDateOfPurchase);
@@ -237,6 +241,8 @@ public class RegisterComplaintAcitivty extends AppCompatActivity {
                                             Toast.makeText(RegisterComplaintAcitivty.this, "Complaints Details Uploaded Successfully..", Toast.LENGTH_SHORT).show();
 
                                             Intent i = new Intent(RegisterComplaintAcitivty.this, RequestServiceActivity.class);
+                                            i.setType(userType);
+                                            i.putExtra("Username",username);
                                             startActivity(i);
                                         }
                                     });

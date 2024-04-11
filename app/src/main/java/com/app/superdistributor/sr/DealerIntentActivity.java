@@ -80,7 +80,7 @@ public class DealerIntentActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                list.clear();
+//                list.clear();
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
 

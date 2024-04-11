@@ -249,6 +249,7 @@ public class QRPaymentActivity extends AppCompatActivity {
                                             Map<String, Object> qrPaymentDetails = new HashMap<String, Object>();
                                             qrPaymentDetails.put("Amount", paymentAmount);
                                             qrPaymentDetails.put("PaymentScreenshotUrl", url);
+                                            qrPaymentDetails.put("Status","Pending");
 
                                             mref.child("Dealers").child(DealerName).child("Payments").child("QR").
                                                     push().updateChildren(qrPaymentDetails)

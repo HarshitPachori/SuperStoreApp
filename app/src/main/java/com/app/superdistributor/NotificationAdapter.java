@@ -37,16 +37,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.MyViewHolder>{
+public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.MyViewHolder> {
     Context context;
     ArrayList<NotificationItemModel> list;
     DatabaseReference databaseReference;
 
-    public NotificationAdapter(Context context, ArrayList<NotificationItemModel> list){
+    public NotificationAdapter(Context context, ArrayList<NotificationItemModel> list) {
         this.context = context;
         this.list = list;
         databaseReference = FirebaseDatabase.getInstance().getReference();
     }
+
     @NonNull
     @Override
     public NotificationAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -79,24 +80,29 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         if (notificationItemModel.getNotificationPriority().equals("Yes")) {
             holder.type.setTextColor(Color.RED);
             holder.tag.setTextColor(Color.RED);
-            holder.description.setTextColor(Color.rgb(255,150,150));
+            holder.description.setTextColor(Color.rgb(255, 150, 150));
             holder.reminderIcon.setVisibility(View.VISIBLE);
+        }
+        if (context.toString().substring(0, 49).equals("com.app.superdistributor.PendingApprovalsActivity")) {
+            holder.item.setText("Send a Reminder");
         }
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Context",context.toString());
-                if (context.toString().substring(0,49).equals("com.app.superdistributor.PendingApprovalsActivity")) {
-                    holder.item.setText("Send a Reminder");
+                Log.d("Context", context.toString());
+                if (context.toString().substring(0, 49).equals("com.app.superdistributor.PendingApprovalsActivity")) {
+
                     sendReminderDialogBox(holder.getAdapterPosition(),
                             notificationItemModel.getNotificationType(),
                             notificationItemModel.getNotificationTag(),
+                            notificationItemModel.getNotificationId(),
                             notificationItemModel.getNotificationDesc());
 
                 } else {
                     showExpandedDialog(holder.getAdapterPosition(),
                             notificationItemModel.getNotificationType(),
                             notificationItemModel.getNotificationTag(),
+                            notificationItemModel.getNotificationId(),
                             notificationItemModel.getNotificationDesc());
                 }
             }
@@ -108,10 +114,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         return list.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         Button item;
-        TextView type, tag, description,reportUrlTv;
+        TextView type, tag, description, reportUrlTv;
         ImageView reminderIcon;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             item = itemView.findViewById(R.id.complaint_item_cv);
@@ -123,204 +130,240 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         }
     }
 
-  private void showExpandedDialog(int position, String type, String tag, String description) {
-      AlertDialog.Builder builder = new AlertDialog.Builder(context);
-      View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_expanded_view, null);
-      TextView tagTv = dialogView.findViewById(R.id.notif_tag);
-      TextView descTv = dialogView.findViewById(R.id.notif_description);
-      builder.setView(dialogView);
-      tagTv.setText(tag);
-      descTv.setText(description);
-      HashMap<String,Object> updateStatus = new HashMap<>();
-      builder.setPositiveButton("Reject", new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-              updateStatus.put("Status","Rejected");
-              updateStatus.put("Reminder","No");
-              if(type.equals("SR Product Confirmation")){
-                  databaseReference.child("Admin").child("Notifications")
-                          .child("ProductConfirmation").child("SRs")
-                          .child(tag).updateChildren(updateStatus);
+    private void showExpandedDialog(int position, String type, String tag, String id, String description) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_expanded_view, null);
+        TextView tagTv = dialogView.findViewById(R.id.notif_tag);
+        TextView descTv = dialogView.findViewById(R.id.notif_description);
+        builder.setView(dialogView);
+        tagTv.setText(tag);
+        descTv.setText(description);
+        HashMap<String, Object> updateStatus = new HashMap<>();
+        builder.setPositiveButton("Reject", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                updateStatus.put("Status", "Rejected");
+                updateStatus.put("Reminder", "No");
+                if(type != null){
+                    if (type.equals("SR Product Confirmation")) {
+                        databaseReference.child("Admin").child("Notifications")
+                                .child("ProductConfirmation").child("SRs")
 
-                  String productID = description.split("ProductID")[1].substring(3,description.split("ProductID")[1].length()).split("Quantity")[0].trim();
+                                .child(tag).child(id).updateChildren(updateStatus);
 
-                  String userID = description.split("Placed by : ")[1].trim();
+                        String productID = description.split("ProductID")[1].substring(3, description.split("ProductID")[1].length()).split("Quantity")[0].trim();
 
-                  Map<String, Object> status = new HashMap<>();
-                  status.put("Status", "Rejected");
+                        String userID = description.split("Placed by : ")[1].trim();
 
-                  databaseReference.child("Dealers").child(userID).child("Orders").child(productID).updateChildren(status);
+                        Map<String, Object> status = new HashMap<>();
+                        status.put("Status", "Rejected");
+
+                        databaseReference.child("Dealers").child(userID).child("Orders").child(productID).updateChildren(status);
 
 
-              }
-              else if (type.equals("Dealer Complaint")) {
-                  databaseReference.child("Dealers").child("RequestServices")
-                          .child("RegisterComplaints").child(tag)
-                          .updateChildren(updateStatus);
-              }
-              else if (type.equals("Replacement by Dealer")) {
-                      databaseReference.child("Dealers").child("RequestServices")
-                              .child("ReplacementByDealer").child(tag)
-                              .updateChildren(updateStatus);
-              }
-              else if (type.equals("Grievance")) {
-                  databaseReference.child("Grievances").child(tag).removeValue();
-              }else if(type.equals("Expense")){
-                 DatabaseReference exReference = databaseReference.child("SRs");
-                 exReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                     @Override
-                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                         for (DataSnapshot srSnapshot : snapshot.getChildren()) {
-                             for (DataSnapshot expenseSnapshot : srSnapshot.child("Expenses").getChildren()) {
-                                 if (expenseSnapshot.getKey().equals(tag)) {
-                                     // Found the expense, now update its status
-                                     DatabaseReference expenseRef = expenseSnapshot.getRef();
-                                     expenseRef.updateChildren(updateStatus);
-                                     return; // Stop iterating once the expense is found and updated
-                                 }
-                             }
-                         }
-                         // If the expense is not found
-                         Toast.makeText(context, "Expense not found", Toast.LENGTH_SHORT).show();
-                     }
+                    } else if (type.equals("Dealer Complaint")) {
+                        databaseReference.child("Dealers").child("RequestServices")
+                                .child("RegisterComplaints").child(tag).child(id)
+                                .updateChildren(updateStatus);
+                    } else if (type.equals("Replacement by Dealer")) {
+                        databaseReference.child("Dealers").child("RequestServices")
+                                .child("ReplacementByDealer").child(tag).child(id)
+                                .updateChildren(updateStatus);
+                    } else if (type.equals("Grievance")) {
+                        databaseReference.child("Grievances").child(tag).removeValue();
+                    } else if (type.equals("Expense")) {
+                        DatabaseReference exReference = databaseReference.child("SRs");
+                        exReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot srSnapshot : snapshot.getChildren()) {
+                                    for (DataSnapshot expenseSnapshot : srSnapshot.child("Expenses").getChildren()) {
+                                        String expenseKey = expenseSnapshot.getKey();
+                                        if (expenseKey != null && expenseKey.equals(tag)) {
+                                            // Found the expense, now update its status
+                                            DatabaseReference expenseRef = expenseSnapshot.getRef();
+                                            expenseRef.updateChildren(updateStatus);
+                                        }
+                                    }
+                                }
+                            }
 
-                     @Override
-                     public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                     }
-                 });
-              }
-              if(position<list.size()) list.remove(position);
-              ((Activity)context).finish();
-              context.startActivity(new Intent(context,AdminNotificationActivity.class));
-              Toast.makeText(context, "Status updated", Toast.LENGTH_SHORT).show();
-          }
-      }).setNegativeButton("Accept", new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-              updateStatus.put("Status","Accepted");
-              updateStatus.put("Reminder","No");
-              if(type.equals("SR Product Confirmation")){
-                  databaseReference.child("Admin").child("Notifications")
-                          .child("ProductConfirmation").child("SRs")
-                          .child(tag).updateChildren(updateStatus);
+                            }
+                        });
+                    } else if (type.equals("Dealer Payment")) {
+                        DatabaseReference exReference = databaseReference.child("Dealers");
+                        exReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot srSnapshot : snapshot.getChildren()) {
+                                    for ( DataSnapshot dealerSnapshot : srSnapshot.child("Payments").getChildren()) {
+                                        for(DataSnapshot snapshot1:dealerSnapshot.getChildren()){
+                                            DatabaseReference expenseRef = snapshot1.getRef();
+                                            expenseRef.updateChildren(updateStatus);
+                                        }
+                                    }
+                                }
+                            }
 
-                  String productID = description.split("ProductID")[1].substring(3,description.split("ProductID")[1].length()).split("Quantity")[0].trim();
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                  String userID = description.split("Placed by : ")[1].trim();
+                            }
+                        });
+                    }
+                    if (position < list.size()) list.remove(position);
+                    notifyDataSetChanged();
+                    ((Activity) context).finish();
+                    context.startActivity(new Intent(context, AdminNotificationActivity.class));
+                    Toast.makeText(context, "Status updated", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).setNegativeButton("Accept", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                updateStatus.put("Status", "Accepted");
+                updateStatus.put("Reminder", "No");
+                if(type != null) {
+                    if (type.equals("SR Product Confirmation")) {
+                        databaseReference.child("Admin").child("Notifications")
+                                .child("ProductConfirmation").child("SRs")
+                                .child(tag).child(id).updateChildren(updateStatus);
 
-                  Map<String, Object> status = new HashMap<>();
-                  status.put("Status", "Accepted");
+                        String productID = description.split("ProductID")[1].substring(3, description.split("ProductID")[1].length()).split("Quantity")[0].trim();
 
-                  databaseReference.child("Dealers").child(userID).child("Orders").child(productID).updateChildren(status);
-              }
-              else if (type.equals("Dealer Complaint")) {
-                  databaseReference.child("Dealers").child("RequestServices")
-                          .child("RegisterComplaints").child(tag)
-                          .updateChildren(updateStatus);
-              }
-              else if (type.equals("Replacement by Dealer")) {
-                  databaseReference.child("Dealers").child("RequestServices")
-                          .child("ReplacementByDealer").child(tag)
-                          .updateChildren(updateStatus);
-              }
-              else if (type.equals("Grievance")) {
-                  databaseReference.child("Grievances").child(tag).removeValue();
-              }else if(type.equals("Expense")){
-                  DatabaseReference exReference = databaseReference.child("SRs");
-                  exReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                      @Override
-                      public void onDataChange(@NonNull DataSnapshot snapshot) {
-                          for (DataSnapshot srSnapshot : snapshot.getChildren()) {
-                              for (DataSnapshot expenseSnapshot : srSnapshot.child("Expenses").getChildren()) {
-                                  if (expenseSnapshot.getKey().equals(tag)) {
-                                      // Found the expense, now update its status
-                                      DatabaseReference expenseRef = expenseSnapshot.getRef();
-                                      expenseRef.updateChildren(updateStatus);
-                                      return; // Stop iterating once the expense is found and updated
-                                  }
-                              }
-                          }
-                          // If the expense is not found
-                          Toast.makeText(context, "Expense not found", Toast.LENGTH_SHORT).show();
-                      }
+                        String userID = description.split("Placed by : ")[1].trim();
 
-                      @Override
-                      public void onCancelled(@NonNull DatabaseError error) {
+                        Map<String, Object> status = new HashMap<>();
+                        status.put("Status", "Accepted");
 
-                      }
-                  });
-              }
-              if(position<list.size()) list.remove(position);
-              ((Activity)context).finish();
-              context.startActivity(new Intent(context,AdminNotificationActivity.class));
-              Toast.makeText(context, "Status updated", Toast.LENGTH_SHORT).show();
-          }
-      });
-      AlertDialog dialog = builder.create();
-      dialog.setTitle(type);
-      dialog.show();
-  }
-  private void sendReminderDialogBox(int position, String type, String tag, String description) {
-      AlertDialog.Builder builder = new AlertDialog.Builder(context);
-      builder.setTitle("Send a Reminder?");
-      HashMap<String,Object> updateStatus = new HashMap<>();
-      builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-              updateStatus.put("Reminder","No");
-              if(type.equals("SR Product Confirmation")){
-                  databaseReference.child("Admin").child("Notifications")
-                          .child("ProductConfirmation").child("SRs")
-                          .child(tag).updateChildren(updateStatus);
-              }
-              else if (type.equals("Dealer Complaint")) {
-                  databaseReference.child("Dealers").child("RequestServices")
-                          .child("RegisterComplaints").child(tag)
-                          .updateChildren(updateStatus);
-              }
-              else if (type.equals("Replacement by Dealer")) {
-                      databaseReference.child("Dealers").child("RequestServices")
-                              .child("ReplacementByDealer").child(tag)
-                              .updateChildren(updateStatus);
-              }
-              else if (type.equals("Grievance")) {
-                  databaseReference.child("Grievances").child(tag).removeValue();
-              }
-              if(position<list.size()) list.remove(position);
-              ((Activity)context).finish();
-              context.startActivity(new Intent(context,PendingApprovalsActivity.class));
-              Toast.makeText(context, "Status updated", Toast.LENGTH_SHORT).show();
-          }
-      }).setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-              updateStatus.put("Reminder","Yes");
-              if(type.equals("SR Product Confirmation")){
-                  databaseReference.child("Admin").child("Notifications")
-                          .child("ProductConfirmation").child("SRs")
-                          .child(tag).updateChildren(updateStatus);
-              }
-              else if (type.equals("Dealer Complaint")) {
-                  databaseReference.child("Dealers").child("RequestServices")
-                          .child("RegisterComplaints").child(tag)
-                          .updateChildren(updateStatus);
-              }
-              else if (type.equals("Replacement by Dealer")) {
-                  databaseReference.child("Dealers").child("RequestServices")
-                          .child("ReplacementByDealer").child(tag)
-                          .updateChildren(updateStatus);
-              }
-              else if (type.equals("Grievance")) {
-                  databaseReference.child("Grievances").child(tag).removeValue();
-              }
-              if(position<list.size()) list.remove(position);
-              ((Activity)context).finish();
-              context.startActivity(new Intent(context, PendingApprovalsActivity.class));
-              Toast.makeText(context, "Status updated", Toast.LENGTH_SHORT).show();
-          }
-      });
-      AlertDialog dialog = builder.create();
-      dialog.show();
-  }
+                        databaseReference.child("Dealers").child(userID).child("Orders").child(productID).updateChildren(status);
+                    } else if (type.equals("Dealer Complaint")) {
+                        databaseReference.child("Dealers").child("RequestServices")
+                                .child("RegisterComplaints").child(tag)
+                                .child(id)
+                                .updateChildren(updateStatus);
+                    } else if (type.equals("Replacement by Dealer")) {
+                        databaseReference.child("Dealers").child("RequestServices")
+                                .child("ReplacementByDealer").child(tag)
+                                .child(id)
+                                .updateChildren(updateStatus);
+                    } else if (type.equals("Grievance")) {
+                        databaseReference.child("Grievances").child(tag).removeValue();
+                    } else if (type.equals("Expense")) {
+                        DatabaseReference exReference = databaseReference.child("SRs");
+                        exReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot srSnapshot : snapshot.getChildren()) {
+                                    for (DataSnapshot expenseSnapshot : srSnapshot.child("Expenses").getChildren()) {
+                                        String expenseKey = expenseSnapshot.getKey();
+                                        if (expenseKey != null && expenseKey.equals(tag)) {
+                                            // Found the expense, now update its status
+                                            DatabaseReference expenseRef = expenseSnapshot.getRef();
+                                            expenseRef.updateChildren(updateStatus);
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    } else if (type.equals("Dealer Payment")) {
+                        DatabaseReference exReference = databaseReference.child("Dealers");
+                        exReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot srSnapshot : snapshot.getChildren()) {
+                                    for (DataSnapshot dealerSnapshot : srSnapshot.child("Payments").getChildren()) {
+
+                                        for (DataSnapshot snapshot1 : dealerSnapshot.getChildren()) {
+                                            DatabaseReference expenseRef = snapshot1.getRef();
+                                            expenseRef.updateChildren(updateStatus);
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                    if (position < list.size()) list.remove(position);
+                    notifyDataSetChanged();
+
+                    ((Activity) context).finish();
+                    context.startActivity(new Intent(context, AdminNotificationActivity.class));
+                    Toast.makeText(context, "Status updated", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.setTitle(type);
+        dialog.show();
+    }
+
+    private void sendReminderDialogBox(int position, String type, String tag,String id, String description) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Send a Reminder?");
+        HashMap<String, Object> updateStatus = new HashMap<>();
+        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                updateStatus.put("Reminder", "No");
+                if (type.equals("SR Product Confirmation")) {
+                    databaseReference.child("Admin").child("Notifications")
+                            .child("ProductConfirmation").child("SRs")
+                            .child(tag).child(id).updateChildren(updateStatus);
+                } else if (type.equals("Dealer Complaint")) {
+                    databaseReference.child("Dealers").child("RequestServices")
+                            .child("RegisterComplaints").child(tag).child(id)
+                            .updateChildren(updateStatus);
+                } else if (type.equals("Replacement by Dealer")) {
+                    databaseReference.child("Dealers").child("RequestServices")
+                            .child("ReplacementByDealer").child(tag).child(id)
+                            .updateChildren(updateStatus);
+                } else if (type.equals("Grievance")) {
+                    databaseReference.child("Grievances").child(tag).removeValue();
+                }
+                if (position < list.size()) list.remove(position);
+                ((Activity) context).finish();
+                context.startActivity(new Intent(context, PendingApprovalsActivity.class));
+                Toast.makeText(context, "Status updated", Toast.LENGTH_SHORT).show();
+            }
+        }).setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                updateStatus.put("Reminder", "Yes");
+                if (type.equals("SR Product Confirmation")) {
+                    databaseReference.child("Admin").child("Notifications")
+                            .child("ProductConfirmation").child("SRs")
+                            .child(tag).child(id).updateChildren(updateStatus);
+                } else if (type.equals("Dealer Complaint")) {
+                    databaseReference.child("Dealers").child("RequestServices")
+                            .child("RegisterComplaints").child(tag).child(id)
+                            .updateChildren(updateStatus);
+                } else if (type.equals("Replacement by Dealer")) {
+                    databaseReference.child("Dealers").child("RequestServices")
+                            .child("ReplacementByDealer").child(tag).child(id)
+                            .updateChildren(updateStatus);
+                } else if (type.equals("Grievance")) {
+                    databaseReference.child("Grievances").child(tag).removeValue();
+                }
+                if (position < list.size()) list.remove(position);
+                ((Activity) context).finish();
+                context.startActivity(new Intent(context, PendingApprovalsActivity.class));
+                Toast.makeText(context, "Status updated", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

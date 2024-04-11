@@ -82,6 +82,7 @@ public class CashPaymentActivity extends AppCompatActivity {
                                     cashMap.put("User", CashUserNameEt.getText().toString());
                                     cashMap.put("UserType", CashPaymentRadioButton.getText().toString());
                                     cashMap.put("Amount", CashAmountET.getText().toString());
+                                    cashMap.put("Status","Pending");
 
                                     mref.child("Dealers").child(DealerName).
                                             child("Payments").child("Cash").push().updateChildren(cashMap)

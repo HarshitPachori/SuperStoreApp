@@ -27,7 +27,7 @@ public class RequestServiceActivity extends AppCompatActivity {
 
         userType = getIntent().getType();
         userType = (userType.equals("viaDealer"))? "Dealers" : "SRs" ;
-        username = (userType.equals("viaDealer"))?getIntent().getStringExtra("DealerName"):getIntent().getStringExtra("SRUserame");
+        username = userType.equals("Dealers") ? getIntent().getStringExtra("DealerName") : getIntent().getStringExtra("SRUsername");
 
         ReplaceByDealerBtn = findViewById(R.id.replacedbydealerbtn);
         RegisterComplaintBtn = findViewById(R.id.registercomplaints);

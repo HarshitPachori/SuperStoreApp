@@ -46,14 +46,17 @@ public class ReplaceByDealerReport extends AppCompatActivity {
         adapter = new ReplaceByDealerAdapter(this, list);
         recyclerView.setAdapter(adapter);
         progressBar.setVisibility(View.VISIBLE);
-        database.child("Dealers").child("RequestServices").child("ReplacementByDealer").addListenerForSingleValueEvent(new ValueEventListener() {
+//        database.child("Dealers").child("RequestServices").child("ReplacementByDealer").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.child("SRs").child("RequestServices").child("ReplacementByDealer").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    ReplaceByDealerModel model = dataSnapshot.getValue(ReplaceByDealerModel.class);
-                    if (model.getStatus().equals("Accepted") || model.getStatus().equals("Rejected")) {
-                        list.add(model);
-                    }
+                   for(DataSnapshot snapshot1 : dataSnapshot.getChildren()){
+                       ReplaceByDealerModel model = snapshot1.getValue(ReplaceByDealerModel.class);
+                       if (model.getStatus().equals("Accepted") || model.getStatus().equals("Rejected")) {
+                           list.add(model);
+                       }
+                   }
                 }
                 adapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);

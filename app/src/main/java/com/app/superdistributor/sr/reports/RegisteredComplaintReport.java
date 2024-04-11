@@ -45,14 +45,17 @@ public class RegisteredComplaintReport extends AppCompatActivity {
         adapter = new RegisterComplaintAdapter(this, list);
         recyclerView.setAdapter(adapter);
         progressBar.setVisibility(View.VISIBLE);
-        database.child("Dealers").child("RequestServices").child("RegisterComplaints").addListenerForSingleValueEvent(new ValueEventListener() {
+//        database.child("Dealers").child("RequestServices").child("RegisterComplaints").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.child("SRs").child("RequestServices").child("RegisterComplaints").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    RegisteredComplaintModel model = dataSnapshot.getValue(RegisteredComplaintModel.class);
-                    if (model.getStatus().equals("Accepted") || model.getStatus().equals("Rejected")) {
-                        list.add(model);
-                    }
+                  for(DataSnapshot snapshot1 : dataSnapshot.getChildren()){
+                      RegisteredComplaintModel model = snapshot1.getValue(RegisteredComplaintModel.class);
+                      if (model.getStatus().equals("Accepted") || model.getStatus().equals("Rejected")) {
+                          list.add(model);
+                      }
+                  }
                 }
                 adapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);

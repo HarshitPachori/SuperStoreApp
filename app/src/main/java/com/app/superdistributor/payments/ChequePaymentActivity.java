@@ -298,6 +298,7 @@ public class ChequePaymentActivity extends AppCompatActivity {
                                             chequePaymentDetails.put("User", username);
                                             chequePaymentDetails.put("Date", selectedDate);
                                             chequePaymentDetails.put("ChequeScreenshotUrl", url);
+                                            chequePaymentDetails.put("Status","Pending");
 
                                             mref.child("Dealers").child(DealerName).child("Payments").child("Cheque").
                                                     push().updateChildren(chequePaymentDetails)

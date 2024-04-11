@@ -119,7 +119,7 @@ public class DealerOrderAdapter extends RecyclerView.Adapter<DealerOrderAdapter.
 
 
                 database.child("Admin").child("Notifications").child("ProductConfirmation")
-                        .child("SRs").child(SRUsername).updateChildren(orderConfirmationMap)
+                        .child("SRs").child(SRUsername).push().setValue(orderConfirmationMap)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {

@@ -34,11 +34,13 @@ public class ServiceReportActivity extends AppCompatActivity {
     ArrayList<ServiceModel> list;
     String selectedDate;
     private Button mPickDateButton;
+    String username,usertype;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_report);
-
+username = getIntent().getStringExtra("Username");
+usertype = getIntent().getType();
         recyclerView = findViewById(R.id.serviceReportRV);
         database = FirebaseDatabase.getInstance().getReference();
         recyclerView.setHasFixedSize(true);
@@ -75,15 +77,17 @@ public class ServiceReportActivity extends AppCompatActivity {
                         filter(selectedDate);
                     }
                 });
-
-        database.child("Dealers").child("RequestServices").child("ReplacementByDealer")
+Log.d("usertype",usertype);
+        database.child(usertype).child("RequestServices").child("ReplacementByDealer")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            ServiceModel serviceModel = dataSnapshot.getValue(ServiceModel.class);
-                            Log.d("servicemodel",serviceModel.toString());
-                            list.add(serviceModel);
+                           for(DataSnapshot snapshot1 : dataSnapshot.getChildren()){
+                               ServiceModel serviceModel = snapshot1.getValue(ServiceModel.class);
+                               Log.d("servicemodel",serviceModel.toString());
+                               list.add(serviceModel);
+                           }
                         }
 
                         myAdapter.notifyDataSetChanged();
