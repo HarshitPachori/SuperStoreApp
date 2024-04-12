@@ -174,7 +174,7 @@ Log.d("userdata",snapshot.child(userType).child(ForgetPasswordUsername.getText()
                     mref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            mref.child(userType).child(ForgetPasswordUsername.getText().toString()).child("DealerPassword")
+                            mref.child(userType).child(ForgetPasswordUsername.getText().toString()).child("Password")
                                     .setValue(confirmpassword).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
