@@ -41,6 +41,7 @@ public class SrReportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SrReportsActivity.this, RegisteredComplaintReport.class);
+                intent.putExtra("SRUsername",SRUsername);
                 startActivity(intent);
             }
         });
@@ -48,6 +49,7 @@ public class SrReportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SrReportsActivity.this, ReplaceByDealerReport.class);
+                intent.putExtra("SRUsername",SRUsername);
                 startActivity(intent);
             }
         });
@@ -63,6 +65,7 @@ public class SrReportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SrReportsActivity.this, ApprovedPaymentReport.class);
+                intent.putExtra("SRUsername",SRUsername);
                 startActivity(intent);
             }
         });
@@ -78,6 +81,7 @@ public class SrReportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SrReportsActivity.this, RegisteredComplaintReport.class);
+                intent.putExtra("SRUsername",SRUsername);
                 startActivity(intent);
             }
         });
