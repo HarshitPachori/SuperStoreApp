@@ -136,14 +136,7 @@
             android:layout_centerHorizontal="true"
             android:text="Expense" />
 
-        <Button
-            android:id="@+id/paymentReportBt"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_centerHorizontal="true"
-            android:backgroundTint="#303F9F"
-            android:text="Payment" />
+
 
     </LinearLayout>
 
