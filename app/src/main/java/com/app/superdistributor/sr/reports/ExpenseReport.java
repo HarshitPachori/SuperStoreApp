@@ -52,16 +52,13 @@ public class ExpenseReport extends AppCompatActivity {
         Log.d("sruser",SRUsername);
         progressBar.setVisibility(View.VISIBLE);
 
-       databaseReference.child("SRs").child(SRUsername).addValueEventListener(new ValueEventListener() {
+       databaseReference.child("SRs").child(SRUsername).child("Expenses").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot srSnapshot : dataSnapshot.getChildren()) {
-                    DataSnapshot expensesSnapshot = srSnapshot.child("Expenses");
-
-                    for (DataSnapshot expenseSnapshot : expensesSnapshot.getChildren()) {
-                        ExpenseModel model = expenseSnapshot.getValue(ExpenseModel.class);
-                        if(!model.getStatus().equals("Pending"))list.add(model);
-                    }
+                    Log.d("expense",srSnapshot.toString());
+                    ExpenseModel model = srSnapshot.getValue(ExpenseModel.class);
+                    if(!model.getStatus().equals("Pending"))list.add(model);
                 }
                 adapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
