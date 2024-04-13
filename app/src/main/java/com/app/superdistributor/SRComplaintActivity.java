@@ -89,8 +89,8 @@ public class SRComplaintActivity extends AppCompatActivity {
                         complaint.put("Tag",complainTag);
                         complaint.put("Description",complainBody);
 
-                        database.child("SRs").child(username).child("Complaints").child(dealer)
-                                .updateChildren(complaint).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        database.child("SRs").child(username).child("Complaints").child(dealer).push()
+                                .setValue(complaint).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         complaintTagET.setText("");

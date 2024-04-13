@@ -16,6 +16,7 @@ import com.app.superdistributor.sr.reports.ApprovedPaymentReport;
 import com.app.superdistributor.sr.reports.ConfirmedOrderReport;
 import com.app.superdistributor.sr.reports.ExpenseReport;
 import com.app.superdistributor.sr.reports.PostMessageReport;
+import com.app.superdistributor.sr.reports.RaiseComplaintReport;
 import com.app.superdistributor.sr.reports.RegisteredComplaintReport;
 import com.app.superdistributor.sr.reports.ReplaceByDealerReport;
 
@@ -80,7 +81,7 @@ public class SrReportsActivity extends AppCompatActivity {
         RaiseComplaint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SrReportsActivity.this, RegisteredComplaintReport.class);
+                Intent intent = new Intent(SrReportsActivity.this, RaiseComplaintReport.class);
                 intent.putExtra("SRUsername",SRUsername);
                 startActivity(intent);
             }
