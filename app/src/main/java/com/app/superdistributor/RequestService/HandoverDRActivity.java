@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -60,13 +61,16 @@ public class HandoverDRActivity extends AppCompatActivity {
                 database.child("Dealers").child("RequestServices").child("ReplacementByDealer").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                        handoverDataList.clear();
-                        for (DataSnapshot snap : snapshot.getChildren()) {
-                            if(snap.child("Status").getValue().toString().equals("Accepted")) {
-                                handoverDataList.add(snap.child("SerialNumber").getValue().toString() );
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            Log.d("handover", dataSnapshot.toString());
+                            handoverDataList.clear();
+                            for(DataSnapshot snap :dataSnapshot.getChildren()) {
+                                Log.d("handover",snap.toString());
+                                if("Accepted".equals(snap.child("Status").getValue().toString())) {
+                                    handoverDataList.add(snap.child("SerialNumber").getValue().toString() );
+                                }
                             }
-                        }
+                        Log.d("handover",handoverDataList.toString());
                         serialNumberArray = handoverDataList.toArray(new String[0]);
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(HandoverDRActivity.this);
@@ -122,7 +126,9 @@ public class HandoverDRActivity extends AppCompatActivity {
                         });
                         builder.show();
                         Toast.makeText(HandoverDRActivity.this, "These are the approved products", Toast.LENGTH_SHORT).show();
-                    }
+                            }
+                        }
+
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
