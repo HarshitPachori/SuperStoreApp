@@ -1,17 +1,18 @@
 package com.app.superdistributor.sr.reports.models;
 
 public class ConfirmedOrderModel {
-    String Name,DealerName,ProductID,ProductQty,Status;
+    String Name,DealerName,ProductID,ProductQty,Status,Timestamp;
 
     public ConfirmedOrderModel() {
     }
 
-    public ConfirmedOrderModel(String name, String dealerName, String productID, String productQty, String status) {
+    public ConfirmedOrderModel(String name, String dealerName, String productID, String productQty, String status, String timestamp) {
         Name = name;
         DealerName = dealerName;
         ProductID = productID;
         ProductQty = productQty;
         Status = status;
+        Timestamp = timestamp;
     }
 
     public String getName() {
@@ -54,6 +55,14 @@ public class ConfirmedOrderModel {
         Status = status;
     }
 
+    public String getTimestamp() {
+        return Timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        Timestamp = timestamp;
+    }
+
     @Override
     public String toString() {
         return "ConfirmedOrderModel{" +
@@ -62,6 +71,7 @@ public class ConfirmedOrderModel {
                 ", ProductID='" + ProductID + '\'' +
                 ", ProductQty='" + ProductQty + '\'' +
                 ", Status='" + Status + '\'' +
+                ", Timestamp='" + Timestamp + '\'' +
                 '}';
     }
 }
