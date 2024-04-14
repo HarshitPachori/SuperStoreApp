@@ -1,7 +1,19 @@
 package com.app.superdistributor.sr.dealerorders;
 
 public class DealerOrder {
-    String Name, ProductID, ProductQty, DealerName, Status;
+    String Name, ProductID, ProductQty, DealerName, Status,Timestamp;
+
+    public DealerOrder() {
+    }
+
+    public DealerOrder(String name, String productID, String productQty, String dealerName, String status, String timestamp) {
+        Name = name;
+        ProductID = productID;
+        ProductQty = productQty;
+        DealerName = dealerName;
+        Status = status;
+        Timestamp = timestamp;
+    }
 
     public String getName() {
         return Name;
@@ -41,5 +53,13 @@ public class DealerOrder {
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public String getTimestamp() {
+        return Timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        Timestamp = timestamp;
     }
 }

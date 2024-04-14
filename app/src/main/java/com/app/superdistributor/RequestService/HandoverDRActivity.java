@@ -61,76 +61,74 @@ public class HandoverDRActivity extends AppCompatActivity {
                 database.child("Dealers").child("RequestServices").child("ReplacementByDealer").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             Log.d("handover", dataSnapshot.toString());
                             handoverDataList.clear();
-                            for(DataSnapshot snap :dataSnapshot.getChildren()) {
-                                Log.d("handover",snap.toString());
-                                if("Accepted".equals(snap.child("Status").getValue().toString())) {
-                                    handoverDataList.add(snap.child("SerialNumber").getValue().toString() );
+                            for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                                Log.d("handover", snap.toString());
+                                if ("Accepted".equals(snap.child("Status").getValue().toString())) {
+                                    handoverDataList.add(snap.child("SerialNumber").getValue().toString());
                                 }
                             }
-                        Log.d("handover",handoverDataList.toString());
-                        serialNumberArray = handoverDataList.toArray(new String[0]);
+                            Log.d("handover", handoverDataList.toString());
+                            serialNumberArray = handoverDataList.toArray(new String[0]);
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(HandoverDRActivity.this);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(HandoverDRActivity.this);
 
-                        // set title
-                        builder.setTitle("Select Product Serial Number");
+                            // set title
+                            builder.setTitle("Select Product Serial Number");
 
-                        // set dialog non cancelable
-                        builder.setCancelable(false);
+                            // set dialog non cancelable
+                            builder.setCancelable(false);
 
-                        builder.setMultiChoiceItems(serialNumberArray, selectedLanguage, new DialogInterface.OnMultiChoiceClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-                                // check condition
-                                if (b) {
-                                    // when checkbox selected
-                                    // Add position  in lang list
-                                    langList.add(i);
-                                    // Sort array list
-                                    Collections.sort(langList);
-                                } else {
-                                    // when checkbox unselected
-                                    // Remove position from langList
-                                    langList.remove(Integer.valueOf(i));
-                                }
-                            }
-                        });
-
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                // Initialize string builder
-                                StringBuilder stringBuilder = new StringBuilder();
-                                // use for loop
-                                for (int j = 0; j < langList.size(); j++) {
-                                    // concat array value
-                                    stringBuilder.append(serialNumberArray[langList.get(j)]);
+                            builder.setMultiChoiceItems(serialNumberArray, selectedLanguage, new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i, boolean b) {
                                     // check condition
-                                    SelectedItems.add(serialNumberArray[langList.get(j)]);
-                                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(HandoverDRActivity.this, android.R.layout.simple_list_item_1, SelectedItems);
-                                    adapter.notifyDataSetChanged();
-                                    HandoverDataLV.setAdapter(adapter);
+                                    if (b) {
+                                        // when checkbox selected
+                                        // Add position  in lang list
+                                        langList.add(i);
+                                        // Sort array list
+                                        Collections.sort(langList);
+                                    } else {
+                                        // when checkbox unselected
+                                        // Remove position from langList
+                                        langList.remove(Integer.valueOf(i));
+                                    }
                                 }
-                            }
-                        });
+                            });
 
-                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                // dismiss dialog
-                                dialogInterface.dismiss();
-                            }
-                        });
-                        builder.show();
-                        Toast.makeText(HandoverDRActivity.this, "These are the approved products", Toast.LENGTH_SHORT).show();
-                            }
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    // Initialize string builder
+                                    StringBuilder stringBuilder = new StringBuilder();
+                                    // use for loop
+                                    for (int j = 0; j < langList.size(); j++) {
+                                        // concat array value
+                                        stringBuilder.append(serialNumberArray[langList.get(j)]);
+                                        // check condition
+                                        SelectedItems.add(serialNumberArray[langList.get(j)]);
+                                        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(HandoverDRActivity.this, android.R.layout.simple_list_item_1, SelectedItems);
+                                        adapter.notifyDataSetChanged();
+                                        HandoverDataLV.setAdapter(adapter);
+                                    }
+                                }
+                            });
+
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    // dismiss dialog
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            builder.show();
+                            Toast.makeText(HandoverDRActivity.this, "These are the approved products", Toast.LENGTH_SHORT).show();
                         }
+                    }
 
-
-                    @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
