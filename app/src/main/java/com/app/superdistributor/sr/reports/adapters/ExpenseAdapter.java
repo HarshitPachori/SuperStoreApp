@@ -1,6 +1,7 @@
 package com.app.superdistributor.sr.reports.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.superdistributor.R;
+import com.app.superdistributor.sr.reports.models.ConfirmedOrderModel;
 import com.app.superdistributor.sr.reports.models.ExpenseModel;
 
 import java.util.ArrayList;
@@ -17,13 +19,27 @@ import java.util.ArrayList;
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<ExpenseModel> list;
+    ArrayList<ExpenseModel> list,filterList;
 
     public ExpenseAdapter(Context context, ArrayList<ExpenseModel> list) {
         this.context = context;
         this.list = list;
+        this.filterList = new ArrayList<>(list);
     }
 
+    public void filter(String date) {
+        filterList.clear();
+        for (ExpenseModel item : list) {
+            Log.d("item",item.getDate());
+            Log.d("item",date);
+            if (item.getDate().toLowerCase().contains(date.toLowerCase())) {
+                filterList.add(item);
+            }
+        }
+        Log.d("item",filterList.toString());
+        Log.d("item",list.toString());
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public ExpenseAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,7 +49,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ExpenseAdapter.ViewHolder holder, int position) {
-        ExpenseModel model = list.get(position);
+        ExpenseModel model = filterList.get(position);
         holder.status.setText(model.getStatus());
         holder.amount.setText(model.getAmount());
         holder.date.setText(model.getDate());
@@ -43,7 +59,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return filterList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
