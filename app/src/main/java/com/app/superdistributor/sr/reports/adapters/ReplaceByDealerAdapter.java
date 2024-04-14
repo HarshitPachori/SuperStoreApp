@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.superdistributor.R;
+import com.app.superdistributor.sr.reports.models.RegisteredComplaintModel;
 import com.app.superdistributor.sr.reports.models.ReplaceByDealerModel;
 
 import java.util.ArrayList;
@@ -20,13 +22,26 @@ import java.util.ArrayList;
 public class ReplaceByDealerAdapter extends RecyclerView.Adapter<ReplaceByDealerAdapter.ViewHolder>{
 
     Context context;
-    ArrayList<ReplaceByDealerModel> list;
+    ArrayList<ReplaceByDealerModel> list,filterList;
 
     public ReplaceByDealerAdapter(Context context, ArrayList<ReplaceByDealerModel> list) {
         this.context = context;
         this.list = list;
+        this.filterList = new ArrayList<>(list);
     }
-
+    public void filter(String date) {
+        filterList.clear();
+        for (ReplaceByDealerModel item : list) {
+            Log.d("item",item.getDateOfPurchase());
+            Log.d("item",date);
+            if (item.getDateOfPurchase().toLowerCase().contains(date.toLowerCase())) {
+                filterList.add(item);
+            }
+        }
+        Log.d("item",filterList.toString());
+        Log.d("item",list.toString());
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public ReplaceByDealerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,7 +51,7 @@ public class ReplaceByDealerAdapter extends RecyclerView.Adapter<ReplaceByDealer
 
     @Override
     public void onBindViewHolder(@NonNull ReplaceByDealerAdapter.ViewHolder holder, int position) {
-        ReplaceByDealerModel model = list.get(position);
+        ReplaceByDealerModel model = filterList.get(position);
         holder.CustomerName.setText(model.getCustomerName());
         holder.DateOfPurchase.setText(model.getDateOfPurchase());
         holder.ModelNumber.setText(model.getNewProductSerialNumber());
@@ -59,7 +74,7 @@ public class ReplaceByDealerAdapter extends RecyclerView.Adapter<ReplaceByDealer
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return filterList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
