@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.superdistributor.R;
+import com.app.superdistributor.RequestService.ServiceModel;
 import com.app.superdistributor.sr.reports.models.RegisteredComplaintModel;
 
 import java.util.ArrayList;
@@ -21,12 +23,28 @@ import java.util.ArrayList;
 public class RegisterComplaintAdapter extends RecyclerView.Adapter<RegisterComplaintAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<RegisteredComplaintModel> list;
+    ArrayList<RegisteredComplaintModel> list,filterList;
 
     public RegisterComplaintAdapter(Context context, ArrayList<RegisteredComplaintModel> list) {
         this.context = context;
         this.list = list;
+        this.filterList = new ArrayList<>(list);
     }
+
+    public void filter(String date) {
+        filterList.clear();
+        for (RegisteredComplaintModel item : list) {
+            Log.d("item",item.getDateOfPurchase());
+            Log.d("item",date);
+            if (item.getDateOfPurchase().toLowerCase().contains(date.toLowerCase())) {
+                filterList.add(item);
+            }
+        }
+        Log.d("item",filterList.toString());
+        Log.d("item",list.toString());
+        notifyDataSetChanged();
+    }
+
 
     @NonNull
     @Override
@@ -37,7 +55,7 @@ public class RegisterComplaintAdapter extends RecyclerView.Adapter<RegisterCompl
 
     @Override
     public void onBindViewHolder(@NonNull RegisterComplaintAdapter.ViewHolder holder, int position) {
-        RegisteredComplaintModel model = list.get(position);
+        RegisteredComplaintModel model = filterList.get(position);
         holder.CustomerName.setText(model.getCustomerName());
         holder.DateOfPurchase.setText(model.getDateOfPurchase());
         holder.ModelNumber.setText(model.getModelNumber());
@@ -59,7 +77,7 @@ public class RegisterComplaintAdapter extends RecyclerView.Adapter<RegisterCompl
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return filterList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
