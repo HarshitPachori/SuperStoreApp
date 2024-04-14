@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,18 +21,24 @@ import java.util.ArrayList;
 
 public class MyServiceAdapter extends RecyclerView.Adapter<MyServiceAdapter.MyViewHolder>{
     Context context;
-    ArrayList<ServiceModel> list;
+    ArrayList<ServiceModel> list,filterList;
+
+
     public MyServiceAdapter(Context context, ArrayList<ServiceModel> list) {
         this.context = context;
         this.list = list;
+        this.filterList = new ArrayList<>(list);
     }
 
-    public void filterList(ArrayList<ServiceModel> filterlist) {
-        // below line is to add our filtered
-        // list in our course array list.
-        list = filterlist;
-        // below line is to notify our adapter
-        // as change in recycler view data.
+    public void filter(String date) {
+        filterList.clear();
+        for (ServiceModel item : list) {
+            if (item.getDateOfPurchase().toLowerCase().contains(date.toLowerCase())) {
+                filterList.add(item);
+            }
+        }
+        Log.d("item",filterList.toString());
+        Log.d("item",list.toString());
         notifyDataSetChanged();
     }
 
@@ -44,7 +51,11 @@ public class MyServiceAdapter extends RecyclerView.Adapter<MyServiceAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull MyServiceAdapter.MyViewHolder holder, int position) {
-        ServiceModel serviceModel = list.get(position);
+
+
+
+
+        ServiceModel serviceModel = filterList.get(position);
         holder.CustomerNameTV.setText(serviceModel.getCustomerName());
         holder.DateOfPurchaseTV.setText(serviceModel.getDateOfPurchase());
         holder.ModelNoTV.setText(serviceModel.getModelNumber());
@@ -68,7 +79,7 @@ public class MyServiceAdapter extends RecyclerView.Adapter<MyServiceAdapter.MyVi
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return filterList.size();
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 

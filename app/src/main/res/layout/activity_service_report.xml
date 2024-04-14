@@ -32,11 +32,22 @@
         android:textSize="18sp"
         app:icon="@drawable/baseline_add_to_photos_24" />
 
+    <TextView
+        android:id="@+id/serviceRepDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_below="@+id/filterdateET"
+
+        android:text="All Data" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/serviceReportRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/filterdateET"
+        android:layout_below="@+id/serviceRepDate"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
@@ -44,6 +55,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/service_report_item"
         app:layout_constraintTop_toTopOf="parent" />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/serviceReportProgressBar"
+        />
 
 </RelativeLayout>
