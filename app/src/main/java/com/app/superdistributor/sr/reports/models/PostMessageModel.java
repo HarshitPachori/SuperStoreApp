@@ -4,23 +4,16 @@ import java.util.ArrayList;
 
 public class PostMessageModel {
     String Message , AudioUrl;
-    String Dealers;
+    String Dealers,Date;
 
     public PostMessageModel() {
     }
 
-    public PostMessageModel(String message, String audioUrl, String dealers) {
+    public PostMessageModel(String message, String audioUrl, String dealers, String date) {
         Message = message;
         AudioUrl = audioUrl;
         Dealers = dealers;
-    }
-
-    public String getDealers() {
-        return Dealers;
-    }
-
-    public void setToDealers(String dealers) {
-        Dealers = dealers;
+        Date = date;
     }
 
     public String getMessage() {
@@ -39,12 +32,29 @@ public class PostMessageModel {
         AudioUrl = audioUrl;
     }
 
+    public String getDealers() {
+        return Dealers;
+    }
+
+    public void setDealers(String dealers) {
+        Dealers = dealers;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
     @Override
     public String toString() {
         return "PostMessageModel{" +
                 "Message='" + Message + '\'' +
                 ", AudioUrl='" + AudioUrl + '\'' +
-                ", Dealers=" + Dealers +
+                ", Dealers='" + Dealers + '\'' +
+                ", Date='" + Date + '\'' +
                 '}';
     }
 }

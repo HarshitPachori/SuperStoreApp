@@ -30,9 +30,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.UUID;
 
 public class SRPostMessageActivity extends AppCompatActivity {
@@ -219,6 +222,9 @@ public class SRPostMessageActivity extends AppCompatActivity {
         message.put("AudioUrl",audioUrl);
         Log.d("todealer",selectedDealers.toString());
         message.put("Dealers",selectedDealers.keySet().toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String formattedTimestamp = sdf.format(new Date());
+        message.put("Date", formattedTimestamp.split(" ")[0]);
         DatabaseReference db = database.child("SRs").child(username).child("MessageToDealers");
         db.child(db.push().getKey())
                 .updateChildren(message)

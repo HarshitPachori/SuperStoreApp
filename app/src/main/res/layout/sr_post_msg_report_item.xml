@@ -89,41 +89,41 @@
         </LinearLayout>
 
 
-        <!--        <LinearLayout-->
-        <!--            android:id="@+id/ll3"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_below="@+id/ll2"-->
-        <!--            android:layout_marginTop="5dp"-->
-        <!--            android:orientation="horizontal">-->
+                <LinearLayout
+                    android:id="@+id/ll3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll2"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
-        <!--            <RelativeLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content">-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-        <!--                <TextView-->
-        <!--                    android:id="@+id/complaint_phone_head"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_marginLeft="20dp"-->
-        <!--                    android:text="Audio Attached"-->
-        <!--                    android:textColor="@android:color/black"-->
-        <!--                    android:textSize="15sp" />-->
+                        <TextView
+                            android:id="@+id/postmsgDateHead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:text="Date"
+                            android:textColor="@android:color/black"
+                            android:textSize="15sp" />
 
-        <!--                <TextView-->
-        <!--                    android:id="@+id/complaint_phone"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_alignParentEnd="true"-->
-        <!--                    android:layout_marginLeft="50dp"-->
-        <!--                    android:layout_marginRight="10dp"-->
-        <!--                    android:text="phone number"-->
-        <!--                    android:textColor="@android:color/black"-->
-        <!--                    android:textSize="14sp" />-->
+                        <TextView
+                            android:id="@+id/postmsgDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginLeft="50dp"
+                            android:layout_marginRight="10dp"
+                            android:text="phone number"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp" />
 
-        <!--            </RelativeLayout>-->
+                    </RelativeLayout>
 
-        <!--        </LinearLayout>-->
+                </LinearLayout>
 
     </RelativeLayout>
 
