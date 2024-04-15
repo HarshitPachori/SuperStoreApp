@@ -21,8 +21,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class SRComplaintActivity extends AppCompatActivity {
 
@@ -88,6 +91,9 @@ public class SRComplaintActivity extends AppCompatActivity {
                         complaint.put("Dealer",dealer);
                         complaint.put("Tag",complainTag);
                         complaint.put("Description",complainBody);
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    String formattedTimestamp = sdf.format(new Date());
+                    complaint.put("Date", formattedTimestamp.split(" ")[0]);
 
                         database.child("SRs").child(username).child("Complaints").child(dealer).push()
                                 .setValue(complaint).addOnSuccessListener(new OnSuccessListener<Void>() {

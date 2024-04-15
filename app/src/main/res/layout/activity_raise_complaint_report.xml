@@ -18,12 +18,35 @@
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
+    <Button
+        android:id="@+id/filterdateET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/raiseComplaintReportHead"
+        android:layout_gravity="center"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:text="Select Date"
+        android:backgroundTint="#303F9F"
+        android:textSize="18sp"
+        app:icon="@drawable/baseline_add_to_photos_24" />
 
+    <TextView
+        android:id="@+id/serviceRepDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_below="@+id/filterdateET"
+
+        android:text="All Data" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/raiseComplaintReportRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/raiseComplaintReportHead"
+        android:layout_below="@+id/serviceRepDate"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"

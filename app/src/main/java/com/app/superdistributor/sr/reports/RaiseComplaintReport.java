@@ -1,9 +1,13 @@
 package com.app.superdistributor.sr.reports;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -14,10 +18,13 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.app.superdistributor.DateUtils;
 import com.app.superdistributor.R;
 import com.app.superdistributor.sr.reports.adapters.ExpenseAdapter;
 import com.app.superdistributor.sr.reports.adapters.RaiseComplaintReportAdapter;
 import com.app.superdistributor.sr.reports.models.RaiseComplaintModel;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +41,8 @@ public class RaiseComplaintReport extends AppCompatActivity {
     DatabaseReference databaseReference;
     ArrayList<RaiseComplaintModel>list;
     RaiseComplaintReportAdapter adapter;
+    private Button mPickDateButton;
+    String selectedDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +54,46 @@ public class RaiseComplaintReport extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
-        adapter = new RaiseComplaintReportAdapter(this, list);
-        recyclerView.setAdapter(adapter);
+
         Log.d("sruser",SRUsername);
         progressBar.setVisibility(View.VISIBLE);
+
+        mPickDateButton = findViewById(R.id.filterdateET);
+        MaterialDatePicker.Builder materialDateBuilder = MaterialDatePicker.Builder.datePicker();
+
+        materialDateBuilder.setTitleText("SELECT A DATE");
+
+        final MaterialDatePicker materialDatePicker = materialDateBuilder.build();
+
+        mPickDateButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!materialDatePicker.isVisible()) {
+                            materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
+                        }
+                    }
+                });
+
+
+        materialDatePicker.addOnPositiveButtonClickListener(
+                new MaterialPickerOnPositiveButtonClickListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onPositiveButtonClick(Object selection) {
+                        selectedDate = materialDatePicker.getHeaderText();
+                        TextView selectedDateTv = findViewById(R.id.serviceRepDate);
+                        if(!selectedDate.isEmpty()) {
+                            selectedDateTv.setText(String.format("Selected Date : %s", selectedDate));
+                        }
+                        Toast.makeText(RaiseComplaintReport.this, "" + selectedDate, Toast.LENGTH_SHORT).show();
+
+                        filter(selectedDate);
+                    }
+                });
+
+
+
         databaseReference.child("SRs").child(SRUsername).child("Complaints").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -59,11 +104,8 @@ public class RaiseComplaintReport extends AppCompatActivity {
                       list.add(model);
                   }
                }
-                if (!list.isEmpty()) {
-                    adapter.notifyItemChanged(list.size() - 1);
-                } else {
-                    adapter.notifyDataSetChanged();
-                }
+                adapter = new RaiseComplaintReportAdapter(RaiseComplaintReport.this, list);
+                recyclerView.setAdapter(adapter);
                 progressBar.setVisibility(View.GONE);
             }
 
@@ -72,5 +114,11 @@ public class RaiseComplaintReport extends AppCompatActivity {
 
             }
         });
+    }
+    private void filter(String date){
+        if(!date.isEmpty()){
+            date = DateUtils.formatDate(date);
+            adapter.filter(date);
+        }
     }
 }
