@@ -48,11 +48,11 @@ public class DealerHomeFragment extends Fragment {
 
         String DealerName = getActivity().getIntent().getStringExtra("DealerName");
 
-        final Button placeOrderBtn = binding.placeorderbtn;
+//        final Button placeOrderBtn = binding.placeorderbtn;
         final Button requestServiceBtn = binding.requestservicebtn;
-        final Button addPaymentMethodBtn = binding.addpaymentbtn;
+//        final Button addPaymentMethodBtn = binding.addpaymentbtn;
         final Button ReportBtn = binding.reportbtn;
-        final Button PendingApprovalsBtn = binding.pendingapprovalsbtn;
+//        final Button PendingApprovalsBtn = binding.pendingapprovalsbtn;
         final Button SchemeBtn = binding.schemessbtn;
 
         final TextView CurrentOutstandingBalance = binding.currentOutstandingBalance;
@@ -60,7 +60,7 @@ public class DealerHomeFragment extends Fragment {
 
         mref = FirebaseDatabase.getInstance().getReference();
 
-        mref.child("Dealers").addListenerForSingleValueEvent(new ValueEventListener() {
+        mref.child("Dealers").child(dealerName).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 CurrentServicePendency.setText("Service Pendency Details : " + Long.toString(snapshot.child("RequestServices").child("ReplacementByDealer").getChildrenCount()));
@@ -78,15 +78,15 @@ public class DealerHomeFragment extends Fragment {
             }
         });
 
-        placeOrderBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(getContext().getApplicationContext(), PlaceOrderActivity.class);
-                i.putExtra("DealerName",DealerName);
-                startActivity(i);
-            }
-        });
+//        placeOrderBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent i = new Intent(getContext().getApplicationContext(), PlaceOrderActivity.class);
+//                i.putExtra("DealerName",DealerName);
+//                startActivity(i);
+//            }
+//        });
         requestServiceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,14 +96,14 @@ public class DealerHomeFragment extends Fragment {
                 startActivity(i);
             }
         });
-        addPaymentMethodBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getContext().getApplicationContext(), PaymentMethodActivity.class);
-                i.putExtra("DealerName",DealerName);
-                startActivity(i);
-            }
-        });
+//        addPaymentMethodBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(getContext().getApplicationContext(), PaymentMethodActivity.class);
+//                i.putExtra("DealerName",DealerName);
+//                startActivity(i);
+//            }
+//        });
         ReportBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,13 +112,13 @@ public class DealerHomeFragment extends Fragment {
                 startActivity(i);
             }
         });
-        PendingApprovalsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getContext().getApplicationContext(), PendingApprovalsActivity.class);
-                startActivity(i);
-            }
-        });
+//        PendingApprovalsBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(getContext().getApplicationContext(), PendingApprovalsActivity.class);
+//                startActivity(i);
+//            }
+//        });
         SchemeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

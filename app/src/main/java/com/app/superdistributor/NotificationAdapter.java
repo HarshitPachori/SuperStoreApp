@@ -86,6 +86,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         if (context.toString().substring(0, 49).equals("com.app.superdistributor.PendingApprovalsActivity")) {
             holder.item.setText("Send a Reminder");
         }
+        if("Message To Dealer".equals(notificationItemModel.getNotificationType())){
+            holder.item.setVisibility(View.GONE);
+            holder.reportUrlTv.setText("View Audio");
+        }
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

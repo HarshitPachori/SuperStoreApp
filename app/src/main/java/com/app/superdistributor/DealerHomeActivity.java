@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.superdistributor.admin.notification.AdminNotificationActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -54,6 +55,16 @@ public class DealerHomeActivity extends AppCompatActivity {
                 startActivity(new Intent(DealerHomeActivity.this, MyMessagesActivity.class).putExtra("Username",DealerName));
             }
         });
+
+        binding.appBarDealerHome.dealerNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DealerHomeActivity.this, AdminNotificationActivity.class);
+                intent.putExtra("username",DealerName);
+                intent.setType("viaDealer");
+                startActivity(intent);
+            }
+        });
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
@@ -61,7 +72,7 @@ public class DealerHomeActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_dealer_home, R.id.nav_about)
+                R.id.nav_dealer_home)
                 .setOpenableLayout(drawer)
                 .build();
 

@@ -39,7 +39,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_below="@id/title"
                 android:src="@drawable/ic_launcher_background"
-                android:text="Current Outstanding Balance : Rs. 68,000"
+                android:text="Current Outstanding Balance : Rs. 0"
                 android:textColor="@color/white"
                 android:layout_marginTop="10dp"/>
 
@@ -65,22 +65,22 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/statuscard"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Place Order"
-        android:backgroundTint="#283593"
-        android:id="@+id/placeorderbtn"
-        android:textColor="@android:color/white"
-        android:textSize="15sp"/>
+<!--    <Button-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/statuscard"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:text="Place Order"-->
+<!--        android:backgroundTint="#283593"-->
+<!--        android:id="@+id/placeorderbtn"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:textSize="15sp"/>-->
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/placeorderbtn"
+        android:layout_below="@id/statuscard"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -90,23 +90,23 @@
         android:textColor="@android:color/white"
         android:textSize="15sp"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/requestservicebtn"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#283593"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Add Payment"
-        android:id="@+id/addpaymentbtn"
-        android:textColor="@android:color/white"
-        android:textSize="15sp"/>
+<!--    <Button-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/requestservicebtn"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:backgroundTint="#283593"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:text="Add Payment"-->
+<!--        android:id="@+id/addpaymentbtn"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:textSize="15sp"/>-->
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/addpaymentbtn"
+        android:layout_below="@id/requestservicebtn"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -116,23 +116,23 @@
         android:textColor="@android:color/white"
         android:textSize="15sp"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/reportbtn"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Pending Approvals"
-        android:id="@+id/pendingapprovalsbtn"
-        android:backgroundTint="#283593"
-        android:textColor="@android:color/white"
-        android:textSize="15sp"/>
+<!--    <Button-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/reportbtn"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:text="Pending Approvals"-->
+<!--        android:id="@+id/pendingapprovalsbtn"-->
+<!--        android:backgroundTint="#283593"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:textSize="15sp"/>-->
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pendingapprovalsbtn"
+        android:layout_below="@id/reportbtn"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"

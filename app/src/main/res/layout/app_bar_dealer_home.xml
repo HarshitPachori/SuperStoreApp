@@ -16,8 +16,17 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.AppCompat.NoActionBar.PopupOverlay" />
+            app:popupTheme="@style/Theme.AppCompat.NoActionBar.PopupOverlay">
 
+            <ImageView
+                android:id="@+id/dealerNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/baseline_notifications_24" />
+        </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_dealer_home" />
