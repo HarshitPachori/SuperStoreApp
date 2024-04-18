@@ -1,16 +1,22 @@
 package com.app.superdistributor.MyProducts;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,16 +44,19 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
     Button PlaceFinalOrderButton;
 
-    public static Map<String,Object> orderMap;
+    public static Map<String, Object> orderMap;
 
-    String DealerName;
+    String SRUsername, DealerName;
+    ArrayList<String> dealersNames;
+    Spinner placeOrderSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
+        dealersNames = new ArrayList<>();
 
-        DealerName = getIntent().getStringExtra("DealerName");
+        SRUsername = getIntent().getStringExtra("SRUsername");
 
         PlaceFinalOrderButton = findViewById(R.id.placefinalorderbtn);
 
@@ -57,38 +66,73 @@ public class PlaceOrderActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        myAdapter = new MyProductAdapter(this,list, DealerName);
-        recyclerView.setAdapter(myAdapter);
+
 
         orderMap = new HashMap<>();
+
+
+        placeOrderSpinner = findViewById(R.id.placeOrderSpinner);
+        database.child("SRs").child(SRUsername).child("myDealers").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    dealersNames.add(dataSnapshot.getKey());
+                }
+                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(PlaceOrderActivity.this, android.R.layout.simple_spinner_item, dealersNames);
+                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                placeOrderSpinner.setAdapter(spinnerAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+        placeOrderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                DealerName = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        myAdapter = new MyProductAdapter(PlaceOrderActivity.this, list, DealerName);
+        recyclerView.setAdapter(myAdapter);
 
         PlaceFinalOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(orderMap.size() == 0)
-                {
+                if (orderMap.size() == 0) {
                     Toast.makeText(PlaceOrderActivity.this, "Please add products to place order..", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                }else if(DealerName.isEmpty() || DealerName == null){
+                    Toast.makeText(PlaceOrderActivity.this, "Please select dealer name..", Toast.LENGTH_SHORT).show();
+                } else {
                     database.child("Dealers").child(DealerName).child("Orders").updateChildren(orderMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    orderMap.clear();
-                                    Intent i = new Intent(PlaceOrderActivity.this, CheckoutActivity.class);
-                                    i.putExtra("DealerName",DealerName);
-                                    startActivity(i);
-                                }
-                            });
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            orderMap.clear();
+                            Intent i = new Intent(PlaceOrderActivity.this, CheckoutActivity.class);
+                            i.putExtra("DealerName", DealerName);
+                            startActivity(i);
+                        }
+                    });
                 }
                 //Toast.makeText(PlaceOrderActivity.this, ""+String.valueOf(checkArray.size()), Toast.LENGTH_SHORT).show();
             }
         });
+
         database.child("Products").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
 
                     Products products = dataSnapshot.getValue(Products.class);
@@ -99,7 +143,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
                 }
                 myAdapter.notifyDataSetChanged();
-
                 //Toast.makeText(BuyProductActivity.this, list.get(0).getProductName().toString(), Toast.LENGTH_SHORT).show();
 
             }
@@ -110,4 +153,5 @@ public class PlaceOrderActivity extends AppCompatActivity {
             }
         });
     }
+
 }

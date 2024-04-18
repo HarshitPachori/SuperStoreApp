@@ -8,11 +8,11 @@
     tools:context=".MyProducts.PlaceOrderActivity">
 
     <LinearLayout
+        android:id="@+id/producttitlecart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:id="@+id/producttitlecart"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -20,11 +20,11 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
                 android:id="@+id/buyproducttxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
@@ -41,16 +41,39 @@
         </RelativeLayout>
 
     </LinearLayout>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_below="@id/producttitlecart"
+    android:text="Select Dealer From Below "
+    android:layout_margin="2dp"
+    android:textSize="17sp"
+    android:id="@+id/selectDealerTV"
+    />
+    <Spinner
+        android:id="@+id/placeOrderSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selectDealerTV"
+        android:layout_margin="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:popupBackground="@drawable/spinner_outline_border"
+
+        android:spinnerMode="dropdown" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/placeOrderSpinner"
         android:layout_marginBottom="100dp"
-        android:layout_below="@+id/producttitlecart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/prodcut_item" />
 
     <Button
         android:id="@+id/placefinalorderbtn"
@@ -61,8 +84,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:padding="20dp"
         android:backgroundTint="#283593"
+        android:padding="20dp"
         android:text="Place Order" />
 
 </RelativeLayout>
