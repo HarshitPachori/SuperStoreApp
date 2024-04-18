@@ -176,7 +176,6 @@ public class RegisterComplaintAcitivty extends AppCompatActivity {
                                         public void onSuccess(Uri uri) {
                                             String url = uri.toString();
 
-                                            String replacementID = registerCustomerName;
 
                                             Map<String, Object> replacementDetails = new HashMap<String, Object>();
                                             replacementDetails.put("CustomerName", registerCustomerName);
@@ -187,7 +186,7 @@ public class RegisterComplaintAcitivty extends AppCompatActivity {
                                             replacementDetails.put("ReportUrl", url);
                                             replacementDetails.put("Status", "Pending");
 
-                                            mref.child(userType).child(username).child("RequestServices").child("RegisterComplaints").child(replacementID).push().setValue(replacementDetails)
+                                            mref.child(userType).child(username).child("RequestServices").child("RegisterComplaints").child(registerCustomerName).push().setValue(replacementDetails)
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
@@ -221,7 +220,6 @@ public class RegisterComplaintAcitivty extends AppCompatActivity {
                             //TODO : fix badFilePath
                             String url = "badFilePath";
 
-                            String replacementID = registerCustomerName;
 
                             Map<String, Object> replacementDetails = new HashMap<String, Object>();
                             replacementDetails.put("ComplaintId",UUID.randomUUID().toString());
@@ -233,7 +231,7 @@ public class RegisterComplaintAcitivty extends AppCompatActivity {
                             replacementDetails.put("ReportUrl", url);
                             replacementDetails.put("Status", "Pending");
 
-                            mref.child(userType).child(username).child("RequestServices").child("RegisterComplaints").child(replacementID).push().setValue(replacementDetails)
+                            mref.child(userType).child(username).child("RequestServices").child("RegisterComplaints").child(registerCustomerName).push().setValue(replacementDetails)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
