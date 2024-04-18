@@ -2,6 +2,7 @@ package com.app.superdistributor.sr.reports;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -92,17 +93,27 @@ public class ReplaceByDealerReport extends AppCompatActivity {
 
 
 
-        database.child("Dealers").child("RequestServices").child("ReplacementByDealer").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.child("Dealers").addListenerForSingleValueEvent(new ValueEventListener() {
 //        database.child("SRs").child("RequestServices").child("ReplacementByDealer").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                   for(DataSnapshot snapshot1 : dataSnapshot.getChildren()){
-                       ReplaceByDealerModel model = snapshot1.getValue(ReplaceByDealerModel.class);
-                       if (model.getStatus().equals("Accepted") || model.getStatus().equals("Rejected")) {
-                           list.add(model);
-                       }
-                   }
+                    if (dataSnapshot.child("RequestServices").exists()) {
+                        for (DataSnapshot snapshot1 : dataSnapshot.child("RequestServices").getChildren()) {
+                            Log.d("dealer", snapshot1.toString());
+                            if ("ReplacementByDealer".equals(snapshot1.getKey())) {
+                                for (DataSnapshot dataSnapshot1 : snapshot1.getChildren()) {
+                                    Log.d("dealer", dataSnapshot1.toString());
+                                    for (DataSnapshot dataSnapshot2 : dataSnapshot1.getChildren()) {
+                                        ReplaceByDealerModel model = dataSnapshot2.getValue(ReplaceByDealerModel.class);
+                                        if ("Accepted".equals(model.getStatus()) || "Rejected".equals(model.getStatus())) {
+                                            list.add(model);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 adapter = new ReplaceByDealerAdapter(ReplaceByDealerReport.this, list);
                 recyclerView.setAdapter(adapter);

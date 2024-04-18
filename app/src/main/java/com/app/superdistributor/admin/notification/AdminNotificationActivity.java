@@ -143,81 +143,95 @@ public class AdminNotificationActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                     }
                 });
-        database.child("Dealers").child("RequestServices").child("RegisterComplaints")
+        database.child("Dealers")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                            for (DataSnapshot snapshot1 : dataSnapshot.getChildren()) {
-                                if (snapshot1.child("Status").getValue().toString().equals("Pending")) {
-                                    notificationItemModel = new NotificationItemModel();
-                                    notificationItemModel.setNotificationType("Dealer Complaint");
-                                    notificationItemModel.setNotificationTag(snapshot1.child("CustomerName").getValue().toString());
-                                    notificationItemModel.setNotificationId(snapshot1.getKey());
-                                    notificationItemModel.
-                                            setNotificationDesc("Phone : " + snapshot1.child("PhoneNumber").getValue().toString() +
-                                                    "\nModel : " + snapshot1.child("ModelNumber").getValue().toString() +
-                                                    "\nPurchased on : " + snapshot1.child("DateOfPurchase").getValue().toString() +
-                                                    "\nSerial No. : " + snapshot1.child("SerialNumber").getValue().toString());
-                                    Log.d("snapReport", snapshot1.child("ReportUrl").getValue(String.class));
-                                    if (snapshot1.child("ReportUrl").exists()) {
-                                        notificationItemModel.setReportUrl(snapshot1.child("ReportUrl").getValue(String.class));
-                                    }
-                                    if (snapshot1.child("Reminder").exists()) notificationItemModel
-                                            .setNotificationPriority(snapshot1.child("Reminder").getValue().toString());
-                                    if ("admin".equals(username) || srNames.contains(username)) {
-                                        list.add(notificationItemModel);
-                                    }
-
+//                            Log.d("dealer1", dataSnapshot.toString());
+                            if (dataSnapshot.child("RequestServices").exists()) {
+                                for (DataSnapshot snapshot11 : dataSnapshot.child("RequestServices").getChildren()) {
+                                 if("RegisterComplaints".equals(snapshot11.getKey())){
+                                     for (DataSnapshot snapshot1 : snapshot11.getChildren()) {
+                                         for (DataSnapshot dataSnapshot1 : snapshot1.getChildren()) {
+                                             if ("Pending".equals(dataSnapshot1.child("Status").getValue().toString())) {
+                                                 notificationItemModel = new NotificationItemModel();
+                                                 notificationItemModel.setNotificationType("Dealer Complaint");
+                                                 notificationItemModel.setNotificationTag(dataSnapshot1.child("CustomerName").getValue().toString());
+                                                 notificationItemModel.setNotificationId(dataSnapshot1.getKey());
+                                                 notificationItemModel.
+                                                         setNotificationDesc("Phone : " + dataSnapshot1.child("PhoneNumber").getValue().toString() +
+                                                                 "\nModel : " + dataSnapshot1.child("ModelNumber").getValue().toString() +
+                                                                 "\nPurchased on : " + dataSnapshot1.child("DateOfPurchase").getValue().toString() +
+                                                                 "\nSerial No. : " + dataSnapshot1.child("SerialNumber").getValue().toString());
+                                                 Log.d("snapReport", dataSnapshot1.child("ReportUrl").getValue(String.class));
+                                                 if (dataSnapshot1.child("ReportUrl").exists()) {
+                                                     notificationItemModel.setReportUrl(dataSnapshot1.child("ReportUrl").getValue(String.class));
+                                                 }
+                                                 if (dataSnapshot1.child("Reminder").exists())
+                                                     notificationItemModel
+                                                             .setNotificationPriority(dataSnapshot1.child("Reminder").getValue().toString());
+                                                 if ("admin".equals(username) || srNames.contains(username)) {
+                                                     list.add(notificationItemModel);
+                                                 }
+                                             }
+                                         }
+                                     }
+                                 }
                                 }
                             }
                         }
                         myAdapter.notifyDataSetChanged();
                         progressBar.setVisibility(View.GONE);
-
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         progressBar.setVisibility(View.GONE);
                     }
                 });
-        database.child("Dealers").child("RequestServices").child("ReplacementByDealer")
+        database.child("Dealers")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            for (DataSnapshot snapshot1 : dataSnapshot.getChildren()) {
-                                if (snapshot1.child("Status").getValue().toString().equals("Pending")) {
-                                    NotificationItemModel notificationItemModel = new NotificationItemModel();
-                                    notificationItemModel.setNotificationType("Replacement by Dealer");
-                                    notificationItemModel.setNotificationTag(snapshot1.child("CustomerName").getValue().toString());
-                                    notificationItemModel.setNotificationId(snapshot1.getKey());
-                                    notificationItemModel.
-                                            setNotificationDesc("Phone : " + snapshot1.child("PhoneNumber").getValue().toString() +
-                                                    "\nModel : " + snapshot1.child("ModelNumber").getValue().toString() +
-                                                    "\nPurchased on : " + snapshot1.child("DateOfPurchase").getValue().toString() +
-                                                    "\nSerial No. : " + snapshot1.child("SerialNumber").getValue().toString() +
-                                                    "\nNew Serial No. : " + snapshot1.child("NewProductSerialNumber").getValue().toString());
-                                    Log.d("snapReport", snapshot1.child("ReportUrl").getValue(String.class));
-                                    if (snapshot1.child("ReportUrl").exists()) {
-                                        notificationItemModel.setReportUrl(snapshot1.child("ReportUrl").getValue(String.class));
-                                    }
-                                    if (snapshot1.child("Reminder").exists()) notificationItemModel
-                                            .setNotificationPriority(snapshot1.child("Reminder").getValue().toString());
-                                    if ("admin".equals(username) || srNames.contains(username)) {
-                                        list.add(notificationItemModel);
-                                    }
+                            if(dataSnapshot.child("RequestServices").exists()){
+                                for (DataSnapshot snapshot11 : dataSnapshot.child("RequestServices").getChildren()) {
+                                    if("ReplacementByDealer".equals(snapshot11.getKey())){
+                                        for (DataSnapshot snapshot1 : snapshot11.getChildren()) {
+                                            for (DataSnapshot dataSnapshot1 : snapshot1.getChildren()) {
+                                                if ("Pending".equals(dataSnapshot1.child("Status").getValue().toString())) {
+                                                    NotificationItemModel notificationItemModel = new NotificationItemModel();
+                                                    notificationItemModel.setNotificationType("Replacement by Dealer");
+                                                    notificationItemModel.setNotificationTag(dataSnapshot1.child("CustomerName").getValue().toString());
+                                                    notificationItemModel.setNotificationId(dataSnapshot1.getKey());
+                                                    notificationItemModel.
+                                                            setNotificationDesc("Phone : " + dataSnapshot1.child("PhoneNumber").getValue().toString() +
+                                                                    "\nModel : " + dataSnapshot1.child("ModelNumber").getValue().toString() +
+                                                                    "\nPurchased on : " + dataSnapshot1.child("DateOfPurchase").getValue().toString() +
+                                                                    "\nSerial No. : " + dataSnapshot1.child("SerialNumber").getValue().toString() +
+                                                                    "\nNew Serial No. : " + dataSnapshot1.child("NewProductSerialNumber").getValue().toString());
+                                                    Log.d("snapReport", dataSnapshot1.child("ReportUrl").getValue(String.class));
+                                                    if (dataSnapshot1.child("ReportUrl").exists()) {
+                                                        notificationItemModel.setReportUrl(dataSnapshot1.child("ReportUrl").getValue(String.class));
+                                                    }
+                                                    if (dataSnapshot1.child("Reminder").exists()) notificationItemModel
+                                                            .setNotificationPriority(dataSnapshot1.child("Reminder").getValue().toString());
+                                                    if ("admin".equals(username) || srNames.contains(username)) {
+                                                        list.add(notificationItemModel);
+                                                    }
 
 
-                                }
+                                                }
+                                            }
+                                        }
+                                    }
                             }
+
                         }
                         myAdapter.notifyDataSetChanged();
                         progressBar.setVisibility(View.GONE);
 
-                    }
+                    }}
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {

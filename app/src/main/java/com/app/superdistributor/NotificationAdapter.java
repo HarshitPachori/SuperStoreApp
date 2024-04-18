@@ -86,7 +86,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         if (context.toString().substring(0, 49).equals("com.app.superdistributor.PendingApprovalsActivity")) {
             holder.item.setText("Send a Reminder");
         }
-        if("Message To Dealer".equals(notificationItemModel.getNotificationType())){
+        if ("Message To Dealer".equals(notificationItemModel.getNotificationType())) {
             holder.item.setVisibility(View.GONE);
             holder.reportUrlTv.setText("View Audio");
         }
@@ -148,7 +148,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             public void onClick(DialogInterface dialog, int which) {
                 updateStatus.put("Status", "Rejected");
                 updateStatus.put("Reminder", "No");
-                if(type != null){
+                if (type != null) {
                     if (type.equals("SR Product Confirmation")) {
                         databaseReference.child("Admin").child("Notifications")
                                 .child("ProductConfirmation").child("SRs")
@@ -166,13 +166,51 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
 
                     } else if (type.equals("Dealer Complaint")) {
-                        databaseReference.child("Dealers").child("RequestServices")
-                                .child("RegisterComplaints").child(tag).child(id)
-                                .updateChildren(updateStatus);
+                        DatabaseReference dealerRef = databaseReference.child("Dealers");
+                        dealerRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                                    if (snapshot1.child("RequestServices").exists()) {
+                                        for (DataSnapshot snapshot2 : snapshot1.child("RequestServices").getChildren()) {
+                                            if ("RegisterComplaints".equals(snapshot2.getKey())) {
+                                                Log.d("deal",snapshot2.toString());
+                                                        DatabaseReference dealerComplaintRef = snapshot2.child(tag).child(id).getRef();
+                                                        dealerComplaintRef.updateChildren(updateStatus);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     } else if (type.equals("Replacement by Dealer")) {
-                        databaseReference.child("Dealers").child("RequestServices")
-                                .child("ReplacementByDealer").child(tag).child(id)
-                                .updateChildren(updateStatus);
+                        DatabaseReference dealerRef = databaseReference.child("Dealers");
+                        dealerRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                                    if (snapshot1.child("RequestServices").exists()) {
+                                        for (DataSnapshot snapshot2 : snapshot1.child("RequestServices").getChildren()) {
+                                            if ("ReplacementByDealer".equals(snapshot2.getKey())) {
+                                                Log.d("deal",snapshot2.toString());
+                                                DatabaseReference dealerComplaintRef = snapshot2.child(tag).child(id).getRef();
+                                                dealerComplaintRef.updateChildren(updateStatus);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     } else if (type.equals("Grievance")) {
                         databaseReference.child("Grievances").child(tag).removeValue();
                     } else if (type.equals("Expense")) {
@@ -203,8 +241,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 for (DataSnapshot srSnapshot : snapshot.getChildren()) {
-                                    for ( DataSnapshot dealerSnapshot : srSnapshot.child("Payments").getChildren()) {
-                                        for(DataSnapshot snapshot1:dealerSnapshot.getChildren()){
+                                    for (DataSnapshot dealerSnapshot : srSnapshot.child("Payments").getChildren()) {
+                                        for (DataSnapshot snapshot1 : dealerSnapshot.getChildren()) {
                                             DatabaseReference expenseRef = snapshot1.getRef();
                                             expenseRef.updateChildren(updateStatus);
                                         }
@@ -230,7 +268,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             public void onClick(DialogInterface dialog, int which) {
                 updateStatus.put("Status", "Accepted");
                 updateStatus.put("Reminder", "No");
-                if(type != null) {
+                if (type != null) {
                     if (type.equals("SR Product Confirmation")) {
                         databaseReference.child("Admin").child("Notifications")
                                 .child("ProductConfirmation").child("SRs")
@@ -245,15 +283,51 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
                         databaseReference.child("Dealers").child(userID).child("Orders").child(productID).updateChildren(status);
                     } else if (type.equals("Dealer Complaint")) {
-                        databaseReference.child("Dealers").child("RequestServices")
-                                .child("RegisterComplaints").child(tag)
-                                .child(id)
-                                .updateChildren(updateStatus);
+                        DatabaseReference dealerRef = databaseReference.child("Dealers");
+                        dealerRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                                    if (snapshot1.child("RequestServices").exists()) {
+                                        for (DataSnapshot snapshot2 : snapshot1.child("RequestServices").getChildren()) {
+                                            if ("RegisterComplaints".equals(snapshot2.getKey())) {
+                                                Log.d("deal",snapshot2.toString());
+                                                DatabaseReference dealerComplaintRef = snapshot2.child(tag).child(id).getRef();
+                                                dealerComplaintRef.updateChildren(updateStatus);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     } else if (type.equals("Replacement by Dealer")) {
-                        databaseReference.child("Dealers").child("RequestServices")
-                                .child("ReplacementByDealer").child(tag)
-                                .child(id)
-                                .updateChildren(updateStatus);
+                        DatabaseReference dealerRef = databaseReference.child("Dealers");
+                        dealerRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                                    if (snapshot1.child("RequestServices").exists()) {
+                                        for (DataSnapshot snapshot2 : snapshot1.child("RequestServices").getChildren()) {
+                                            if ("ReplacementByDealer".equals(snapshot2.getKey())) {
+                                                Log.d("deal",snapshot2.toString());
+                                                DatabaseReference dealerComplaintRef = snapshot2.child(tag).child(id).getRef();
+                                                dealerComplaintRef.updateChildren(updateStatus);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     } else if (type.equals("Grievance")) {
                         databaseReference.child("Grievances").child(tag).removeValue();
                     } else if (type.equals("Expense")) {
@@ -314,7 +388,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         dialog.show();
     }
 
-    private void sendReminderDialogBox(int position, String type, String tag,String id, String description) {
+    private void sendReminderDialogBox(int position, String type, String tag, String id, String description) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Send a Reminder?");
         HashMap<String, Object> updateStatus = new HashMap<>();
