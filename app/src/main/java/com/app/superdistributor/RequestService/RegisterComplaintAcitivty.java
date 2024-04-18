@@ -187,7 +187,7 @@ public class RegisterComplaintAcitivty extends AppCompatActivity {
                                             replacementDetails.put("ReportUrl", url);
                                             replacementDetails.put("Status", "Pending");
 
-                                            mref.child(userType).child("RequestServices").child("RegisterComplaints").child(replacementID).push().setValue(replacementDetails)
+                                            mref.child(userType).child(username).child("RequestServices").child("RegisterComplaints").child(replacementID).push().setValue(replacementDetails)
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
@@ -233,7 +233,7 @@ public class RegisterComplaintAcitivty extends AppCompatActivity {
                             replacementDetails.put("ReportUrl", url);
                             replacementDetails.put("Status", "Pending");
 
-                            mref.child(userType).child("RequestServices").child("RegisterComplaints").child(replacementID).updateChildren(replacementDetails)
+                            mref.child(userType).child(username).child("RequestServices").child("RegisterComplaints").child(replacementID).push().setValue(replacementDetails)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {

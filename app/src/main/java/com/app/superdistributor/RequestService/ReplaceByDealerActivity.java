@@ -353,7 +353,7 @@ public class ReplaceByDealerActivity extends AppCompatActivity {
                                             replacementDetails.put("ReportUrl", url);
                                             replacementDetails.put("Status", "Pending");
 
-                                            mref.child(userType).child("RequestServices").child("ReplacementByDealer").child(customerName).push().setValue(replacementDetails)
+                                            mref.child(userType).child(username).child("RequestServices").child("ReplacementByDealer").child(customerName).push().setValue(replacementDetails)
                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {

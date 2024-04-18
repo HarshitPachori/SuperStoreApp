@@ -36,7 +36,7 @@ public class HandoverDRActivity extends AppCompatActivity {
     DatabaseReference database;
 
     ArrayList<String> handoverDataList, SelectedItems;
-    String userType;
+    String userType,username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class HandoverDRActivity extends AppCompatActivity {
         setContentView(R.layout.activity_handover_dractivity);
 
         userType = getIntent().getType();
-
+username = getIntent().getStringExtra("Username");
         HandoverAddProductBtn = findViewById(R.id.handoverAddProductBtn);
 
         SelectedItems = new ArrayList<>();
@@ -58,7 +58,7 @@ public class HandoverDRActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Initialize alert dialog
-                database.child("Dealers").child("RequestServices").child("ReplacementByDealer").addListenerForSingleValueEvent(new ValueEventListener() {
+                database.child("Dealers").child(username).child("RequestServices").child("ReplacementByDealer").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {

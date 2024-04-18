@@ -90,7 +90,7 @@ progressBar.setVisibility(View.VISIBLE);
                     }
                 });
         Log.d("usertype", usertype);
-        database.child(usertype).child("RequestServices").child("ReplacementByDealer")
+        database.child(usertype).child(username).child("RequestServices").child("ReplacementByDealer")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

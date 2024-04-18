@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.superdistributor.MyProducts.PlaceOrderActivity;
 import com.app.superdistributor.admin.AdminPanelActivity;
 import com.app.superdistributor.admin.ViewCreditDebitActivity;
 import com.app.superdistributor.admin.notification.AdminNotificationActivity;
@@ -30,7 +31,7 @@ public class SRHomeActivity extends AppCompatActivity {
 
     TextView SalesDoneTV, RemainingTargetTV;
     Button TotalSROutstandingBtn, DealerIntentBtn, PaymentApproveBtn, ComplaintRaiseBtn, AddPaymentBtn,
-    RequestServiceBtn, PostMessageBtn, ExpenseBtn, AddVisitBtn, CreditDebitBtn, ReportsBtn;
+    PlaceOrderBtn, PostMessageBtn, ExpenseBtn, AddVisitBtn, CreditDebitBtn, ReportsBtn;
 
     ImageView myMessagesBtn, NotificationBtn,LogoutBtn;
 
@@ -108,7 +109,7 @@ public class SRHomeActivity extends AppCompatActivity {
         PaymentApproveBtn = findViewById(R.id.paymentapprovebtn);
         ComplaintRaiseBtn = findViewById(R.id.complaintraisebtn);
         AddPaymentBtn = findViewById(R.id.addpaymentbtn);
-        RequestServiceBtn = findViewById(R.id.requestservicebtn);
+        PlaceOrderBtn = findViewById(R.id.placeOrderBtn);
         PostMessageBtn = findViewById(R.id.postMessageBtn);
         ExpenseBtn = findViewById(R.id.expensebtn);
         AddVisitBtn = findViewById(R.id.addvisitbtn);
@@ -162,10 +163,10 @@ public class SRHomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        RequestServiceBtn.setOnClickListener(new View.OnClickListener() {
+        PlaceOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SRHomeActivity.this, RequestServiceActivity.class);
+                Intent i = new Intent(SRHomeActivity.this, PlaceOrderActivity.class);
                 i.setType("viaSr");
                 i.putExtra("SRUsername",SRUsername);
                 startActivity(i);
