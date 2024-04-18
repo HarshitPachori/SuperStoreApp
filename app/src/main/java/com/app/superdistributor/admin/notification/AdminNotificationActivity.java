@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.app.superdistributor.NotificationAdapter;
@@ -41,7 +43,7 @@ public class AdminNotificationActivity extends AppCompatActivity {
     String usertype;
     ArrayList<String> srNames;
     ArrayList<String> technicianNames;
-
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,10 @@ public class AdminNotificationActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        Toast.makeText(this, "Pending reminders are in red", Toast.LENGTH_LONG).show();
 
+
+        progressBar = findViewById(R.id.notification_progress_bar);
+
+
         list = new ArrayList<>();
         myAdapter = new NotificationAdapter(this, list);
         recyclerView.setAdapter(myAdapter);
@@ -62,6 +68,10 @@ public class AdminNotificationActivity extends AppCompatActivity {
         usertype = getIntent().getType();
         srNames = new ArrayList<>();
         technicianNames = new ArrayList<>();
+
+
+        progressBar.setVisibility(View.VISIBLE);
+
 
         database.child("SRs").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -124,11 +134,13 @@ public class AdminNotificationActivity extends AppCompatActivity {
                             }
                         }
                         myAdapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.GONE);
                     }
 
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
         database.child("Dealers").child("RequestServices").child("RegisterComplaints")
@@ -157,14 +169,18 @@ public class AdminNotificationActivity extends AppCompatActivity {
                                     if ("admin".equals(username) || srNames.contains(username)) {
                                         list.add(notificationItemModel);
                                     }
-//                                myAdapter.notifyDataSetChanged();
+
                                 }
                             }
                         }
+                        myAdapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.GONE);
+
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
         database.child("Dealers").child("RequestServices").child("ReplacementByDealer")
@@ -193,16 +209,19 @@ public class AdminNotificationActivity extends AppCompatActivity {
                                     if ("admin".equals(username) || srNames.contains(username)) {
                                         list.add(notificationItemModel);
                                     }
-                                    myAdapter.notifyDataSetChanged();
+
 
                                 }
                             }
                         }
+                        myAdapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.GONE);
 
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
         database.child("Grievances")
@@ -219,11 +238,14 @@ public class AdminNotificationActivity extends AppCompatActivity {
                             }
                             myAdapter.notifyDataSetChanged();
                         }
+                        myAdapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.GONE);
 
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
         database.child("SRs").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -261,12 +283,14 @@ public class AdminNotificationActivity extends AppCompatActivity {
                         }
                     }
                 }
+                myAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle onCancelled event
+                progressBar.setVisibility(View.GONE);
             }
         });
 //        database.child("Dealers").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -313,26 +337,27 @@ public class AdminNotificationActivity extends AppCompatActivity {
                         String dealersString = snapshot1.child("Dealers").getValue(String.class);
 
                         ArrayList<String> dealersArr = parseDealersString(dealersString);
-                      if(dealersArr.contains(username)){
-                          String msg = snapshot1.child("Message").getValue(String.class);
-                          String audioUrl = snapshot1.child("AudioUrl").getValue(String.class);
-                          String date = snapshot1.child("Date").getValue(String.class);
-                          NotificationItemModel model = new NotificationItemModel();
-                          model.setNotificationId(id);
-                          model.setNotificationType("Message To Dealer");
-                          model.setNotificationTag(username);
-                          model.setNotificationDesc("Message from Sr: " + srname + "\nMessage : " + msg + "\nTo Dealer : " + username + "\nDate : " + date);
-                          model.setReportUrl(audioUrl);
-                          list.add(model);
-                      }
+                        if (dealersArr.contains(username)) {
+                            String msg = snapshot1.child("Message").getValue(String.class);
+                            String audioUrl = snapshot1.child("AudioUrl").getValue(String.class);
+                            String date = snapshot1.child("Date").getValue(String.class);
+                            NotificationItemModel model = new NotificationItemModel();
+                            model.setNotificationId(id);
+                            model.setNotificationType("Message To Dealer");
+                            model.setNotificationTag(username);
+                            model.setNotificationDesc("Message from Sr: " + srname + "\nMessage : " + msg + "\nTo Dealer : " + username + "\nDate : " + date);
+                            model.setReportUrl(audioUrl);
+                            list.add(model);
+                        }
                     }
                 }
                 myAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                progressBar.setVisibility(View.GONE);
             }
         });
 
@@ -346,7 +371,7 @@ public class AdminNotificationActivity extends AppCompatActivity {
             String[] dealers = dealersString.split(", ");
             dealersArr.addAll(Arrays.asList(dealers));
         }
-        Log.d("msgdeal",dealersArr.toString());
+        Log.d("msgdeal", dealersArr.toString());
         return dealersArr;
     }
 

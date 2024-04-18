@@ -13,68 +13,79 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:gravity="center_horizontal"
         android:padding="20dp"
-        android:textStyle="bold"
         android:text="Add a Payment"
         android:textAlignment="center"
         android:textColor="@android:color/background_dark"
         android:textSize="25dp"
-        android:gravity="center_horizontal" />
+        android:textStyle="bold" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/paymentNameTIL"
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+    <!--        android:id="@+id/paymentNameTIL"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_below="@+id/addPaymentHeader"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:layout_marginLeft="20dp"-->
+    <!--        android:layout_marginRight="20dp"-->
+    <!--        android:hint="Name"-->
+    <!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
+
+    <!--        <com.google.android.material.textfield.TextInputEditText-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:ems="10"-->
+    <!--            android:inputType="text"-->
+    <!--            android:id="@+id/paymentNameET"-->
+    <!--            />-->
+
+    <!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <Spinner
+        android:id="@+id/dealerNameDropdown"
         android:layout_width="match_parent"
-        android:layout_below="@+id/addPaymentHeader"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/addPaymentHeader"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Name"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="text"
-            android:id="@+id/paymentNameET"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_marginBottom="10dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:backgroundTint="#303f9f"
+        android:spinnerMode="dropdown" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/paymentAmountTIL"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_below="@+id/paymentNameTIL"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/dealerNameDropdown"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Amount"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        android:hint="Amount">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/paymentAmountET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number"
-            android:id="@+id/paymentAmountET"
-            />
-
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
         android:id="@+id/paymentType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_below="@+id/paymentAmountTIL"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="#303F9F"
         android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"/>
+        android:backgroundTint="#303F9F"
+        android:spinnerMode="dropdown" />
 
     <Button
         android:id="@+id/submitPaymentBtn"
@@ -85,11 +96,10 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
-        android:padding="20dp"
         android:backgroundTint="#303F9F"
-        app:icon="@drawable/baseline_add_to_photos_24"
+        android:padding="20dp"
         android:text="Add Payment"
         android:textColor="@color/white"
-     />
+        app:icon="@drawable/baseline_add_to_photos_24" />
 
 </RelativeLayout>

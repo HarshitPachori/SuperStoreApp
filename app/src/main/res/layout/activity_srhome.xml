@@ -137,15 +137,16 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Dealer Intent" />
-
         <Button
-            android:id="@+id/paymentapprovebtn"
+            android:id="@+id/placeOrderBtn"
             android:layout_width="170dp"
-            android:layout_marginLeft="20dp"
-            android:backgroundTint="#283593"
             android:layout_height="wrap_content"
-            android:padding="7dp"
-            android:text="Payment Approve" />
+            android:padding="10dp"
+            android:backgroundTint="#283593"
+            android:layout_marginLeft="20dp"
+            android:text="Place Order" />
+
+
 
     </LinearLayout>
 
@@ -187,12 +188,12 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/requestservicebtn"
+            android:id="@+id/paymentapprovebtn"
             android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:padding="9.5dp"
             android:backgroundTint="#283593"
-            android:text="Request Service" />
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            android:text="Payment Approve" />
 
         <Button
             android:id="@+id/postMessageBtn"
