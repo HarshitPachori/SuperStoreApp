@@ -20,8 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class SRAddPaymentActivity extends AppCompatActivity {
 
@@ -85,6 +88,10 @@ public class SRAddPaymentActivity extends AppCompatActivity {
                     payment.put("Amount", amountET.getText().toString());
                     payment.put("Type", type.getSelectedItem().toString());
                     payment.put("Status", "Pending");
+                    payment.put("Dealer",dealerNameDropdown.getSelectedItem().toString());
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    String formattedTimestamp = sdf.format(new Date());
+                    payment.put("Date",formattedTimestamp);
                     database.child("SRs")
                             .child(username)
                             .child("myPayments")

@@ -156,9 +156,9 @@ public class AddCreditDebitActivity extends AppCompatActivity {
                                             DocNoET.setText("");
                                             AmountET.setText("");
                                             NoteET.setText("");
-                                            Intent i = new Intent(AddCreditDebitActivity.this, AddDebitCreditActivity.class);
-                                            i.putExtra("Username",Username);
-                                            startActivity(i);
+//                                            Intent i = new Intent(AddCreditDebitActivity.this, AddDebitCreditActivity.class);
+//                                            i.putExtra("Username",Username);
+//                                            startActivity(i);
                                         }
                                     });
                         }

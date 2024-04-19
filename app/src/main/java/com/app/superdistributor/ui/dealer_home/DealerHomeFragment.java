@@ -2,6 +2,7 @@ package com.app.superdistributor.ui.dealer_home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class DealerHomeFragment extends Fragment {
 
@@ -60,15 +63,23 @@ public class DealerHomeFragment extends Fragment {
 
         mref = FirebaseDatabase.getInstance().getReference();
 
-        mref.child("Dealers").child(dealerName).addListenerForSingleValueEvent(new ValueEventListener() {
+        mref.child("Dealers").child(dealerName).addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                CurrentServicePendency.setText("Service Pendency Details : " + Long.toString(snapshot.child("RequestServices").child("ReplacementByDealer").getChildrenCount()));
-                for (DataSnapshot snap : snapshot.getChildren()) {
-                    if(snap.child("CurrentBalance").getValue(String.class) != null)
-                        currentBalance = currentBalance + Integer.valueOf(snap.child("CurrentBalance").getValue(String.class));
+                int pendingCnt = 0;
+                DataSnapshot reqService = snapshot.child("RequestServices").child("ReplacementByDealer");
+                for (DataSnapshot dataSnapshot : reqService.getChildren()) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        if ("Pending".equals(dataSnapshot1.child("Status").getValue().toString())) {
+                            pendingCnt++;
+                        }
+                    }
                 }
-
+                CurrentServicePendency.setText("Service Pendency Details : " + pendingCnt);
+                if (snapshot.child("CurrentBalance").getValue(String.class) != null) {
+                    currentBalance += Integer.parseInt(snapshot.child("CurrentBalance").getValue(String.class));
+                }
                 CurrentOutstandingBalance.setText("Current Outstanding Balance : Rs. " + String.valueOf(currentBalance));
             }
 
@@ -92,7 +103,7 @@ public class DealerHomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent i = new Intent(getContext().getApplicationContext(), RequestServiceActivity.class);
                 i.setType("viaDealer");
-                i.putExtra("DealerName",DealerName);
+                i.putExtra("DealerName", DealerName);
                 startActivity(i);
             }
         });
@@ -108,7 +119,7 @@ public class DealerHomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext().getApplicationContext(), ReportsActivity.class);
-                i.putExtra("DealerName",DealerName);
+                i.putExtra("DealerName", DealerName);
                 startActivity(i);
             }
         });
@@ -123,7 +134,7 @@ public class DealerHomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext().getApplicationContext(), SchemesActivity.class);
-                i.putExtra("DealerName",dealerName);
+                i.putExtra("DealerName", dealerName);
                 startActivity(i);
             }
         });
