@@ -39,13 +39,24 @@ import java.util.Map;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.MyViewHolder> {
     Context context;
-    ArrayList<NotificationItemModel> list;
+    ArrayList<NotificationItemModel> list, filterList;
     DatabaseReference databaseReference;
 
     public NotificationAdapter(Context context, ArrayList<NotificationItemModel> list) {
         this.context = context;
         this.list = list;
+        this.filterList = new ArrayList<>(list);
         databaseReference = FirebaseDatabase.getInstance().getReference();
+    }
+
+    public void filter(String type) {
+        filterList.clear();
+        for (NotificationItemModel model : list) {
+            if (model.getNotificationType().equals(type)) {
+                filterList.add(model);
+            }
+        }
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -58,7 +69,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(@NonNull NotificationAdapter.MyViewHolder holder, int position) {
 
-        NotificationItemModel notificationItemModel = list.get(position);
+        NotificationItemModel notificationItemModel = filterList.get(position);
         holder.type.setText(notificationItemModel.getNotificationType());
         holder.tag.setText(notificationItemModel.getNotificationTag());
         holder.description.setText(notificationItemModel.getNotificationDesc());
@@ -115,7 +126,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return filterList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -174,9 +185,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                     if (snapshot1.child("RequestServices").exists()) {
                                         for (DataSnapshot snapshot2 : snapshot1.child("RequestServices").getChildren()) {
                                             if ("RegisterComplaints".equals(snapshot2.getKey())) {
-                                                Log.d("deal",snapshot2.toString());
-                                                        DatabaseReference dealerComplaintRef = snapshot2.child(tag).child(id).getRef();
-                                                        dealerComplaintRef.updateChildren(updateStatus);
+                                                Log.d("deal", snapshot2.toString());
+                                                DatabaseReference dealerComplaintRef = snapshot2.child(tag).child(id).getRef();
+                                                dealerComplaintRef.updateChildren(updateStatus);
                                             }
                                         }
                                     }
@@ -197,7 +208,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                     if (snapshot1.child("RequestServices").exists()) {
                                         for (DataSnapshot snapshot2 : snapshot1.child("RequestServices").getChildren()) {
                                             if ("ReplacementByDealer".equals(snapshot2.getKey())) {
-                                                Log.d("deal",snapshot2.toString());
+                                                Log.d("deal", snapshot2.toString());
                                                 DatabaseReference dealerComplaintRef = snapshot2.child(tag).child(id).getRef();
                                                 dealerComplaintRef.updateChildren(updateStatus);
                                             }
@@ -291,7 +302,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                     if (snapshot1.child("RequestServices").exists()) {
                                         for (DataSnapshot snapshot2 : snapshot1.child("RequestServices").getChildren()) {
                                             if ("RegisterComplaints".equals(snapshot2.getKey())) {
-                                                Log.d("deal",snapshot2.toString());
+                                                Log.d("deal", snapshot2.toString());
                                                 DatabaseReference dealerComplaintRef = snapshot2.child(tag).child(id).getRef();
                                                 dealerComplaintRef.updateChildren(updateStatus);
                                             }
@@ -314,7 +325,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                                     if (snapshot1.child("RequestServices").exists()) {
                                         for (DataSnapshot snapshot2 : snapshot1.child("RequestServices").getChildren()) {
                                             if ("ReplacementByDealer".equals(snapshot2.getKey())) {
-                                                Log.d("deal",snapshot2.toString());
+                                                Log.d("deal", snapshot2.toString());
                                                 DatabaseReference dealerComplaintRef = snapshot2.child(tag).child(id).getRef();
                                                 dealerComplaintRef.updateChildren(updateStatus);
                                             }
