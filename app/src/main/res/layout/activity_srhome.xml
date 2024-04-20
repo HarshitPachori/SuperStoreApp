@@ -242,13 +242,13 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/creditdebitbtn"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:backgroundTint="#283593"
-            android:text="Credit/Debit" />
+<!--        <Button-->
+<!--            android:id="@+id/creditdebitbtn"-->
+<!--            android:layout_width="170dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="10dp"-->
+<!--            android:backgroundTint="#283593"-->
+<!--            android:text="Credit/Debit" />-->
 
         <Button
             android:id="@+id/reportbtn"

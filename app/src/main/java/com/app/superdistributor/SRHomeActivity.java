@@ -113,7 +113,7 @@ public class SRHomeActivity extends AppCompatActivity {
         PostMessageBtn = findViewById(R.id.postMessageBtn);
         ExpenseBtn = findViewById(R.id.expensebtn);
         AddVisitBtn = findViewById(R.id.addvisitbtn);
-        CreditDebitBtn = findViewById(R.id.creditdebitbtn);
+//        CreditDebitBtn = findViewById(R.id.creditdebitbtn);
         ReportsBtn = findViewById(R.id.reportbtn);
 
 
@@ -197,14 +197,14 @@ public class SRHomeActivity extends AppCompatActivity {
             }
         });
 
-        CreditDebitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(SRHomeActivity.this, SrCreditDebitActivity.class);
-                i.putExtra("SRUsername",SRUsername);
-                startActivity(i);
-            }
-        });
+//        CreditDebitBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(SRHomeActivity.this, SrCreditDebitActivity.class);
+//                i.putExtra("SRUsername",SRUsername);
+//                startActivity(i);
+//            }
+//        });
         ReportsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
