@@ -24,23 +24,32 @@
             android:layout_marginLeft="25dp"/>
     </RelativeLayout>
 
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/adminNotificationTopHead"
-        android:id="@+id/notificationspinner"
-        android:layout_margin="5dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        />
-
+<!--    <Spinner-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/adminNotificationTopHead"-->
+<!--        android:id="@+id/notificationspinner"-->
+<!--        android:layout_margin="5dp"-->
+<!--        android:background="@android:drawable/btn_dropdown"-->
+<!--        android:spinnerMode="dropdown"-->
+<!--        />-->
+<com.google.android.material.tabs.TabLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/notiTab"
+    app:tabMode="auto"
+    app:tabGravity="fill"
+android:layout_alignParentBottom="true"
+    android:background="@drawable/bg_color"
+    />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notificationRLV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="20dp"
         tools:listitem="@layout/product_confirmation_notification_item"
-        android:layout_below="@+id/notificationspinner"
+        android:layout_above="@+id/notiTab"
+        android:layout_below="@id/adminNotificationTopHead"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -21,6 +21,7 @@ import com.app.superdistributor.R;
 import com.app.superdistributor.payments.DealerPaymentModel;
 import com.app.superdistributor.sr.dealerorders.DealerOrder;
 import com.app.superdistributor.sr.dealerorders.DealerOrderAdapter;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,8 +48,9 @@ public class AdminNotificationActivity extends AppCompatActivity {
     ArrayList<String> technicianNames, dealersName;
     ProgressBar progressBar;
 
-    Spinner spinner;
+//    Spinner spinner;
     ArrayList<String> notiType;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,8 @@ public class AdminNotificationActivity extends AppCompatActivity {
 
         progressBar.setVisibility(View.VISIBLE);
 
-        spinner = findViewById(R.id.notificationspinner);
+//        spinner = findViewById(R.id.notificationspinner);
+tabLayout = findViewById(R.id.notiTab);
 
         notiType = new ArrayList<>();
 
@@ -131,19 +134,35 @@ public class AdminNotificationActivity extends AppCompatActivity {
         });
 
 //populateSpinner();
+tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        String selectedTab = tab.getText().toString();
+        filterNotification(selectedTab);
+    }
 
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                filterNotification(notiType.get(position));
-            }
+    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
 
-            }
-        });
+    }
+});
+
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                filterNotification(notiType.get(position));
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         database.child("Admin").child("Notifications").child("ProductConfirmation").child("SRs")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -151,18 +170,21 @@ public class AdminNotificationActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             for (DataSnapshot notificationSnapshot : dataSnapshot.getChildren()) {
+                                Log.d("dataa",notificationSnapshot.child("Status").getValue().toString());
+
                                 String status = notificationSnapshot.child("Status").getValue(String.class);
                                 if ("Pending".equals(status)) {
                                     NotificationItemModel notificationItemModel = new NotificationItemModel();
                                     notificationItemModel.setNotificationType("SR Product Confirmation");
                                     notificationItemModel.setNotificationTag(dataSnapshot.getKey());
                                     notificationItemModel.setNotificationId(notificationSnapshot.getKey());
+                                    Log.d("dataaa",notificationSnapshot.getKey());
                                     notificationItemModel.
                                             setNotificationDesc("Product Name : " + notificationSnapshot.child("Name").getValue().toString() +
-                                                    "\nPrice : " + notificationSnapshot.child("Price").getValue().toString() +
+                                                    "\nPrice : " + notificationSnapshot.child("ProductPrice").getValue().toString() +
                                                     "\nProductID : " + notificationSnapshot.child("ProductID").getValue().toString() +
-                                                    "\nQuantity : " + notificationSnapshot.child("Qty").getValue().toString() +
-                                                    "\nPlaced by : " + notificationSnapshot.child("PlacedBy").getValue().toString()
+                                                    "\nQuantity : " + notificationSnapshot.child("ProductQty").getValue().toString() +
+                                                    "\nPlaced by : " + notificationSnapshot.child("DealerName").getValue().toString()
                                             );
 
                                     if (notificationSnapshot.child("Reminder").exists())
@@ -453,22 +475,18 @@ public class AdminNotificationActivity extends AppCompatActivity {
     }
 
     private void populateSpinner() {
-        Log.d("dataaaaa", dealersName.toString());
-        Log.d("dataaaaa", srNames.toString());
         notiType.clear();
         if ("admin".equals(username) || srNames.contains(username)) {
-            notiType.add("SR Product Confirmation");
-            notiType.add("Dealer Complaint");
-            notiType.add("Replacement by Dealer");
-            notiType.add("Grievance");
+            tabLayout.addTab(tabLayout.newTab().setText("SR Product Confirmation"));
+            tabLayout.addTab(tabLayout.newTab().setText("Dealer Complaint"));
+            tabLayout.addTab(tabLayout.newTab().setText("Replacement by Dealer"));
+            tabLayout.addTab(tabLayout.newTab().setText("Grievance"));
         }
         if ("admin".equals(username)) {
-            notiType.add("Expense");
+            tabLayout.addTab(tabLayout.newTab().setText("Expense"));
         }
         if (dealersName.contains(username)) {
-            notiType.add("Message To Dealer");
+            tabLayout.addTab(tabLayout.newTab().setText("Message To Dealer"));
         }
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, notiType);
-        spinner.setAdapter(spinnerAdapter);
     }
 }

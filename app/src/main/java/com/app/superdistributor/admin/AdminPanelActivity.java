@@ -223,6 +223,7 @@ public class AdminPanelActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AdminPanelActivity.this, AddDebitCreditActivity.class);
                 intent.putExtra("Username",Username);
+                intent.setType("viaAdmin");
                 if(list.isEmpty()){
                     Toast.makeText(AdminPanelActivity.this, "No data available currently", Toast.LENGTH_SHORT).show();
                 }

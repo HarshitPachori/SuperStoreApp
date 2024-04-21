@@ -173,7 +173,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                         Map<String, Object> status = new HashMap<>();
                         status.put("Status", "Rejected");
 
-                        databaseReference.child("Dealers").child(userID).child("Orders").child(productID).updateChildren(status);
+                        databaseReference.child("Dealers").child(userID).child("Orders").child(id).updateChildren(status);
 
 
                     } else if (type.equals("Dealer Complaint")) {
@@ -292,7 +292,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                         Map<String, Object> status = new HashMap<>();
                         status.put("Status", "Accepted");
 
-                        databaseReference.child("Dealers").child(userID).child("Orders").child(productID).updateChildren(status);
+                        databaseReference.child("Dealers").child(userID).child("Orders").child(id).updateChildren(status);
                     } else if (type.equals("Dealer Complaint")) {
                         DatabaseReference dealerRef = databaseReference.child("Dealers");
                         dealerRef.addListenerForSingleValueEvent(new ValueEventListener() {

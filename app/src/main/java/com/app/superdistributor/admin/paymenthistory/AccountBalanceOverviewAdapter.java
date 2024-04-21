@@ -24,10 +24,12 @@ import java.util.ArrayList;
 public class AccountBalanceOverviewAdapter extends RecyclerView.Adapter<AccountBalanceOverviewAdapter.MyViewHolder>{
     Context context;
     ArrayList<AmountOverviewModel> list;
+String usertype;
 
-    public AccountBalanceOverviewAdapter(Context context, ArrayList<AmountOverviewModel> list) {
+    public AccountBalanceOverviewAdapter(Context context, ArrayList<AmountOverviewModel> list,String usertype) {
         this.context = context;
         this.list = list;
+        this.usertype=usertype;
     }
     @NonNull
     @Override
@@ -67,10 +69,12 @@ public class AccountBalanceOverviewAdapter extends RecyclerView.Adapter<AccountB
                     i.putExtra("dealerUsername", amountOverviewModel.getUserName());
                 }
                 else {
+
                     i = new Intent(context.getApplicationContext(), GiveGetAmountActivity.class);
                     i.putExtra("dealerUsername", amountOverviewModel.getUserName());
                     i.putExtra("dealerName", amountOverviewModel.getName());
                     i.putExtra("Username", AddDebitCreditActivity.Username);
+                    i.setType(usertype);
                 }
                 context.startActivity(i);
             }

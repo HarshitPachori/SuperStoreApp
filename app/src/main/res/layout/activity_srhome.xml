@@ -130,21 +130,28 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/dealerintentbtn"
-            android:layout_width="170dp"
-            android:backgroundTint="#283593"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Dealer Intent" />
+<!--        <Button-->
+<!--            android:id="@+id/dealerintentbtn"-->
+<!--            android:layout_width="170dp"-->
+<!--            android:backgroundTint="#283593"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="Dealer Intent" />-->
         <Button
             android:id="@+id/placeOrderBtn"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:backgroundTint="#283593"
-            android:layout_marginLeft="20dp"
             android:text="Place Order" />
+        <Button
+            android:id="@+id/reportbtn"
+            android:layout_width="170dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:backgroundTint="#283593"
+            android:text="Reports" />
 
 
 
@@ -233,32 +240,6 @@
             android:text="Add Visit" />
 
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/btngroup6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btngroup5"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:orientation="horizontal">
 
-<!--        <Button-->
-<!--            android:id="@+id/creditdebitbtn"-->
-<!--            android:layout_width="170dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:padding="10dp"-->
-<!--            android:backgroundTint="#283593"-->
-<!--            android:text="Credit/Debit" />-->
-
-        <Button
-            android:id="@+id/reportbtn"
-            android:layout_width="170dp"
-            android:layout_marginLeft="20dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:backgroundTint="#283593"
-            android:text="Reports" />
-
-    </LinearLayout>
 
 </RelativeLayout>

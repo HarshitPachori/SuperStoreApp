@@ -11,11 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.app.superdistributor.DealerHomeActivity;
 import com.app.superdistributor.MyProducts.PlaceOrderActivity;
 import com.app.superdistributor.R;
+import com.app.superdistributor.admin.AddDebitCreditActivity;
+import com.app.superdistributor.admin.AdminPanelActivity;
 import com.app.superdistributor.payments.PaymentMethodActivity;
 import com.app.superdistributor.PendingApprovalsActivity;
 import com.app.superdistributor.ReportsActivity;
@@ -37,6 +41,7 @@ public class DealerHomeFragment extends Fragment {
 
     String dealerName;
     int currentBalance = 0;
+    CardView cardView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -57,12 +62,22 @@ public class DealerHomeFragment extends Fragment {
         final Button ReportBtn = binding.reportbtn;
 //        final Button PendingApprovalsBtn = binding.pendingapprovalsbtn;
         final Button SchemeBtn = binding.schemessbtn;
+        cardView = binding.statuscard;
 
         final TextView CurrentOutstandingBalance = binding.currentOutstandingBalance;
         final TextView CurrentServicePendency = binding.currentServicePendency;
 
         mref = FirebaseDatabase.getInstance().getReference();
 
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AddDebitCreditActivity.class);
+                intent.putExtra("Username",DealerName);
+                intent.setType("viaDealer");
+                startActivity(intent);
+            }
+        });
         mref.child("Dealers").child(dealerName).addValueEventListener(new ValueEventListener() {
 
             @Override

@@ -3,6 +3,7 @@ package com.app.superdistributor.MyProducts;
 import static com.app.superdistributor.MyProducts.PlaceOrderActivity.orderMap;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+        Log.d("dataaaaa",DealerName);
         Products products = list.get(position);
         holder.productName.setText(products.getName());
         holder.AddProductBtn.setOnClickListener(new View.OnClickListener() {
@@ -56,20 +57,25 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.MyVi
                 {
                     Toast.makeText(context, "Please increase quantity to add product..", Toast.LENGTH_SHORT).show();
                 }
+                else if(holder.Price.getText().toString().equals("0")){
+                    Toast.makeText(context, "Please increase the price...", Toast.LENGTH_SHORT).show();
+                }
                 else
                 {
-                    Map<String, Object> productMap = new HashMap<>();
+//                    Map<String, Object> productMap = new HashMap<>();
                     Toast.makeText(context, "Product added..", Toast.LENGTH_SHORT).show();
-                    productMap.put("Name",products.getName());
-                    productMap.put("ProductID",products.getProductID());
-                    productMap.put("ProductQty",holder.Qty.getText().toString());
-                    productMap.put("DealerName",DealerName);
-                    productMap.put("Status","Open");
+                    orderMap.put("Name",products.getName());
+                    orderMap.put("ProductID",products.getProductID());
+                    orderMap.put("ProductQty",holder.Qty.getText().toString());
+                    orderMap.put("ProductPrice",holder.Price.getText().toString());
+                    orderMap.put("DealerName",DealerName);
+                    orderMap.put("Status","Pending");
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     String formattedTimestamp = sdf.format(new Date());
-                    productMap.put("Timestamp",formattedTimestamp);
-                    orderMap.put(products.getProductID(),productMap);
+                    orderMap.put("Timestamp",formattedTimestamp);
+//                    orderMap.put(products.getProductID(),productMap);
                     holder.Qty.setText("0");
+                    holder.Price.setText("0");
                     //Toast.makeText(context, ""+products.getName(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -86,7 +92,7 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.MyVi
         TextView productName;
         Button AddProductBtn;
 
-        TextInputEditText Qty;
+        TextInputEditText Qty,Price;
         
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,6 +100,7 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.MyVi
             productName = itemView.findViewById(R.id.tvProductName);
             AddProductBtn = itemView.findViewById(R.id.addProduct);
             Qty = itemView.findViewById(R.id.qty);
+            Price = itemView.findViewById(R.id.price);
 
         }
     }

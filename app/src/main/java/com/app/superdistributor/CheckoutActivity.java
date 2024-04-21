@@ -12,14 +12,14 @@ import android.widget.Toast;
 public class CheckoutActivity extends AppCompatActivity {
 
     Button BackToHomeBtn;
-    String DealerName;
+    String SRUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
-        DealerName = getIntent().getStringExtra("DealerName");
+        SRUsername = getIntent().getStringExtra("SRUsername");
 
         BackToHomeBtn = findViewById(R.id.backtohomebtn);
 
@@ -28,8 +28,8 @@ public class CheckoutActivity extends AppCompatActivity {
         BackToHomeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(CheckoutActivity.this, DealerHomeActivity.class);
-                i.putExtra("DealerName",DealerName);
+                Intent i = new Intent(CheckoutActivity.this, SRHomeActivity.class);
+                i.putExtra("SRUsername",SRUsername);
                 startActivity(i);
             }
         });

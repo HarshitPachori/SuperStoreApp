@@ -31,7 +31,7 @@ public class GiveGetAmountActivity extends AppCompatActivity {
     MyAmountAdapter myAdapter;
     ArrayList<AmountModel> list;
 
-    String DealerUsername, DealerName, Username;
+    String DealerUsername, DealerName, Username,usertype;
 
     TextView GiveGetUsername,getGiveGetRoundedUsername;
 
@@ -44,10 +44,16 @@ public class GiveGetAmountActivity extends AppCompatActivity {
 
         DealerUsername = getIntent().getStringExtra("dealerUsername");
         DealerName = getIntent().getStringExtra("dealerName");
+        usertype = getIntent().getType();
         Username = getIntent().getStringExtra("Username");
 
         YouGaveBtn = findViewById(R.id.yougaveBtn);
         YouGotButton = findViewById(R.id.yougotBtn);
+
+       if(usertype.equals("viaDealer")){
+           YouGaveBtn.setVisibility(View.GONE);
+           YouGotButton.setVisibility(View.GONE);
+       }
 
         YouGaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override

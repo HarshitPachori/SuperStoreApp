@@ -18,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SRDealersLedgerAccountActivity extends AppCompatActivity {
 
@@ -31,12 +33,15 @@ public class SRDealersLedgerAccountActivity extends AppCompatActivity {
     ArrayList<AmountOverviewModel> list;
 
     public static String SRUsername;
+    String usertype;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_srdealers_ledger_account);
         SRUsername = getIntent().getStringExtra("SRUsername");
+        usertype = getIntent().getType();
+
         recyclerView = findViewById(R.id.accountBalanceOverviewRL);
 
         database = FirebaseDatabase.getInstance().getReference();
@@ -44,7 +49,7 @@ public class SRDealersLedgerAccountActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        myAdapter = new AccountBalanceOverviewAdapter(this,list);
+        myAdapter = new AccountBalanceOverviewAdapter(this,list,usertype);
         recyclerView.setAdapter(myAdapter);
 
         giveAmountArrayList = new ArrayList<>();
@@ -102,6 +107,11 @@ public class SRDealersLedgerAccountActivity extends AppCompatActivity {
 
                 YougiveBalance.setText("\u20B9 "+String.valueOf(giveAmount));
                 YougetBalance.setText("\u20B9 "+String.valueOf(getAmount));
+                Map<String,Object> map = new HashMap<>();
+                map.put("TotalOutstanding",String.valueOf(getAmount));
+                database.child("SRs").child(SRUsername)
+                        .child("SRSSalesStatus")
+                                .updateChildren(map);
                 TotalBalance.setText("\u20B9 "+String.valueOf(getAmount-giveAmount));
 
             }

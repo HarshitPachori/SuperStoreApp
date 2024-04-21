@@ -79,7 +79,7 @@ public class SRHomeActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        database.addListenerForSingleValueEvent(new ValueEventListener() {
+        database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Integer salesDone = Integer.parseInt(snapshot.child("SRs").child(SRUsername)
@@ -92,7 +92,7 @@ public class SRHomeActivity extends AppCompatActivity {
 
                 SalesDoneTV.setText("Sales Done \u20B9 "+ salesDone);
                 RemainingTargetTV.setText("Remaining Target \u20B9 "+ remainingTarget);
-                TotalSROutstandingBtn.setText("Total Outstanding - "+snapshot.child("SRs").child(SRUsername)
+                TotalSROutstandingBtn.setText("Total Outstanding - \u20B9"+snapshot.child("SRs").child(SRUsername)
                         .child("SRSSalesStatus")
                         .child("TotalOutstanding").getValue().toString());
             }
@@ -105,7 +105,7 @@ public class SRHomeActivity extends AppCompatActivity {
 
 
         TotalSROutstandingBtn = findViewById(R.id.totaloutstandingondealersbtn);
-        DealerIntentBtn = findViewById(R.id.dealerintentbtn);
+//        DealerIntentBtn = findViewById(R.id.dealerintentbtn);
         PaymentApproveBtn = findViewById(R.id.paymentapprovebtn);
         ComplaintRaiseBtn = findViewById(R.id.complaintraisebtn);
         AddPaymentBtn = findViewById(R.id.addpaymentbtn);
@@ -124,18 +124,19 @@ public class SRHomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(SRHomeActivity.this, SRDealersLedgerAccountActivity.class);
                 i.putExtra("SRUsername",SRUsername);
+                i.setType("viaSR");
                 startActivity(i);
             }
         });
 
-        DealerIntentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(SRHomeActivity.this, DealerIntentActivity.class);
-                i.putExtra("SRUsername",SRUsername);
-                startActivity(i);
-            }
-        });
+//        DealerIntentBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(SRHomeActivity.this, DealerIntentActivity.class);
+//                i.putExtra("SRUsername",SRUsername);
+//                startActivity(i);
+//            }
+//        });
 
         PaymentApproveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
