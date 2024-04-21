@@ -86,7 +86,7 @@ public class PaymentStatusAdapter extends RecyclerView.Adapter<PaymentStatusAdap
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Log.d("dataa", snapshot.toString());
-                            Integer currentValue = Integer.parseInt(snapshot.getValue(String.class));
+                            Integer currentValue = snapshot.getValue(Integer.class);
                             if (currentValue == null) {
                                 currentValue = 0;
                             }

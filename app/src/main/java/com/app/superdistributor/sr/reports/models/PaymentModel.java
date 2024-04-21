@@ -1,17 +1,17 @@
 package com.app.superdistributor.sr.reports.models;
 
 public class PaymentModel {
-    String Amount,Status,User,UserType,PaymentMethod;
+    String Amount,Status,Dealer,Type,Date;
 
     public PaymentModel() {
     }
 
-    public PaymentModel(String amount, String status, String user, String userType, String paymentMethod) {
+    public PaymentModel(String amount, String status, String dealer, String type, String date) {
         Amount = amount;
         Status = status;
-        User = user;
-        UserType = userType;
-        PaymentMethod = paymentMethod;
+        Dealer = dealer;
+        Type = type;
+        Date = date;
     }
 
     public String getAmount() {
@@ -30,28 +30,28 @@ public class PaymentModel {
         Status = status;
     }
 
-    public String getUser() {
-        return User;
+    public String getDealer() {
+        return Dealer;
     }
 
-    public void setUser(String user) {
-        User = user;
+    public void setDealer(String dealer) {
+        Dealer = dealer;
     }
 
-    public String getUserType() {
-        return UserType;
+    public String getType() {
+        return Type;
     }
 
-    public void setUserType(String userType) {
-        UserType = userType;
+    public void setType(String type) {
+        Type = type;
     }
 
-    public String getPaymentMethod() {
-        return PaymentMethod;
+    public String getDate() {
+        return Date;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        PaymentMethod = paymentMethod;
+    public void setDate(String date) {
+        Date = date;
     }
 
     @Override
@@ -59,9 +59,9 @@ public class PaymentModel {
         return "PaymentModel{" +
                 "Amount='" + Amount + '\'' +
                 ", Status='" + Status + '\'' +
-                ", User='" + User + '\'' +
-                ", UserType='" + UserType + '\'' +
-                ", PaymentMethod='" + PaymentMethod + '\'' +
+                ", Dealer='" + Dealer + '\'' +
+                ", Type='" + Type + '\'' +
+                ", Date='" + Date + '\'' +
                 '}';
     }
 }

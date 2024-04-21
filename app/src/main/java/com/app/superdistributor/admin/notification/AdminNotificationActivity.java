@@ -441,6 +441,31 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 progressBar.setVisibility(View.GONE);
             }
         });
+
+//        database.child("SRs").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot snapshot1:snapshot.getChildren()){
+//                    String sr = snapshot1.getKey();
+//                    Log.d("dataa",snapshot1.toString());
+//                      for(DataSnapshot dataSnapshot1 :  snapshot1.child("myPayments").getChildren()){
+//                                NotificationItemModel model = new NotificationItemModel();
+//                                model.setNotificationType("Dealer Payment");
+//                                model.setNotificationTag(sr);
+//                                model.setNotificationId(dataSnapshot1.getKey());
+//                                String status = dataSnapshot1.child("Status").getValue(String.class);
+//                                model.setNotificationDesc("Payment from Dealer : " + dataSnapshot1.child("Dealer").getValue(String.class) + "\nAmount : " + dataSnapshot1.child("Amount").getValue(String.class) + "\nPayment Method : " + dataSnapshot1.child("Type").getValue(String.class) + "\nStatus : " + status);
+//                                if ("Pending".equals(status)) list.add(model);
+//                      }
+////                  }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 //populateSpinner();
         myAdapter.notifyDataSetChanged();
     }
@@ -475,12 +500,14 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
     }
 
     private void populateSpinner() {
-        notiType.clear();
+//        notiType.clear();
+        tabLayout.removeAllTabs();
         if ("admin".equals(username) || srNames.contains(username)) {
             tabLayout.addTab(tabLayout.newTab().setText("SR Product Confirmation"));
             tabLayout.addTab(tabLayout.newTab().setText("Dealer Complaint"));
             tabLayout.addTab(tabLayout.newTab().setText("Replacement by Dealer"));
             tabLayout.addTab(tabLayout.newTab().setText("Grievance"));
+//            tabLayout.addTab(tabLayout.newTab().setText("Dealer Payment"));
         }
         if ("admin".equals(username)) {
             tabLayout.addTab(tabLayout.newTab().setText("Expense"));

@@ -101,6 +101,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             holder.item.setVisibility(View.GONE);
             holder.reportUrlTv.setText("View Audio");
         }
+        if ("Dealer Payment".equals(notificationItemModel.getNotificationType())) {
+            holder.reportUrlTv.setVisibility(View.GONE);
+        }
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,6 +157,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         tagTv.setText(tag);
         descTv.setText(description);
         HashMap<String, Object> updateStatus = new HashMap<>();
+        Log.d("opennnnn",tag+ " "+type + " " + id);
         builder.setPositiveButton("Reject", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -247,25 +251,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                             }
                         });
                     } else if (type.equals("Dealer Payment")) {
-                        DatabaseReference exReference = databaseReference.child("Dealers");
-                        exReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot srSnapshot : snapshot.getChildren()) {
-                                    for (DataSnapshot dealerSnapshot : srSnapshot.child("Payments").getChildren()) {
-                                        for (DataSnapshot snapshot1 : dealerSnapshot.getChildren()) {
-                                            DatabaseReference expenseRef = snapshot1.getRef();
-                                            expenseRef.updateChildren(updateStatus);
-                                        }
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
+                        databaseReference.child("SRs").child(tag).child("myPayments").child(id).updateChildren(updateStatus);
                     }
                     if (position < list.size()) list.remove(position);
                     notifyDataSetChanged();
@@ -364,26 +350,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                             }
                         });
                     } else if (type.equals("Dealer Payment")) {
-                        DatabaseReference exReference = databaseReference.child("Dealers");
-                        exReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot srSnapshot : snapshot.getChildren()) {
-                                    for (DataSnapshot dealerSnapshot : srSnapshot.child("Payments").getChildren()) {
-
-                                        for (DataSnapshot snapshot1 : dealerSnapshot.getChildren()) {
-                                            DatabaseReference expenseRef = snapshot1.getRef();
-                                            expenseRef.updateChildren(updateStatus);
-                                        }
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
+                       databaseReference.child("SRs").child(tag).child("myPayments").child(id).updateChildren(updateStatus);
                     }
                     if (position < list.size()) list.remove(position);
                     notifyDataSetChanged();

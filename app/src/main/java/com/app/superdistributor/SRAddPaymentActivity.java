@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.UUID;
 
 public class SRAddPaymentActivity extends AppCompatActivity {
 
@@ -95,7 +96,7 @@ public class SRAddPaymentActivity extends AppCompatActivity {
                     database.child("SRs")
                             .child(username)
                             .child("myPayments")
-                            .child(dealerNameDropdown.getSelectedItem().toString())
+                            .child(UUID.randomUUID().toString())
                             .updateChildren(payment).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {

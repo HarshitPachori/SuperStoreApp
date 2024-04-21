@@ -1,6 +1,7 @@
 package com.app.superdistributor.sr.reports.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +12,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.superdistributor.R;
 import com.app.superdistributor.sr.reports.models.PaymentModel;
+import com.app.superdistributor.sr.reports.models.RaiseComplaintModel;
 
 import java.util.ArrayList;
 
 public class PaymentReportAdapter extends RecyclerView.Adapter<PaymentReportAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<PaymentModel> list;
+    ArrayList<PaymentModel> list,filterList;
 
     public PaymentReportAdapter(Context context, ArrayList<PaymentModel> list) {
         this.context = context;
         this.list = list;
+        this.filterList = new ArrayList<>(list);
     }
 
+    public void filter(String date) {
+        filterList.clear();
+        for (PaymentModel item : list) {
+            Log.d("item",item.getDate());
+            Log.d("item",date);
+            if (item.getDate().toLowerCase().contains(date.toLowerCase())) {
+                filterList.add(item);
+            }
+        }
+        Log.d("item",filterList.toString());
+        Log.d("item",list.toString());
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public PaymentReportAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,17 +50,17 @@ public class PaymentReportAdapter extends RecyclerView.Adapter<PaymentReportAdap
     @Override
     public void onBindViewHolder(@NonNull PaymentReportAdapter.ViewHolder holder, int position) {
 
-        PaymentModel model = list.get(position);
-        holder.paymentMethod.setText(model.getPaymentMethod());
-        holder.user.setText(model.getUser());
-        holder.usertype.setText(model.getUserType());
+        PaymentModel model = filterList.get(position);
+        holder.paymentMethod.setText(model.getType());
+        holder.user.setText(model.getDate());
+        holder.usertype.setText(model.getDealer());
         holder.amount.setText(model.getAmount());
         holder.status.setText(model.getStatus());
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return filterList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
