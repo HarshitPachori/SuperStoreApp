@@ -508,6 +508,14 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             tabLayout.addTab(tabLayout.newTab().setText("Replacement by Dealer"));
             tabLayout.addTab(tabLayout.newTab().setText("Grievance"));
 //            tabLayout.addTab(tabLayout.newTab().setText("Dealer Payment"));
+
+
+
+
+
+
+
+
         }
         if ("admin".equals(username)) {
             tabLayout.addTab(tabLayout.newTab().setText("Expense"));
