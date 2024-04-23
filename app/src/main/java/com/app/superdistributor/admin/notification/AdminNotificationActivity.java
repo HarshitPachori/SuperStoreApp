@@ -48,7 +48,7 @@ public class AdminNotificationActivity extends AppCompatActivity {
     ArrayList<String> technicianNames, dealersName;
     ProgressBar progressBar;
 
-//    Spinner spinner;
+    //    Spinner spinner;
     ArrayList<String> notiType;
     TabLayout tabLayout;
 
@@ -81,7 +81,7 @@ public class AdminNotificationActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
 //        spinner = findViewById(R.id.notificationspinner);
-tabLayout = findViewById(R.id.notiTab);
+        tabLayout = findViewById(R.id.notiTab);
 
         notiType = new ArrayList<>();
 
@@ -133,24 +133,34 @@ tabLayout = findViewById(R.id.notiTab);
             }
         });
 
-//populateSpinner();
-tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        String selectedTab = tab.getText().toString();
-        filterNotification(selectedTab);
-    }
+        populateSpinner();
+        Log.d("tabbb", list.toString());
+//filterNotification("SR Product Confirmation");
+        TabLayout.Tab defaultTab = tabLayout.getTabAt(0);
+        if (defaultTab != null) {
+            Log.d("tabb", defaultTab.getText().toString());
+            defaultTab.select();
+            filterNotification(defaultTab.getText().toString());
+            myAdapter.notifyDataSetChanged();
 
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
+        }
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                String selectedTab = tab.getText().toString();
+                filterNotification(selectedTab);
+            }
 
-    }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
 
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
+            }
 
-    }
-});
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
 //        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
@@ -165,12 +175,12 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 //        });
 
         database.child("Admin").child("Notifications").child("ProductConfirmation").child("SRs")
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             for (DataSnapshot notificationSnapshot : dataSnapshot.getChildren()) {
-                                Log.d("dataa",notificationSnapshot.child("Status").getValue().toString());
+                                Log.d("dataa", notificationSnapshot.child("Status").getValue().toString());
 
                                 String status = notificationSnapshot.child("Status").getValue(String.class);
                                 if ("Pending".equals(status)) {
@@ -178,7 +188,7 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                                     notificationItemModel.setNotificationType("SR Product Confirmation");
                                     notificationItemModel.setNotificationTag(dataSnapshot.getKey());
                                     notificationItemModel.setNotificationId(notificationSnapshot.getKey());
-                                    Log.d("dataaa",notificationSnapshot.getKey());
+                                    Log.d("dataaa", notificationSnapshot.getKey());
                                     notificationItemModel.
                                             setNotificationDesc("Product Name : " + notificationSnapshot.child("Name").getValue().toString() +
                                                     "\nPrice : " + notificationSnapshot.child("ProductPrice").getValue().toString() +
@@ -192,12 +202,19 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                                                 .setNotificationPriority(notificationSnapshot.child("Reminder").getValue().toString());
                                     Log.d("adminnn", notificationItemModel.toString());
                                     if (username.equals("admin") || srNames.contains(username)) {
-                                        list.add(notificationItemModel);
+//                                       if(tabLayout.getTabAt(tabLayout.getSelectedTabPosition()).getText().toString().equals("SR Product Confirmation")){
+                                           list.add(notificationItemModel);
+                                           filterNotification("SR Product Confirmation");
+//                                       }
                                     }
                                 }
                             }
                         }
-                        myAdapter.notifyDataSetChanged();
+
+//                        myAdapter.notifyDataSetChanged();
+
+                        myAdapter = new NotificationAdapter(AdminNotificationActivity.this, list);
+                        recyclerView.setAdapter(myAdapter);
                         progressBar.setVisibility(View.GONE);
                     }
 
@@ -236,7 +253,9 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                                                         notificationItemModel
                                                                 .setNotificationPriority(dataSnapshot1.child("Reminder").getValue().toString());
                                                     if ("admin".equals(username) || srNames.contains(username)) {
-                                                        list.add(notificationItemModel);
+                                                        if(tabLayout.getTabAt(tabLayout.getSelectedTabPosition()).getText().toString().equals("SR Product Confirmation")){
+                                                            list.add(notificationItemModel);
+                                                        }
                                                     }
                                                 }
                                             }
@@ -245,6 +264,7 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                                 }
                             }
                         }
+
                         myAdapter.notifyDataSetChanged();
                         progressBar.setVisibility(View.GONE);
                     }
@@ -294,6 +314,7 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                                 }
 
                             }
+
                             myAdapter.notifyDataSetChanged();
                             progressBar.setVisibility(View.GONE);
 
@@ -317,8 +338,8 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                             if ("admin".equals(username) || srNames.contains(username)) {
                                 list.add(notificationItemModel);
                             }
-                            myAdapter.notifyDataSetChanged();
                         }
+
                         myAdapter.notifyDataSetChanged();
                         progressBar.setVisibility(View.GONE);
 
@@ -360,10 +381,10 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                             if ("admin".equals(username)) {
                                 list.add(notificationItemModel);
                             }
-                            myAdapter.notifyDataSetChanged();
                         }
                     }
                 }
+
                 myAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
 
@@ -429,9 +450,11 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                             model.setNotificationDesc("Message from Sr: " + srname + "\nMessage : " + msg + "\nTo Dealer : " + username + "\nDate : " + date);
                             model.setReportUrl(audioUrl);
                             list.add(model);
+                           filterNotification("Message To Dealer");
                         }
                     }
                 }
+
                 myAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
             }
@@ -467,6 +490,7 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 //            }
 //        });
 //populateSpinner();
+        Log.d("tab", list.toString());
         myAdapter.notifyDataSetChanged();
     }
 
@@ -508,14 +532,6 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             tabLayout.addTab(tabLayout.newTab().setText("Replacement by Dealer"));
             tabLayout.addTab(tabLayout.newTab().setText("Grievance"));
 //            tabLayout.addTab(tabLayout.newTab().setText("Dealer Payment"));
-
-
-
-
-
-
-
-
         }
         if ("admin".equals(username)) {
             tabLayout.addTab(tabLayout.newTab().setText("Expense"));
@@ -524,4 +540,6 @@ tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             tabLayout.addTab(tabLayout.newTab().setText("Message To Dealer"));
         }
     }
+
+
 }

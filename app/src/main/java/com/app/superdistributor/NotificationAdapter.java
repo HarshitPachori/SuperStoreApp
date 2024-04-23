@@ -50,6 +50,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
     public void filter(String type) {
+        Log.d("tabbbb",list.toString());
+        Log.d("tabbbb",filterList.toString());
         filterList.clear();
         for (NotificationItemModel model : list) {
             if (model.getNotificationType().equals(type)) {

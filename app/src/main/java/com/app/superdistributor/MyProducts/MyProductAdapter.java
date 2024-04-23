@@ -46,7 +46,7 @@ public class MyProductAdapter extends RecyclerView.Adapter<MyProductAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Log.d("dataaaaa",DealerName);
+//        Log.d("dataaaaa",DealerName);
         Products products = list.get(position);
         holder.productName.setText(products.getName());
         holder.AddProductBtn.setOnClickListener(new View.OnClickListener() {
