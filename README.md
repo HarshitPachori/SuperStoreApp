@@ -1,1 +1,1 @@
-# SuperDistributorApp
+# SuperStoreApp
